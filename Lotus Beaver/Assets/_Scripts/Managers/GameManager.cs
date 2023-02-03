@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
-    public enum GameState { Game, Paused, GameOver }
-    public event Action<GameState> OnGameStateChanged;
-    private GameState _gameState;
+    public static event Action<GameState> OnGameStateChanged;
+    private static GameState _gameState;
+    public static GameState GameState => _gameState;
+
     private void Awake()
     {
         if (RefManager.gameManager != null)
@@ -16,8 +18,9 @@ public class GameManager : MonoBehaviour
         RefManager.gameManager = this;
         SceneManager.activeSceneChanged += OnSceneChanged;
         DontDestroyOnLoad(gameObject);
-    }
 
+        SetGameState(GameState.GameOver);
+    }
 
     private void OnSceneChanged(Scene current, Scene next)
     {
@@ -27,10 +30,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetGameState(GameState gameState)
+    public static void SetGameState(GameState gameState)
     {
         _gameState = gameState;
         OnGameStateChanged?.Invoke(_gameState);
+
+#if UNITY_EDITOR
+        Debug.Log($"Game State: {gameState}");
+#endif
+
+        switch (gameState)
+        {
+            case GameState.Ingame:
+                Time.timeScale = 1f;
+                break;
+            case GameState.Paused:
+            case GameState.GameOver:
+                Time.timeScale= 0f;
+                break;
+        }
     }
 
+    public static void StartNewGame()
+    {
+#if UNITY_EDITOR
+        Debug.Log("New Game");
+#endif
+    }
 }
