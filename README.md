@@ -1,3 +1,3 @@
 # GGJ-2023
 
-Teilnehmer: 
+Teilnehmer: Juri Knauth
