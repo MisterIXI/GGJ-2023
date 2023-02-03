@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleCameraTargetMovement()
     {
-        CameraTarget.position = transform.position + new Vector3(_movement.x, _movement.y, 0f) * _movementSettings.cameraDistance;
+        CameraTarget.position = transform.position + new Vector3(_movement.x, _movement.y, -_movementSettings.cameraZDistance) * _movementSettings.cameraDistance;
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
