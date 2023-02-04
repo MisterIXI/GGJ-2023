@@ -6,7 +6,7 @@ public class Tile : Poolable
 
     private TilePool _pool;
 
-    public Vector2Int TilePosition { get; set; }
+    public Vector2Int Coordinates { get; set; }
 
     public void SetPool(TilePool pool)
     {

@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class TileManagerTester : MonoBehaviour
 {
     [SerializeField] private Tile _currentTile;
+    [SerializeField] private List<Tile> _sourroundingTiles;
     [SerializeField] private Vector2 _coordinates;
 
     private void Update()
@@ -14,5 +16,6 @@ public class TileManagerTester : MonoBehaviour
 
         _coordinates = TileManager.GetCoordinates(transform.position);
         _currentTile = TileManager.GetClosetTile(_coordinates);
+        _sourroundingTiles = TileManager.GetSouroundingTiles(_currentTile);
     }
 }
