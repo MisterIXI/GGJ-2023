@@ -74,7 +74,7 @@ public class TileManager : MonoBehaviour
 
     public static Tile GetClosetTile(Vector2Int coordinates)
     {
-        return ClampTile(ApplyCenterOffset(coordinates));
+        return ClampTile(coordinates);
     }
 
     private static Vector2Int ApplyCenterOffset(Vector2Int coordinates)
@@ -107,6 +107,12 @@ public class TileManager : MonoBehaviour
     public static Vector2Int CenterTile()
     {
         return new Vector2Int(GetTilesXLength() / 2, GetTilesYLength() / 2);
+    }
+
+    public static Vector2 CenterTileOffset()
+    {
+        return Vector2.zero;
+        //return new Vector2(GetTilesXLength() / 2 * _instance._gameSettings.TileSize.x, GetTilesYLength() / 2 * _instance._gameSettings.TileSize.y);
     }
 
     private Vector3 GetTilePosition(int x, int y)

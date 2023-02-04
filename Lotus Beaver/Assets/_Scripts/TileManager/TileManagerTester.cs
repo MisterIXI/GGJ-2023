@@ -5,7 +5,7 @@ public class TileManagerTester : MonoBehaviour
 {
     [SerializeField] private Tile _currentTile;
     [SerializeField] private List<Tile> _sourroundingTiles;
-    [SerializeField] private Vector2 _coordinates;
+    [SerializeField] private Vector2Int _coordinates;
 
     private void Update()
     {
