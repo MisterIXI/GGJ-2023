@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
         }
         RefManager.gameManager = this;
         SceneManager.activeSceneChanged += OnSceneChanged;
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(transform.root.gameObject);
 
         SetGameState(GameState.GameOver);
     }
