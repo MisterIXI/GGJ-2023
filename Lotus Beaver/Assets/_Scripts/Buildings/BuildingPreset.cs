@@ -15,4 +15,6 @@ public class BuildingPreset : ScriptableObject
 
     [field: SerializeField] public int earthProduction { get; private set; }
     [field: SerializeField] public int waterProduction { get; private set; }
+
+    [field: SerializeField] public Sprite InteractionIcon;
 }

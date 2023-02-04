@@ -6,6 +6,7 @@ public class InteractionController : MonoBehaviour
     private IInteractable[] Interactions;
     public static event Action<Tile> OnTileInteract;
     public static event Action<Tile> OnTileSelectionChange;
+    public static event Action<int> OnInteractionChange;
     [SerializeField] private InteractionSettings _interactionSettings;
     public Tile CurrentTile { get; private set; }
     private SpriteRenderer _currentSpriteRenderer;
@@ -47,7 +48,7 @@ public class InteractionController : MonoBehaviour
             Debug.Log("Interaction changed: " + _currentInteraction?.GetType().Name + " -> " + Interactions[index].GetType().Name);
             _currentInteraction = Interactions[index];
             _currentInteractionIndex = index;
-
+            OnInteractionChange?.Invoke(_currentInteractionIndex);
         }
     }
     private void TileSelectionUpdate()
@@ -110,7 +111,11 @@ public class InteractionController : MonoBehaviour
     {
         if (context.performed)
         {
-            SelectInteraction((_currentInteractionIndex - 1) % Interactions.Length);
+            if (_currentInteractionIndex == 0)
+                _currentInteractionIndex = Interactions.Length - 1;
+            else
+                _currentInteractionIndex -= 1;
+            SelectInteraction(_currentInteractionIndex);
         }
     }
 
