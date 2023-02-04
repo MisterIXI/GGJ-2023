@@ -8,6 +8,8 @@ public class CliffController : MonoBehaviour
 
     private TileElement _tileElement;
 
+    private Tile _parentTile;
+
     private void Awake()
     {
         _tileElement = GetComponent<TileElement>();
@@ -23,12 +25,30 @@ public class CliffController : MonoBehaviour
         _activeCliffControllers.Remove(this);
     }
 
+    private void Update()
+    {
+        for (int i = 0; i < _activeCliffControllers.Count; i++)
+        {
+            UpdateCliffSprite();
+        }
+    }
+
+    [ContextMenu(nameof(UpdateCliffSprite))]
     public void UpdateCliffSprite()
     {
-        SoroundingTiles soroundingTiles = TileManager.GetSouroundingTilesElements(GetComponent<Tile>());
+        if (GameManager.GameState != GameState.Ingame)
+        {
+            Debug.Log("Not Ingame");
+
+            return;
+        }
+
+        Tile parentTile = GetComponentInParent<Tile>(true);
+
+        SoroundingTiles soroundingTiles = TileManager.GetSouroundingTilesElements(parentTile);
 
         WaterMask waterMask = new WaterMask(soroundingTiles);
 
-        _tileElement.SpriteRenderer.sprite = CliffManager.CliffSpriteLibrary().GetSortedSprite(waterMask);
+        _tileElement.SpriteRenderer.sprite = CliffManager.CliffSpriteLibrary()?.GetSortedSprite(waterMask);
     }
 }

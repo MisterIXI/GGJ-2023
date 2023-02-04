@@ -20,6 +20,11 @@ public class CliffManager : MonoBehaviour
 
     public static CliffSpriteLibrary CliffSpriteLibrary()
     {
+        if (_instance == null)
+        {
+            return null;
+        }
+
         return _instance._cliffSpriteLibrary;
     }
 }

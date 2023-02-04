@@ -5,7 +5,7 @@ public class TileElement : Poolable
     [SerializeField] private TileElementType _tileElementType;
     public TileElementType TileElementType => _tileElementType;
 
-    public SpriteRenderer SpriteRenderer { get; set; }
+    [field: SerializeField] public SpriteRenderer SpriteRenderer { get; set; }
 
     private TileElementPool _pool;
 

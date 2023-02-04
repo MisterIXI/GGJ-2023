@@ -100,3 +100,4 @@ MonoBehaviour:
   _transform: {fileID: 7922348945151694464}
   _gameObject: {fileID: 4467046365076314938}
   _tileElementType: 0
+  <SpriteRenderer>k__BackingField: {fileID: 7665081954327038487}

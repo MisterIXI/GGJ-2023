@@ -282,18 +282,23 @@ public class TileManager : MonoBehaviour
 
     public static SoroundingTiles GetSouroundingTilesElements(Tile currentTile)
     {
+        if (currentTile == null)
+        {
+            return new SoroundingTiles();
+        }
+
         Vector2Int coordinates = currentTile.Coordinates;
 
         return new SoroundingTiles()
         {
-            Up = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
-            UpRight = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
-            Right = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
-            DownRight = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
-            Down = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
-            DownLeft = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
-            Left = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
-            UpLeft = FilterOutOfBoundsCoordinates(coordinates)?.TileElement
+            UpLeft = FilterOutOfBoundsCoordinates(coordinates + Vector2Int.up + Vector2Int.left)?.TileElement,
+            Up = FilterOutOfBoundsCoordinates(coordinates + Vector2Int.up)?.TileElement,
+            UpRight = FilterOutOfBoundsCoordinates(coordinates + Vector2Int.up + Vector2Int.right)?.TileElement,
+            Right = FilterOutOfBoundsCoordinates(coordinates + Vector2Int.right)?.TileElement,
+            DownRight = FilterOutOfBoundsCoordinates(coordinates + Vector2Int.down + Vector2Int.right)?.TileElement,
+            Down = FilterOutOfBoundsCoordinates(coordinates + Vector2Int.down)?.TileElement,
+            DownLeft = FilterOutOfBoundsCoordinates(coordinates + Vector2Int.down + Vector2Int.left)?.TileElement,
+            Left = FilterOutOfBoundsCoordinates(coordinates + Vector2Int.left)?.TileElement
         };
     }
 
