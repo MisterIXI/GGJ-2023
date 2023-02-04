@@ -26,28 +26,30 @@ public class CliffController : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < _activeCliffControllers.Count; i++)
-        {
-            UpdateCliffSprite();
-        }
+        // for (int i = 0; i < _activeCliffControllers.Count; i++)
+        // {
+        //     UpdateCliffSprite();
+        // }
     }
 
     [ContextMenu(nameof(UpdateCliffSprite))]
     public void UpdateCliffSprite()
     {
-        if (GameManager.GameState != GameState.Ingame)
-        {
-            Debug.Log("Not Ingame");
+        // if (GameManager.GameState != GameState.Ingame)
+        // {
+        //     Debug.Log("Not Ingame");
 
-            return;
-        }
+        //     return;
+        // }
 
         Tile parentTile = GetComponentInParent<Tile>(true);
 
-        SoroundingTiles soroundingTiles = TileManager.GetSouroundingTilesElements(parentTile);
+        SurroundingTiles soroundingTiles = TileManager.GetSurroundingTilesElements(parentTile);
 
         WaterMask waterMask = new WaterMask(soroundingTiles);
 
         _tileElement.SpriteRenderer.sprite = CliffManager.CliffSpriteLibrary()?.GetSortedSprite(waterMask);
     }
+
+    
 }

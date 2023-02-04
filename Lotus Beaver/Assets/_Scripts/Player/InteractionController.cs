@@ -77,6 +77,7 @@ public class InteractionController : MonoBehaviour
             {
                 OnTileInteract?.Invoke(CurrentTile);
                 _currentInteraction?.OnInteract(CurrentTile);
+                CurrentTile = null;
             }
         }
     }

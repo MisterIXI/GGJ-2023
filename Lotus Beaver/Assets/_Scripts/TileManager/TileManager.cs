@@ -254,9 +254,40 @@ public class TileManager : MonoBehaviour
         tileElement.Transform.SetParent(tile.Transform);
         tileElement.Transform.localPosition = Vector3.zero;
         tile.TileElement = tileElement;
+
+        List<Tile> surroundingTiles = GetSurroundingTilesWithDiagonal(tile);
+
+        UpdateCliffTiles(surroundingTiles, tile.TileElement.TileElementType);
     }
 
-    public static List<Tile> GetSouroundingTiles(Tile currentTile)
+    private static void UpdateCliffTiles(List<Tile> tiles, TileElementType tileType)
+    {
+        foreach (Tile tile in tiles)
+        {
+            bool surrByWater = IsSurroundedByWaterOrCliff(tile);
+            TileElementType type = tile.TileElement?.TileElementType ?? TileElementType.Water;
+            if (type == TileElementType.Cliff)
+            {
+                if (surrByWater)
+                    SetTileElementType(tile, TileElementType.Water);
+                else
+                    tile.GetComponentInChildren<CliffController>().UpdateCliffSprite();
+            }
+            else if (type == TileElementType.Water)
+            {
+                if (!surrByWater)
+                {
+                    SetTileElementType(tile, TileElementType.Cliff);
+                    tile.GetComponentInChildren<CliffController>().UpdateCliffSprite();
+                }
+            }
+            else
+            {
+                // if not cliff or water
+            }
+        }
+    }
+    public static List<Tile> GetSurroundingTiles(Tile currentTile)
     {
         List<Tile> result = new List<Tile>();
 
@@ -268,9 +299,9 @@ public class TileManager : MonoBehaviour
         return result;
     }
 
-    public static List<Tile> GetSouroundingTilesWithDiagonal(Tile currentTile)
+    public static List<Tile> GetSurroundingTilesWithDiagonal(Tile currentTile)
     {
-        List<Tile> result = GetSouroundingTiles(currentTile);
+        List<Tile> result = GetSurroundingTiles(currentTile);
 
         AddTile(currentTile.Coordinates + Vector2Int.left + Vector2Int.up, result);
         AddTile(currentTile.Coordinates + Vector2Int.right + Vector2Int.up, result);
@@ -280,16 +311,34 @@ public class TileManager : MonoBehaviour
         return result;
     }
 
-    public static SoroundingTiles GetSouroundingTilesElements(Tile currentTile)
+    private static bool IsSurroundedByWaterOrCliff(Tile tile)
+    {
+        List<Tile> surroundingTiles = GetSurroundingTilesWithDiagonal(tile);
+
+        foreach (Tile surroundingTile in surroundingTiles)
+        {
+            if(surroundingTile == null || surroundingTile.TileElement == null)
+                continue;
+            // if a tile is not water or cliff, return false
+            if (surroundingTile.TileElement.TileElementType != TileElementType.Water &&
+                surroundingTile.TileElement.TileElementType != TileElementType.Cliff)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static SurroundingTiles GetSurroundingTilesElements(Tile currentTile)
     {
         if (currentTile == null)
         {
-            return new SoroundingTiles();
+            return new SurroundingTiles();
         }
 
         Vector2Int coordinates = currentTile.Coordinates;
 
-        return new SoroundingTiles()
+        return new SurroundingTiles()
         {
             UpLeft = FilterOutOfBoundsCoordinates(coordinates + Vector2Int.up + Vector2Int.left)?.TileElement,
             Up = FilterOutOfBoundsCoordinates(coordinates + Vector2Int.up)?.TileElement,

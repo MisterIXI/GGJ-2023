@@ -24,7 +24,7 @@ public struct WaterMask
         Left = left;
     }
 
-    public WaterMask(SoroundingTiles surrounding)
+    public WaterMask(SurroundingTiles surrounding)
     {
         UpLeft = IsWaterOrCliff(surrounding.UpLeft?.TileElementType);
         Up = IsWaterOrCliff(surrounding.Up?.TileElementType);
