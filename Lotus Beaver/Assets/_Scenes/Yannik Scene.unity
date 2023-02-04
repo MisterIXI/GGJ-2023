@@ -453,6 +453,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 347619016, guid: af6e5fdd6e6ace04cac62828712e0ba6, type: 3}
+      propertyPath: _gameSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 67cecd397a9833e4ea7cd236a5e1c68c, type: 2}
+    - target: {fileID: 347619022, guid: af6e5fdd6e6ace04cac62828712e0ba6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2884496688444343359, guid: af6e5fdd6e6ace04cac62828712e0ba6, type: 3}
       propertyPath: m_Name
       value: Managers
