@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [RequireComponent(typeof(TileElement))]
@@ -7,8 +8,6 @@ public class CliffController : MonoBehaviour
     public static List<CliffController> _activeCliffControllers = new List<CliffController>();
 
     private TileElement _tileElement;
-
-    private Tile _parentTile;
 
     private void Awake()
     {
