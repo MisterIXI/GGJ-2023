@@ -7,8 +7,13 @@ public abstract class Pool<T> : MonoBehaviour, IPool<T> where T : Poolable
     [SerializeField] private int _initialSize;
     private Queue<T> _poolables = new Queue<T>();
 
+    private Transform _transform;
+
+    public Transform Transform  => _transform;
+
     protected virtual void Awake()
     {
+        _transform = transform;
         InitializePool();
     }
 
@@ -26,15 +31,15 @@ public abstract class Pool<T> : MonoBehaviour, IPool<T> where T : Poolable
 
     private T GrowPool()
     {
-        T poolable = CreatePoolable();
-        return poolable;
+        return CreatePoolable();
     }
 
     protected abstract void SetPool(T poolable);
 
     private T CreatePoolable()
     {
-        T poolable = Instantiate(_poolable);
+        T poolable = Instantiate(_poolable, _transform);
+        poolable.PoolTransform = _transform;
         SetPool(poolable);
         poolable.SetActive(false);
         return poolable;

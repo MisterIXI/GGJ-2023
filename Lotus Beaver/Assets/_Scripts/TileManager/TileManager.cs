@@ -69,11 +69,21 @@ public class TileManager : MonoBehaviour
 
     public static Tile GetClosetTile(Vector3 position)
     {
-        return ClampTile(ApplyCenterOffset(GetCoordinates(position)));
+        if (_tiles == null || _tiles.Length == 0)
+        {
+            return null;
+        }
+
+        return ClampTile(GetCoordinates(position));
     }
 
     public static Tile GetClosetTile(Vector2Int coordinates)
     {
+        if (_tiles == null || _tiles.Length == 0)
+        {
+            return null;
+        }
+
         return ClampTile(coordinates);
     }
 
