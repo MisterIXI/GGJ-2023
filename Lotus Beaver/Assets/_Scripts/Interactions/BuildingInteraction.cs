@@ -14,14 +14,28 @@ public class BuildingInteraction : IInteractable
     public void OnInteract(Tile tile)
     {
         // instantiate building
-        if(RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
-        {
-            RessourceManager.UseResources(_settings.earthCost, _settings.waterCost);
-            GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity);
+        if (tile.TileElement.TileElementType == TileElementType.Earth) {
+            if(RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
+            {
+                if (tile.InteractableBase == null)
+                {
+                    RessourceManager.UseResources(_settings.earthCost, _settings.waterCost);
+                    GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity);
+                    tile.InteractableBase = building.GetComponent<InteractableBase>();
+                }
+                else
+                {
+                    Debug.Log("There is already a building on this tile");
+                }
+            }
+            else
+            {
+                Debug.Log("Not enough resources!");
+            }
         }
         else
         {
-            Debug.Log("Not enough Resources!");
+            Debug.Log("Has to be build on Dirt!");
         }
         
     }
