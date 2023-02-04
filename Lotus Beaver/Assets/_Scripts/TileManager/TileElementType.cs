@@ -3,5 +3,6 @@
     Water = 0,
     Earth = 1,
     Root = 2,
-    Count = 3
+    Cliff = 3,
+    Count = 4
 }

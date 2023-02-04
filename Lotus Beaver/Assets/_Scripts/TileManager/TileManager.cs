@@ -252,7 +252,7 @@ public class TileManager : MonoBehaviour
         tile.TileElement = tileElement;
     }
 
-    internal static List<Tile> GetSouroundingTiles(Tile currentTile)
+    public static List<Tile> GetSouroundingTiles(Tile currentTile)
     {
         List<Tile> result = new List<Tile>();
 
@@ -262,6 +262,35 @@ public class TileManager : MonoBehaviour
         AddTile(currentTile.Coordinates + Vector2Int.down, result);
 
         return result;
+    }
+
+    public static List<Tile> GetSouroundingTilesWithDiagonal(Tile currentTile)
+    {
+        List<Tile> result = GetSouroundingTiles(currentTile);
+
+        AddTile(currentTile.Coordinates + Vector2Int.left + Vector2Int.up, result);
+        AddTile(currentTile.Coordinates + Vector2Int.right + Vector2Int.up, result);
+        AddTile(currentTile.Coordinates + Vector2Int.left + Vector2Int.down, result);
+        AddTile(currentTile.Coordinates + Vector2Int.right + Vector2Int.down, result);
+
+        return result;
+    }
+
+    public static SoroundingTiles GetSouroundingTilesElements(Tile currentTile)
+    {
+        Vector2Int coordinates = currentTile.Coordinates;
+
+        return new SoroundingTiles()
+        {
+            Up = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
+            UpRight = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
+            Right = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
+            DownRight = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
+            Down = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
+            DownLeft = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
+            Left = FilterOutOfBoundsCoordinates(coordinates)?.TileElement,
+            UpLeft = FilterOutOfBoundsCoordinates(coordinates)?.TileElement
+        };
     }
 
     private static void AddTile(Vector2Int coordinates, List<Tile> result)
