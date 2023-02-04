@@ -15,3 +15,5 @@ MonoBehaviour:
   <MapSize>k__BackingField: {x: 7, y: 7}
   <TileSize>k__BackingField: {x: 1, y: 1}
   <TileHeight>k__BackingField: 0
+  <DamageTickTime>k__BackingField: 0.2
+  <BuildingTickTime>k__BackingField: 1
