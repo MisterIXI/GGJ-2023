@@ -16,3 +16,6 @@ MonoBehaviour:
   InteractionDistance: 1
   BuildingSettings:
   - {fileID: 11400000, guid: 201145eeb71261640b46bd492fa304a9, type: 2}
+  - {fileID: 11400000, guid: 381d7f73ecfd8164c9e7bc021b3d9488, type: 2}
+  - {fileID: 11400000, guid: 9b6a973cdf22af743a3ad70532b01abe, type: 2}
+  - {fileID: 11400000, guid: 9378e485ba540ad42be530d0aa9b505a, type: 2}

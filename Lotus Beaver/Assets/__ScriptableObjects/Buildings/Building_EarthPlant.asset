@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c388026e8f6e884bb60657fce1ea5f6, type: 3}
+  m_Name: Building_EarthPlant
+  m_EditorClassIdentifier: 
+  <displayName>k__BackingField: Earth Plant
+  <earthCost>k__BackingField: 100
+  <waterCost>k__BackingField: 500
+  <buildingPrefab>k__BackingField: {fileID: 6108754275576499043, guid: 1a450d36d4a0e2243ad4d703ad53a49c, type: 3}
+  <earthProduction>k__BackingField: 5
+  <waterProduction>k__BackingField: 0
+  <constructionStages>k__BackingField: 0
+  <sprites>k__BackingField: []
+  <ticksPerStage>k__BackingField: 0

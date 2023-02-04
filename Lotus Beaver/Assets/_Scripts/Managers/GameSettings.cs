@@ -12,4 +12,5 @@ public class GameSettings : ScriptableObject
     [field: Header("Tick Settings")]
     [field: SerializeField] public float DamageTickTime { get; private set; }
     [field: SerializeField] public float BuildingTickTime { get; private set; }
+    [field: SerializeField] public float ConstructionTickTime { get; private set; }
 }
