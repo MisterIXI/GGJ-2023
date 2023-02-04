@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public Transform CameraTarget { get; private set; }
+
+    private Animator animator;
     private Vector2 _moveInput;
     private Vector2 _movement;
     private Rigidbody2D _rigidbody;
@@ -15,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     {
         CameraTarget = new GameObject("CameraTarget").transform;
         CameraTarget.SetParent(transform);
+
+        animator = GetComponentInChildren<Animator>();
     }
     void Start()
     {
@@ -26,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
     {
         HandleMovement();
         HandleCameraTargetMovement();
+
+        animator.SetFloat("Horizontal", _movement.x);
+        animator.SetFloat("Vertical", _movement.y);
     }
 
     private void HandleMovement()
