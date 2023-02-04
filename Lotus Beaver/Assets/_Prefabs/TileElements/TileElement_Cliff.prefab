@@ -13,11 +13,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7665081954327038487, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
       propertyPath: m_Color.b
-      value: 0.994123
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7665081954327038487, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7665081954327038487, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
       propertyPath: m_Color.r
@@ -73,3 +73,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
+--- !u!1 &9027319487871000046 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4467046365076314938, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
+  m_PrefabInstance: {fileID: 4663855915602134740}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &6006824766940559830
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9027319487871000046}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0

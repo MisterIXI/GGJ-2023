@@ -18,3 +18,7 @@ MonoBehaviour:
   <buildingPrefab>k__BackingField: {fileID: 5213177626744561057, guid: a3662c2fcd57fff49baeb1303ca0a6a5, type: 3}
   <earthProduction>k__BackingField: 10
   <waterProduction>k__BackingField: 10
+  InteractionIcon: {fileID: 0}
+  <constructionStages>k__BackingField: 0
+  <sprites>k__BackingField: []
+  <ticksPerStage>k__BackingField: 0

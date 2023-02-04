@@ -2,8 +2,18 @@
 
 public class HeadUpDisplayElement : MonoBehaviour
 {
+    public static HeadUpDisplayElement Instance { get; private set; }
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
         GameManager.OnGameStateChanged += OnGameStateChanged;
     }
 

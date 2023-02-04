@@ -57,9 +57,9 @@ public class InputManager : MonoBehaviour
         map["BuildingKey"].performed += OnBuildingKeyInput;
         map["BuildingKey"].canceled += OnBuildingKeyInput;
 
-        map["Reset"].started += OnResetInput;
-        map["Reset"].performed += OnResetInput;
-        map["Reset"].canceled += OnResetInput;
+        map["ResetPosition"].started += OnResetInput;
+        map["ResetPosition"].performed += OnResetInput;
+        map["ResetPosition"].canceled += OnResetInput;
     }
 
     public void OnMoveInput(CallbackContext context)
