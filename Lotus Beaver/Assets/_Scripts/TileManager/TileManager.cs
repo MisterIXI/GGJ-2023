@@ -74,7 +74,7 @@ public class TileManager : MonoBehaviour
             return null;
         }
 
-        return ClampTile(ApplyCenterOffset(GetCoordinates(position)));
+        return ClampTile(GetCoordinates(position));
     }
 
     public static Tile GetClosetTile(Vector2Int coordinates)
