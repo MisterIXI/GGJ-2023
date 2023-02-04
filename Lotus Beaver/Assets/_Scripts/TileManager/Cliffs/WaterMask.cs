@@ -24,17 +24,25 @@ public struct WaterMask
         Left = left;
     }
 
-    public WaterMask(SoroundingTiles sorounding)
+    public WaterMask(SoroundingTiles surrounding)
     {
-        UpLeft = sorounding.UpLeft?.TileElementType == TileElementType.Water;
-        Up = sorounding.Up?.TileElementType == TileElementType.Water;
-        UpRight = sorounding.UpRight?.TileElementType == TileElementType.Water;
-        Right = sorounding.Right?.TileElementType == TileElementType.Water;
-        DownRight = sorounding.DownRight?.TileElementType == TileElementType.Water;
-        Down = sorounding.Down?.TileElementType == TileElementType.Water;
-        DownLeft = sorounding.DownLeft?.TileElementType == TileElementType.Water;
-        Left = sorounding.Left?.TileElementType == TileElementType.Water;
+        UpLeft = IsWaterOrCliff(surrounding.UpLeft?.TileElementType);
+        Up = IsWaterOrCliff(surrounding.Up?.TileElementType);
+        UpRight = IsWaterOrCliff(surrounding.UpRight?.TileElementType);
+        Right = IsWaterOrCliff(surrounding.Right?.TileElementType);
+        DownRight = IsWaterOrCliff(surrounding.DownRight?.TileElementType);
+        Down = IsWaterOrCliff(surrounding.Down?.TileElementType);
+        DownLeft = IsWaterOrCliff(surrounding.DownLeft?.TileElementType);
+        Left = IsWaterOrCliff(surrounding.Left?.TileElementType);
     }
+
+    private static bool IsWaterOrCliff(TileElementType? tileElementType)
+    {
+        if(tileElementType == null)
+            return false;
+        return tileElementType == TileElementType.Water || tileElementType == TileElementType.Cliff;
+    }
+
 
     public override string ToString()
     {

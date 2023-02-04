@@ -11,6 +11,7 @@ public class CliffSpriteLibrary : ScriptableObject
 
     [SerializeField] private char _waterChar;
     [SerializeField] private char _bothChar;
+    [SerializeField] private char _earthChar;
 
     [ContextMenu(nameof(LoadNewSpirts))]
     private void LoadNewSpirts()
@@ -18,97 +19,56 @@ public class CliffSpriteLibrary : ScriptableObject
         _sortedSprites = new Sprite[2, 2, 2, 2, 2, 2, 2, 2];
 
         foreach (Sprite sprite in _sprites)
+            RecReplaceChar(sprite, sprite.name.ToCharArray());
+
+        DebugPrint();
+    }
+
+    private void RecReplaceChar(Sprite sprite, char[] name)
+    {
+        int bothCharCount = name.Count(x => x == _bothChar);
+        if (bothCharCount == 0)
         {
-            WaterMask waterMask = new()
-            {
-                Up = sprite.name[0] == _waterChar ? true : false,
-                UpRight = sprite.name[2] == _waterChar ? true : false,
-                Right = sprite.name[4] == _waterChar ? true : false,
-                DownRight = sprite.name[6] == _waterChar ? true : false,
-                Down = sprite.name[8] == _waterChar ? true : false,
-                DownLeft = sprite.name[10] == _waterChar ? true : false,
-                Left = sprite.name[12] == _waterChar ? true : false,
-                UpLeft = sprite.name[14] == _waterChar ? true : false,
-            };
-
-            _sortedSprites[
-                waterMask.Up? 1 : 0,
-                waterMask.UpRight ? 1 : 0,
-                waterMask.Right ? 1 : 0,
-                waterMask.DownRight ? 1 : 0,
-                waterMask.Down ? 1 : 0,
-                waterMask.DownLeft ? 1 : 0,
-                waterMask.Left ? 1 : 0,
-                waterMask.UpLeft ? 1 : 0
-            ] = sprite;
-
-            int bothCharCount = sprite.name.ToCharArray().Count(x => x == _bothChar);
-
-            for (int i = 0; i < bothCharCount; i++)
-            {
-                char[] spriteNameCharArray = sprite.name.ToCharArray();
-
-                int bothIndex = Array.IndexOf(spriteNameCharArray, spriteNameCharArray.Skip(i).FirstOrDefault(x => x == _bothChar));
-
-                spriteNameCharArray[bothIndex] = _waterChar;
-
-                string spriteName = new string(spriteNameCharArray);
-
-                waterMask = new()
-                {
-                    Up = spriteName[0] == _waterChar ? true : false,
-                    UpRight = spriteName[2] == _waterChar ? true : false,
-                    Right = spriteName[4] == _waterChar ? true : false,
-                    DownRight = spriteName[6] == _waterChar ? true : false,
-                    Down = spriteName[8] == _waterChar ? true : false,
-                    DownLeft = spriteName[10] == _waterChar ? true : false,
-                    Left = spriteName[12] == _waterChar ? true : false,
-                    UpLeft = spriteName[14] == _waterChar ? true : false,
-                };
-
-                _sortedSprites[
-                    waterMask.Up ? 1 : 0,
-                    waterMask.UpRight ? 1 : 0,
-                    waterMask.Right ? 1 : 0,
-                    waterMask.DownRight ? 1 : 0,
-                    waterMask.Down ? 1 : 0,
-                    waterMask.DownLeft ? 1 : 0,
-                    waterMask.Left ? 1 : 0,
-                    waterMask.UpLeft ? 1 : 0
-                ] = sprite;
-            }
-
-            if (bothCharCount == 2)
-            {
-                string spriteName = sprite.name;
-
-                spriteName.Replace(_bothChar, _waterChar);
-
-                waterMask = new()
-                {
-                    Up = spriteName[0] == _waterChar ? true : false,
-                    UpRight = spriteName[2] == _waterChar ? true : false,
-                    Right = spriteName[4] == _waterChar ? true : false,
-                    DownRight = spriteName[6] == _waterChar ? true : false,
-                    Down = spriteName[8] == _waterChar ? true : false,
-                    DownLeft = spriteName[10] == _waterChar ? true : false,
-                    Left = spriteName[12] == _waterChar ? true : false,
-                    UpLeft = spriteName[14] == _waterChar ? true : false,
-                };
-
-                _sortedSprites[
-                    waterMask.Up ? 1 : 0,
-                    waterMask.UpRight ? 1 : 0,
-                    waterMask.Right ? 1 : 0,
-                    waterMask.DownRight ? 1 : 0,
-                    waterMask.Down ? 1 : 0,
-                    waterMask.DownLeft ? 1 : 0,
-                    waterMask.Left ? 1 : 0,
-                    waterMask.UpLeft ? 1 : 0
-                ] = sprite;
-            }
+            SetSprite(sprite, new string(name));
         }
+        else
+        {
+            // get index of first both char
+            int bothIndex = Array.IndexOf(name, name.FirstOrDefault(x => x == _bothChar));
+            name[bothIndex] = _waterChar;
+            RecReplaceChar(sprite, name.Clone() as char[]);
+            name[bothIndex] = _earthChar;
+            RecReplaceChar(sprite, name.Clone() as char[]);
+        }
+    }
 
+    private void SetSprite(Sprite sprite, string name)
+    {
+        WaterMask waterMask = new()
+        {
+            UpLeft = name[0] == _waterChar ? true : false,
+            Up = name[2] == _waterChar ? true : false,
+            UpRight = name[4] == _waterChar ? true : false,
+            Right = name[6] == _waterChar ? true : false,
+            DownRight = name[8] == _waterChar ? true : false,
+            Down = name[10] == _waterChar ? true : false,
+            DownLeft = name[12] == _waterChar ? true : false,
+            Left = name[14] == _waterChar ? true : false,
+        };
+        _sortedSprites[
+            waterMask.UpLeft ? 1 : 0,
+            waterMask.Up ? 1 : 0,
+            waterMask.UpRight ? 1 : 0,
+            waterMask.Right ? 1 : 0,
+            waterMask.DownRight ? 1 : 0,
+            waterMask.Down ? 1 : 0,
+            waterMask.DownLeft ? 1 : 0,
+            waterMask.Left ? 1 : 0
+        ] = sprite;
+    }
+
+    private void DebugPrint()
+    {
         for (int a0 = 0; a0 < _sortedSprites.GetLength(0); a0++)
         {
             for (int a1 = 0; a1 < _sortedSprites.GetLength(0); a1++)
@@ -145,14 +105,14 @@ public class CliffSpriteLibrary : ScriptableObject
 
         Sprite sprite = _sortedSprites
             [
-                waterMask.Up? 1 : 0,
+                waterMask.UpLeft ? 1 : 0,
+                waterMask.Up ? 1 : 0,
                 waterMask.UpRight ? 1 : 0,
                 waterMask.Right ? 1 : 0,
                 waterMask.DownRight ? 1 : 0,
                 waterMask.Down ? 1 : 0,
                 waterMask.DownLeft ? 1 : 0,
-                waterMask.Left ? 1 : 0,
-                waterMask.UpLeft ? 1 : 0
+                waterMask.Left ? 1 : 0
             ];
 
         Debug.Log($"{sprite?.name} {waterMask}");
