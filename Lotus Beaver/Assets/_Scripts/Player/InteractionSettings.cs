@@ -5,5 +5,5 @@ public class InteractionSettings : ScriptableObject
 {
     [field: SerializeField] public bool DrawGizmos = false;
     [Range(0f, 10f)] public float InteractionDistance = 1.5f;
-    [field: SerializeField] public BuildingInteractionSettings[] BuildingSettings;
+    [field: SerializeField] public BuildingPreset[] BuildingSettings;
 }
