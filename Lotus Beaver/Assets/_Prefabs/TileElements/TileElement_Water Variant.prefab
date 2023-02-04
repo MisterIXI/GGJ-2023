@@ -12,16 +12,24 @@ PrefabInstance:
       value: TileElement_Water Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7665081954327038487, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a9279ec601b3c8b4ca62bf6e9524a2ee, type: 3}
+    - target: {fileID: 7665081954327038487, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
       propertyPath: m_Color.b
-      value: 0.8113208
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7665081954327038487, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
       propertyPath: m_Color.g
-      value: 0.7262387
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7665081954327038487, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
       propertyPath: m_Color.r
-      value: 0.24237564
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7665081954327038487, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7922348945151694464, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
       propertyPath: m_RootOrder
