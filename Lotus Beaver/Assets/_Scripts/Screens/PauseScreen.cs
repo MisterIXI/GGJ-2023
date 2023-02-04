@@ -1,4 +1,6 @@
-﻿public class PauseScreen : Screen
+﻿using System;
+
+public class PauseScreen : Screen
 {
     public void ResumeGame()
     {

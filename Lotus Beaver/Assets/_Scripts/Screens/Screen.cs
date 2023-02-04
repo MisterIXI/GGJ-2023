@@ -7,13 +7,13 @@ public class Screen : MonoBehaviour
 
     private static Screen _currentScreen;
 
-    public static void SetCurrentScreen(Screen screen)
+    public void SetCurrentScreen(Screen screen)
     {
         _currentScreen?.SetActive(false);
 
         _currentScreen = screen;
 
-        screen.SetActive(true);
+        screen?.SetActive(true);
     }
 
     private void OnEnable()

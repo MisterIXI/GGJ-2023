@@ -32,9 +32,6 @@ public class GameManager : MonoBehaviour
 
     public static void SetGameState(GameState gameState)
     {
-        _gameState = gameState;
-        OnGameStateChanged?.Invoke(_gameState);
-
 #if UNITY_EDITOR
         Debug.Log($"Game State: {gameState}");
 #endif
@@ -46,9 +43,12 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.Paused:
             case GameState.GameOver:
-                Time.timeScale= 0f;
+                Time.timeScale = 0f;
                 break;
         }
+
+        _gameState = gameState;
+        OnGameStateChanged?.Invoke(_gameState);
     }
 
     public static void StartNewGame()
@@ -56,5 +56,15 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log("New Game");
 #endif
+    }
+
+    [ContextMenu(nameof(LoseGame))]
+    public void LoseGame()
+    {
+#if UNITY_EDITOR
+        Debug.Log("Lose Game");
+#endif
+
+        SetGameState(GameState.GameOver);
     }
 }

@@ -25,4 +25,9 @@ public class HeadUpDisplayElement : MonoBehaviour
     {
         gameObject.SetActive(active);
     }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= OnGameStateChanged;
+    }
 }

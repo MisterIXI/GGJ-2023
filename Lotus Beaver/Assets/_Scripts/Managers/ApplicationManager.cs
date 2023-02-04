@@ -13,7 +13,7 @@ public class ApplicationManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance == null)
+        if (_instance != null)
         {
             Destroy(gameObject);
             return;
