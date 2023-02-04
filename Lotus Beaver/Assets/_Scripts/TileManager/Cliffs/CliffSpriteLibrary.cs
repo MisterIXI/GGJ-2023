@@ -21,7 +21,8 @@ public class CliffSpriteLibrary : ScriptableObject
         foreach (Sprite sprite in _sprites)
             RecReplaceChar(sprite, sprite.name.ToCharArray());
 
-        DebugPrint();
+        // DebugPrint();
+        CountEmpties();
     }
 
     private void RecReplaceChar(Sprite sprite, char[] name)
@@ -66,7 +67,38 @@ public class CliffSpriteLibrary : ScriptableObject
             waterMask.Left ? 1 : 0
         ] = sprite;
     }
-
+    private void CountEmpties()
+    {
+        int count = 0;
+        // count all empty sprites in _sortedSprites
+        for (int a0 = 0; a0 < _sortedSprites.GetLength(0); a0++)
+        {
+            for (int a1 = 0; a1 < _sortedSprites.GetLength(0); a1++)
+            {
+                for (int a2 = 0; a2 < _sortedSprites.GetLength(0); a2++)
+                {
+                    for (int a3 = 0; a3 < _sortedSprites.GetLength(0); a3++)
+                    {
+                        for (int a4 = 0; a4 < _sortedSprites.GetLength(0); a4++)
+                        {
+                            for (int a5 = 0; a5 < _sortedSprites.GetLength(0); a5++)
+                            {
+                                for (int a6 = 0; a6 < _sortedSprites.GetLength(0); a6++)
+                                {
+                                    for (int a7 = 0; a7 < _sortedSprites.GetLength(0); a7++)
+                                    {
+                                        if (_sortedSprites[a0, a1, a2, a3, a4, a5, a6, a7] == null)
+                                            count++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Debug.Log("Missing Entries: " + count);
+    }
     private void DebugPrint()
     {
         for (int a0 = 0; a0 < _sortedSprites.GetLength(0); a0++)
