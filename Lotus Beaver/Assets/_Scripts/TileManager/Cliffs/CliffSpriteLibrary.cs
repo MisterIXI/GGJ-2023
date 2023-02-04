@@ -7,7 +7,7 @@ public class CliffSpriteLibrary : ScriptableObject
 {
     [SerializeField] private Sprite[] _sprites;
 
-    [SerializeField] private Sprite[,,,,,,,] _sortedSprites = new Sprite[2, 2, 2, 2, 2, 2, 2, 2];
+    private Sprite[,,,,,,,] _sortedSprites;
 
     [SerializeField] private char _waterChar;
     [SerializeField] private char _bothChar;
@@ -108,11 +108,42 @@ public class CliffSpriteLibrary : ScriptableObject
                 ] = sprite;
             }
         }
+
+        for (int a0 = 0; a0 < _sortedSprites.GetLength(0); a0++)
+        {
+            for (int a1 = 0; a1 < _sortedSprites.GetLength(0); a1++)
+            {
+                for (int a2 = 0; a2 < _sortedSprites.GetLength(0); a2++)
+                {
+                    for (int a3 = 0; a3 < _sortedSprites.GetLength(0); a3++)
+                    {
+                        for (int a4 = 0; a4 < _sortedSprites.GetLength(0); a4++)
+                        {
+                            for (int a5 = 0; a5 < _sortedSprites.GetLength(0); a5++)
+                            {
+                                for (int a6 = 0; a6 < _sortedSprites.GetLength(0); a6++)
+                                {
+                                    for (int a7 = 0; a7 < _sortedSprites.GetLength(0); a7++)
+                                    {
+                                        Debug.Log($"{a0}{a1}{a2}{a3}{a4}{a5}{a6}{a7} {_sortedSprites[a0, a1, a2, a3, a4, a5, a6, a7]?.name}");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public Sprite GetSortedSprite(WaterMask waterMask)
     {
-        return _sortedSprites
+        if (_sortedSprites == null || _sortedSprites.Length == 0)
+        {
+            LoadNewSpirts();
+        }
+
+        Sprite sprite = _sortedSprites
             [
                 waterMask.Up? 1 : 0,
                 waterMask.UpRight ? 1 : 0,
@@ -123,5 +154,9 @@ public class CliffSpriteLibrary : ScriptableObject
                 waterMask.Left ? 1 : 0,
                 waterMask.UpLeft ? 1 : 0
             ];
+
+        Debug.Log($"{sprite.name} {waterMask}");
+
+        return sprite;
     }
 }

@@ -1,4 +1,7 @@
-﻿public struct WaterMask
+﻿using System;
+using UnityEngine;
+
+public struct WaterMask
 {
     public bool UpLeft;
     public bool Up;
@@ -31,5 +34,18 @@
         Down = sorounding.Down?.TileElementType == TileElementType.Water;
         DownLeft = sorounding.DownLeft?.TileElementType == TileElementType.Water;
         Left = sorounding.Left?.TileElementType == TileElementType.Water;
+    }
+
+    public override string ToString()
+    {
+        return
+                $"UpLeft: {UpLeft}" +
+                $"Up: {Up}" +
+                $"UpRight: {UpRight}" +
+                $"Right: {Right}" +
+                $"DownRight: {DownRight}" +
+                $"Down: {Down}" +
+                $"DownLeft: {DownLeft}" +
+                $"Left: {Left}";
     }
 }
