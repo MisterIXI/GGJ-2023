@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using System;
+using System.Resources;
 
 public class BuildingInteraction : IInteractable
 {
@@ -13,7 +14,16 @@ public class BuildingInteraction : IInteractable
     public void OnInteract(Tile tile)
     {
         // instantiate building
-        GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity);
+        if(RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
+        {
+            RessourceManager.UseResources(_settings.earthCost, _settings.waterCost);
+            GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.Log("Not enough Resources!");
+        }
+        
     }
 
     public void OnSelection(Tile tile)

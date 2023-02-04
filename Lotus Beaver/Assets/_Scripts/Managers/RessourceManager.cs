@@ -32,4 +32,18 @@ public class RessourceManager : MonoBehaviour
     {
         water += value;
     }
+
+    public static bool EnoughResources(int earthCost, int waterCost)
+    {
+        if(earthCost <= earth && waterCost <= water)
+            return true;
+        else
+            return false;
+    }
+
+    public static void UseResources(int earthCost, int waterCost)
+    {
+        earth -= earthCost;
+        water -= waterCost;
+    }
 }
