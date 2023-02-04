@@ -73,6 +73,9 @@ public class HeadUpDisplayActiveElements : MonoBehaviour
         _ressourceTexts = new TextMeshProUGUI[2];
         _ressourceTexts[0] = earth.GetComponentInChildren<TextMeshProUGUI>();
         _ressourceTexts[1] = water.GetComponentInChildren<TextMeshProUGUI>();
+
+        RessourceManager.OnEarthChange += UpdateEarth;
+        RessourceManager.OnWaterChange += UpdateWater;
     }
 
     private void InitializeTools()
