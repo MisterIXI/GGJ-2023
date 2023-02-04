@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPreset: {fileID: 11400000, guid: 9b6a973cdf22af743a3ad70532b01abe, type: 2}
+  buildingName: 
+  upgradeStages: 0
+  currentUpgradeStage: 0
 --- !u!1 &4114158671736528343
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,6 +59,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7751052090561736150}
   - component: {fileID: 99166325600211344}
+  - component: {fileID: 5450493288884700239}
   m_Layer: 0
   m_Name: Sprite_WaterPlant
   m_TagString: Untagged
@@ -119,7 +123,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ac7b10e79391da948b0bb026532c2bbe, type: 3}
+  m_Sprite: {fileID: -646067831, guid: 53c51cd9f59f51a49aae876cecbd86c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,3 +134,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5450493288884700239
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4114158671736528343}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f96713a165f4d6343b04c2d00549f1bf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

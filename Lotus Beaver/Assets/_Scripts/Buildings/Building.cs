@@ -85,7 +85,17 @@ public class Building : InteractableBase
                 GetComponentInChildren<SpriteRenderer>().sprite = sprites[currentConstructionStage];
 
                 if (currentConstructionStage == constructionStages)
+                {
                     isBuild = true;
+
+                    Animator anim = GetComponentInChildren<Animator>();
+                    if (anim != null)
+                    {
+                        anim.enabled = true;
+                        //anim.SetBool("isBuild", true);
+                    }
+                }
+
             }
         } 
     }

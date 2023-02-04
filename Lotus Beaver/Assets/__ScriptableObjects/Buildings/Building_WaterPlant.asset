@@ -18,13 +18,16 @@ MonoBehaviour:
   <buildingPrefab>k__BackingField: {fileID: 3340042791620746101, guid: 0d493411f9ae6ec41bd981f6b999ad05, type: 3}
   <earthProduction>k__BackingField: 0
   <waterProduction>k__BackingField: 5
-  InteractionIcon: {fileID: 0}
+  InteractionIcon: {fileID: 1274222128, guid: 28a741c0365eb794ba1bbab48788978f, type: 3}
   <selfHealAmount>k__BackingField: 0
   <healAmount>k__BackingField: 0
   <healRadius>k__BackingField: 0
-  <constructionStages>k__BackingField: 0
-  <constructionSprites>k__BackingField: []
-  <ticksPerStage>k__BackingField: 10
+  <constructionStages>k__BackingField: 2
+  <constructionSprites>k__BackingField:
+  - {fileID: -646067831, guid: 53c51cd9f59f51a49aae876cecbd86c1, type: 3}
+  - {fileID: 463707233, guid: 860258bbeb86404499990d37ad41e712, type: 3}
+  - {fileID: 1274222128, guid: 28a741c0365eb794ba1bbab48788978f, type: 3}
+  <ticksPerStage>k__BackingField: 5
   <upgradeStages>k__BackingField: 0
   <upgradeSprites>k__BackingField: []
   <upgradeEarthCosts>k__BackingField: 
