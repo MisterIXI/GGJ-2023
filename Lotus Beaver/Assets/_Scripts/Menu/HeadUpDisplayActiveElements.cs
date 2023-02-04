@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 using TMPro;
+
 public class HeadUpDisplayActiveElements : MonoBehaviour
 {
     [SerializeField] private Transform RessourcesRoot;
@@ -16,6 +17,9 @@ public class HeadUpDisplayActiveElements : MonoBehaviour
 
     [SerializeField] private InteractionSettings _interactionSettings;
     [SerializeField] private TextMeshProUGUI[] _ressourceTexts;
+
+    [SerializeField] public Image FadeImage;
+
     private GameObject _selectedTool;
 
     private void Start()
