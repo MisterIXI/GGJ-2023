@@ -15,6 +15,9 @@ MonoBehaviour:
   <displayName>k__BackingField: Earth Plant
   <earthCost>k__BackingField: 100
   <waterCost>k__BackingField: 500
-  <buildingPrefab>k__BackingField: {fileID: 0}
+  <buildingPrefab>k__BackingField: {fileID: 6108754275576499043, guid: 1a450d36d4a0e2243ad4d703ad53a49c, type: 3}
   <earthProduction>k__BackingField: 5
   <waterProduction>k__BackingField: 0
+  <constructionStages>k__BackingField: 0
+  <sprites>k__BackingField: []
+  <ticksPerStage>k__BackingField: 0

@@ -406,6 +406,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7868271523652566667, guid: 21c0566e2e9e4454d9f41e8a6d682ff3, type: 3}
+      propertyPath: m_Damping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7868271524196134179, guid: 21c0566e2e9e4454d9f41e8a6d682ff3, type: 3}
       propertyPath: m_Name
       value: PlayerVirtCam

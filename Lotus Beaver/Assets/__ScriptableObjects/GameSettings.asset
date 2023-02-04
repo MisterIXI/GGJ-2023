@@ -18,3 +18,4 @@ MonoBehaviour:
   <TileHeight>k__BackingField: 0
   <DamageTickTime>k__BackingField: 0.2
   <BuildingTickTime>k__BackingField: 1
+  <ConstructionTickTime>k__BackingField: 0.1
