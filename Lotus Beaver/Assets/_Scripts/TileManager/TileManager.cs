@@ -93,7 +93,34 @@ public class TileManager : MonoBehaviour
 
     private Vector3 GetTilePosition(int x, int y)
     {
-        return new Vector3(x * _gameSettings.TileSize.x, y * _gameSettings.TileSize.y, _gameSettings.TileHeight);
+        return new Vector3(x * _gameSettings.TileSize.x, y * _gameSettings.TileSize.y, _gameSettings.TileHeight) + CenterOffset();
+    }
+
+    private static Vector3 CenterOffset()
+    {
+        return new Vector3(
+            -0.5f * (_instance._gameSettings.MapSize.x * _instance._gameSettings.TileSize.x),
+            -0.5f * (_instance._gameSettings.MapSize.y * _instance._gameSettings.TileSize.y),
+            0f)
+            - HalfTileOffset();
+    }
+
+    private static Vector3 HalfTileOffset()
+    {
+        return new Vector3(
+            HalfTileOffsetX(),
+            HalfTileOffsetY(),
+            0f);
+    }
+
+    private static float HalfTileOffsetY()
+    {
+        return -0.5f * (1 * _instance._gameSettings.TileSize.y);
+    }
+
+    private static float HalfTileOffsetX()
+    {
+        return -0.5f * (1 * _instance._gameSettings.TileSize.x);
     }
 
     public static void AddTileElementPool(TileElementType tileElementType, Pool<TileElement> pool)
@@ -128,8 +155,6 @@ public class TileManager : MonoBehaviour
         SetTileElementType(_tiles[center.x, center.y], TileElementType.Earth);
     }
 
-
-
     private static IEnumerable<Tile> GetNextTile()
     {
         for (int x = 0; x < _tiles.GetLength(0); x++)
@@ -148,5 +173,54 @@ public class TileManager : MonoBehaviour
         tileElement.Transform.SetParent(tile.Transform);
         tileElement.Transform.localPosition = Vector3.zero;
         tile.TileElement = tileElement;
+    }
+
+    public static Tile GetClosetTile(Vector3 position)
+    {
+        Vector2Int coordinates = GetCoordinates(position);
+
+        return ClampTile(coordinates);
+    }
+
+    public static Tile GetClosetTile(Vector2Int coordinates)
+    {
+        return ClampTile(coordinates);
+    }
+
+    public static Tile ClampTile(Vector2Int coordinates)
+    {
+        coordinates -= CenterTile();
+
+        return _tiles[Math.Clamp(coordinates.x, 0, GetTilesMaxX()), Math.Clamp(coordinates.y, 0, GetTilesMaxY())];
+    }
+
+    public static Vector2Int GetCoordinates(Vector3 position)
+    {
+        return new Vector2Int((int)Mathf.Round(position.x), (int)Mathf.Round(position.y)) + CenterTile();
+    }
+
+    public static Vector2Int CenterTile()
+    {
+        return new Vector2Int(GetTilesXLength() / 2, GetTilesYLength() / 2);
+    }
+
+    public static int GetTilesMaxX()
+    {
+        return _tiles.GetLength(0) - 1;
+    }
+
+    public static int GetTilesMaxY ()
+    {
+        return _tiles.GetLength(1) - 1;
+    }
+
+    public static int GetTilesXLength()
+    {
+        return _tiles.GetLength(0);
+    }
+
+    public static int GetTilesYLength()
+    {
+        return _tiles.GetLength(1);
     }
 }
