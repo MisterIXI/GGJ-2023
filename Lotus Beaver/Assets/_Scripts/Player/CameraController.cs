@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
-        
+
         _vcam = GetComponent<CinemachineVirtualCamera>();
         _hardLockToTarget = _vcam.GetCinemachineComponent<CinemachineHardLockToTarget>();
         if (player != null)
@@ -23,8 +23,9 @@ public class CameraController : MonoBehaviour
         _lastDamping = -1;
     }
 
-    private void Update() {
-        if(_lastDamping != _movementSettings.cameraDamping)
+    private void Update()
+    {
+        if (_lastDamping != _movementSettings.cameraDamping)
         {
             _hardLockToTarget.m_Damping = _movementSettings.cameraDamping;
             _lastDamping = _movementSettings.cameraDamping;
