@@ -6,6 +6,8 @@ public class Tile : Poolable
 
     private TilePool _pool;
 
+    public InteractableBase InteractableBase { get; set; }
+
     public Vector2Int Coordinates { get; set; }
 
     public void SetPool(TilePool pool)
