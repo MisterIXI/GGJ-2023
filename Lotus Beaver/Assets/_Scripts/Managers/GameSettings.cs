@@ -6,6 +6,7 @@ public class GameSettings : ScriptableObject
     [field: Header("Map Settings")]
     [field: SerializeField] public Vector2Int MapSize { get; private set; }
     [field: SerializeField] public Vector2 TileSize { get; private set; }
+    [field: SerializeField] public int RootLevel{ get; private set; }
     [field: SerializeField] public float TileHeight { get; private set; }
 
     [field: Header("Tick Settings")]

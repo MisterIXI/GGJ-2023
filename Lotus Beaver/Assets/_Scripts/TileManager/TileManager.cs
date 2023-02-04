@@ -10,7 +10,6 @@ public class TileManager : MonoBehaviour
     private static Dictionary<TileElementType, Pool<TileElement>> _tileElementPools = new Dictionary<TileElementType, Pool<TileElement>>();
 
     [SerializeField] private GameSettings _gameSettings;
-    [SerializeField] private Vector3 _correctionValue;
 
     private TilePool _tilePool;
 
@@ -20,24 +19,29 @@ public class TileManager : MonoBehaviour
 
     public static Tile[,] Tiles => _tiles;
 
-    private static int GetTilesMaxX()
+    public static int GetTilesMaxX()
     {
         return _tiles.GetLength(0) - 1;
     }
 
-    private static int GetTilesMaxY()
+    public static int GetTilesMaxY()
     {
         return _tiles.GetLength(1) - 1;
     }
 
-    private static int GetTilesXLength()
+    public static int GetTilesXLength()
     {
         return _tiles.GetLength(0);
     }
 
-    private static int GetTilesYLength()
+    public static int GetTilesYLength()
     {
         return _tiles.GetLength(1);
+    }
+
+    public static Vector2Int GetSize()
+    {
+        return new Vector2Int(GetTilesXLength(), GetTilesYLength());
     }
 
     private static Vector3 CenterOffset()

@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     private static GameState _gameState;
     public static GameState GameState => _gameState;
 
+    public static event Action OnNewGame;
+    public static event Action OnGameOver;
+
     private void Awake()
     {
         if (RefManager.gameManager != null)
@@ -56,6 +59,8 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log("New Game");
 #endif
+
+        OnNewGame?.Invoke();
     }
 
     [ContextMenu(nameof(LoseGame))]
@@ -66,5 +71,7 @@ public class GameManager : MonoBehaviour
 #endif
 
         SetGameState(GameState.GameOver);
+
+        OnGameOver?.Invoke();
     }
 }
