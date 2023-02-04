@@ -147,7 +147,7 @@ public class CliffSpriteLibrary : ScriptableObject
                 waterMask.Left ? 1 : 0
             ];
 
-        Debug.Log($"{sprite?.name} {waterMask}");
+        // Debug.Log($"{sprite?.name} {waterMask}");
 
         return sprite;
     }

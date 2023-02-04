@@ -16,6 +16,6 @@ public class TileManagerTester : MonoBehaviour
 
         _coordinates = TileManager.GetCoordinates(transform.position);
         _currentTile = TileManager.GetClosetTile(_coordinates);
-        _sourroundingTiles = TileManager.GetSouroundingTiles(_currentTile);
+        _sourroundingTiles = TileManager.GetSurroundingTiles(_currentTile);
     }
 }

@@ -106,7 +106,7 @@ public class Building : InteractableBase
         //currentTile.Heal(selfHealAmount);
         if (healRadius > 0)
         {
-            foreach(var tile in TileManager.GetSouroundingTilesWithDiagonal(currentTile))
+            foreach(var tile in TileManager.GetSurroundingTilesWithDiagonal(currentTile))
             {
                 if(tile.TileElement.TileElementType == TileElementType.Earth)
                 {
