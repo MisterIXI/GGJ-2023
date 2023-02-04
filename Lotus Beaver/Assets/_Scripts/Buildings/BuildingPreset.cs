@@ -13,10 +13,17 @@ public class BuildingPreset : ScriptableObject
 
     [field: SerializeField] public GameObject buildingPrefab { get; private set; }
 
+    [field: Header("Resource Production")]
     [field: SerializeField] public int earthProduction { get; private set; }
     [field: SerializeField] public int waterProduction { get; private set; }
 
     [field: SerializeField] public Sprite InteractionIcon;
+
+    [field: Header("Healing")]
+    [field: SerializeField] public int selfHealAmount { get; private set; }
+    [field: SerializeField] public int healAmount { get; private set; }
+    [field: SerializeField] public int healRadius { get; private set; }
+
     [field: Header("Construction")]
     [field: SerializeField] public int constructionStages { get; private set; }
     [field: SerializeField] public Sprite[] sprites { get; private set; }

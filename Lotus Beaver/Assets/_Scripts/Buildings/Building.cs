@@ -6,6 +6,10 @@ public class Building : InteractableBase
 {
     [SerializeField] private BuildingPreset buildingPreset;
 
+    private int selfHealAmount;
+    private int healAmount;
+    private int healRadius;
+
     private bool isBuild = false;
 
     private int constructionTicks = 0;
@@ -22,10 +26,15 @@ public class Building : InteractableBase
     {
         TickManager.OnBuildingTick += TickManager_OnBuildingTick;
         TickManager.OnConstructionTick += TickManager_OnConstructionTick;
+        TickManager.OnDamageTick += TickManager_OnDamageTick;
 
         constructionStages = buildingPreset.constructionStages;
         ticksPerStage = buildingPreset.ticksPerStage;
         sprites = buildingPreset.sprites;
+
+        selfHealAmount = buildingPreset.selfHealAmount;
+        healAmount = buildingPreset.healAmount;
+        healRadius = buildingPreset.healRadius;
 
         if (constructionStages > 0)
         {
@@ -63,6 +72,23 @@ public class Building : InteractableBase
                     isBuild = true;
             }
         } 
+    }
+
+    private void TickManager_OnDamageTick(object sender, TickManager.OnTickEventArgs e)
+    {
+        Tile currentTile = GetComponentInParent<Tile>();
+        //currentTile.Heal(selfHealAmount);
+        if (healRadius > 0)
+        {
+            foreach(var tile in TileManager.GetSouroundingTilesWithDiagonal(currentTile))
+            {
+                if(tile.TileElement.TileElementType == TileElementType.Earth)
+                {
+                    //tile.Heal(healAmount);
+                }
+
+            }
+        }
     }
 
     public override void OnInteract(Tile tile)
