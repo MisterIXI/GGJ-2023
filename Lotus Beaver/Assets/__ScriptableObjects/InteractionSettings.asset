@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f50e2a7d765dc48aca3433da5abd64, type: 3}
+  m_Name: InteractionSettings
+  m_EditorClassIdentifier: 
+  DrawGizmos: 1
+  InteractionDistance: 1
+  BuildingSettings:
+  - {fileID: 11400000, guid: 201145eeb71261640b46bd492fa304a9, type: 2}
+  - {fileID: 11400000, guid: 381d7f73ecfd8164c9e7bc021b3d9488, type: 2}
+  - {fileID: 11400000, guid: 9b6a973cdf22af743a3ad70532b01abe, type: 2}
+  - {fileID: 11400000, guid: 9378e485ba540ad42be530d0aa9b505a, type: 2}
