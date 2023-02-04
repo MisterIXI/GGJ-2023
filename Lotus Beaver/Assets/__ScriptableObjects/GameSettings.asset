@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   <MapSize>k__BackingField: {x: 7, y: 7}
-  <TileSize>k__BackingField: {x: 1, y: 1}
+  <TileSize>k__BackingField: {x: 2, y: 2}
   <TileHeight>k__BackingField: 0

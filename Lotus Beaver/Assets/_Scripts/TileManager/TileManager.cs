@@ -99,6 +99,8 @@ public class TileManager : MonoBehaviour
 
     public static Vector2Int GetCoordinates(Vector3 position)
     {
+        position.x /= _instance._gameSettings.TileSize.x;
+        position.y /= _instance._gameSettings.TileSize.y;
         return new Vector2Int((int)Mathf.Round(position.x), (int)Mathf.Round(position.y)) + CenterTile();
     }
 
