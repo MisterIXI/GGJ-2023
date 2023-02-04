@@ -7,12 +7,16 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public Transform CameraTarget { get; private set; }
-
+    private Vector3 _startPosition;
     private Animator animator;
     private Vector2 _moveInput;
     private Vector2 _movement;
     private Rigidbody2D _rigidbody;
     [SerializeField] private MovementSettings _movementSettings;
+
+    private enum fadeState { none, fadein, fadeout };
+    private fadeState _fadeState = fadeState.none;
+    private float _fadeStartTime;
     private void Awake()
     {
         CameraTarget = new GameObject("CameraTarget").transform;
@@ -24,13 +28,14 @@ public class PlayerMovement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         RefManager.inputManager.OnMove += OnMoveInput;
+        _startPosition = transform.position;
     }
 
     private void Update()
     {
         HandleMovement();
         HandleCameraTargetMovement();
-
+        HandleFade();
         animator.SetFloat("Horizontal", _movement.x);
         animator.SetFloat("Vertical", _movement.y);
     }
@@ -55,6 +60,25 @@ public class PlayerMovement : MonoBehaviour
         else if (context.canceled)
         {
             _moveInput = Vector2.zero;
+        }
+    }
+
+    private void HandleFade()
+    {
+        if(_fadeState == fadeState.fadeout)
+        {
+            
+        }
+    }
+    public void OnResetInput(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (_fadeState == fadeState.none)
+            {
+                _fadeStartTime = Time.time;
+                _fadeState = fadeState.fadein;
+            }
         }
     }
 
