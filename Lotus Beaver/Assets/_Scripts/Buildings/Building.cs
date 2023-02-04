@@ -6,6 +6,8 @@ public class Building : InteractableBase
 {
     [SerializeField] private BuildingPreset buildingPreset;
 
+    public string buildingName;
+
     private int selfHealAmount;
     private int healAmount;
     private int healRadius;
@@ -16,9 +18,16 @@ public class Building : InteractableBase
     private int ticksPerStage;
 
     private int constructionStages;
-    private int currentStage = 0;
+    private int currentConstructionStage = 0;
 
-    Sprite[] sprites;
+
+    private Sprite[] upgradeSprites;
+    public int upgradeStages;
+    public int currentUpgradeStage = 0;
+    private int[] upgradeEarthCosts;
+    private int[] upgradeWaterCosts;
+
+    private Sprite[] sprites;
 
 
     // Start is called before the first frame update
@@ -28,13 +37,20 @@ public class Building : InteractableBase
         TickManager.OnConstructionTick += TickManager_OnConstructionTick;
         TickManager.OnDamageTick += TickManager_OnDamageTick;
 
+        buildingName = buildingPreset.displayName;
+
         constructionStages = buildingPreset.constructionStages;
         ticksPerStage = buildingPreset.ticksPerStage;
-        sprites = buildingPreset.sprites;
+        sprites = buildingPreset.constructionSprites;
 
         selfHealAmount = buildingPreset.selfHealAmount;
         healAmount = buildingPreset.healAmount;
         healRadius = buildingPreset.healRadius;
+
+        upgradeSprites = buildingPreset.upgradeSprites;
+        upgradeStages = buildingPreset.upgradeStages;
+        upgradeEarthCosts = buildingPreset.upgradeEarthCosts;
+        upgradeWaterCosts = buildingPreset.upgradeWaterCosts;
 
         if (constructionStages > 0)
         {
@@ -59,16 +75,16 @@ public class Building : InteractableBase
 
     private void TickManager_OnConstructionTick(object sender, TickManager.OnTickEventArgs e)
     {
-        if (!isBuild && currentStage < constructionStages)
+        if (!isBuild && currentConstructionStage < constructionStages)
         {
             constructionTicks++;
             if (constructionTicks >= ticksPerStage)
             {
-                currentStage++;
+                currentConstructionStage++;
                 constructionTicks = 0;
-                GetComponentInChildren<SpriteRenderer>().sprite = sprites[currentStage];
+                GetComponentInChildren<SpriteRenderer>().sprite = sprites[currentConstructionStage];
 
-                if (currentStage == constructionStages)
+                if (currentConstructionStage == constructionStages)
                     isBuild = true;
             }
         } 
@@ -99,5 +115,11 @@ public class Building : InteractableBase
     public override void OnSelection(Tile tile)
     {
         Debug.Log("Selected " + tile);
+    }
+
+    public void Upgrade()
+    {
+        GetComponentInChildren<SpriteRenderer>().sprite = upgradeSprites[currentUpgradeStage];
+        currentUpgradeStage++;
     }
 }

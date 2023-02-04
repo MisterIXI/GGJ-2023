@@ -18,3 +18,23 @@ MonoBehaviour:
   <buildingPrefab>k__BackingField: {fileID: 5213177626744561057, guid: a3662c2fcd57fff49baeb1303ca0a6a5, type: 3}
   <earthProduction>k__BackingField: 10
   <waterProduction>k__BackingField: 10
+  InteractionIcon: {fileID: 0}
+  <selfHealAmount>k__BackingField: 0
+  <healAmount>k__BackingField: 0
+  <healRadius>k__BackingField: 0
+  <constructionStages>k__BackingField: 0
+  <constructionSprites>k__BackingField: []
+  <ticksPerStage>k__BackingField: 0
+  <upgradeStages>k__BackingField: 9
+  <upgradeSprites>k__BackingField:
+  - {fileID: 21300000, guid: c84bfaa59cd47cf439d53e602fbde717, type: 3}
+  - {fileID: 21300000, guid: b0210222783ae2c419a7e61031fe35ca, type: 3}
+  - {fileID: 21300000, guid: 9db5441febcb8c04a90c25d6a9699d0c, type: 3}
+  - {fileID: 21300000, guid: 34bf89f8dec28cb4dbd2ba55b8d3aea1, type: 3}
+  - {fileID: 21300000, guid: f31990fe3d57d3c4eb23cca25cd7546b, type: 3}
+  - {fileID: 21300000, guid: 072392016db68c549855e1410e27891f, type: 3}
+  - {fileID: 21300000, guid: d4e7c856dd29ec3459396b764cc5b27a, type: 3}
+  - {fileID: 21300000, guid: e1f286dfa3725104b8808e4a31309edc, type: 3}
+  - {fileID: 21300000, guid: ae0ad89c91ae5e3499c6325622c8dafd, type: 3}
+  <upgradeEarthCosts>k__BackingField: 640000006400000064000000640000006400000064000000640000006400000064000000
+  <upgradeWaterCosts>k__BackingField: 640000006400000064000000640000006400000064000000640000006400000064000000

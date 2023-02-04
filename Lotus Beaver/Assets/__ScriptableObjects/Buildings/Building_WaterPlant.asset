@@ -18,6 +18,14 @@ MonoBehaviour:
   <buildingPrefab>k__BackingField: {fileID: 3340042791620746101, guid: 0d493411f9ae6ec41bd981f6b999ad05, type: 3}
   <earthProduction>k__BackingField: 0
   <waterProduction>k__BackingField: 5
+  InteractionIcon: {fileID: 0}
+  <selfHealAmount>k__BackingField: 0
+  <healAmount>k__BackingField: 0
+  <healRadius>k__BackingField: 0
   <constructionStages>k__BackingField: 0
-  <sprites>k__BackingField: []
-  <ticksPerStage>k__BackingField: 0
+  <constructionSprites>k__BackingField: []
+  <ticksPerStage>k__BackingField: 10
+  <upgradeStages>k__BackingField: 0
+  <upgradeSprites>k__BackingField: []
+  <upgradeEarthCosts>k__BackingField: 
+  <upgradeWaterCosts>k__BackingField: 

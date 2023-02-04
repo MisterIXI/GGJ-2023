@@ -15,22 +15,46 @@ public class BuildingInteraction : IInteractable
     {
         // instantiate building
         if (tile.TileElement.TileElementType == TileElementType.Earth) {
-            if(RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
+            if (tile.building == null)
             {
-                if (tile.InteractableBase == null)
+                if (RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
                 {
                     RessourceManager.UseResources(_settings.earthCost, _settings.waterCost);
                     GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity);
-                    tile.InteractableBase = building.GetComponent<InteractableBase>();
+                    Debug.Log(building.GetComponent<Building>().buildingName);
+                    tile.building = building.GetComponent<Building>();
                 }
                 else
                 {
-                    Debug.Log("There is already a building on this tile");
+                    Debug.Log("Not enough resources!");
                 }
+            }
+            else if (tile.building.buildingName == _settings.displayName)
+            {
+                int currentUpgradeStage = tile.building.currentUpgradeStage;
+                if (currentUpgradeStage < tile.building.upgradeStages)
+                {
+                    if (RessourceManager.EnoughResources(_settings.upgradeEarthCosts[currentUpgradeStage], _settings.upgradeWaterCosts[currentUpgradeStage]))
+                    {
+                        RessourceManager.UseResources(_settings.upgradeEarthCosts[currentUpgradeStage], _settings.upgradeWaterCosts[currentUpgradeStage]);
+                        tile.building.Upgrade();
+                    }
+                    else
+                    {
+                        Debug.Log("Not enough resources to upgrade!");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Max Upgrade Reached!");
+                }
+                
             }
             else
             {
-                Debug.Log("Not enough resources!");
+                Debug.Log(tile.building.buildingName);
+                Debug.Log(_settings.displayName);
+                Debug.Log("There is already a building on this tile");
             }
         }
         else
