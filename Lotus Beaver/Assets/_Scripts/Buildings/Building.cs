@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : MonoBehaviour
+public class Building : InteractableBase
 {
     [SerializeField] private BuildingPreset buildingPreset;
 
@@ -16,5 +16,15 @@ public class Building : MonoBehaviour
     {
         RessourceManager.AddEarth(buildingPreset.earthProduction);
         RessourceManager.AddWater(buildingPreset.waterProduction);
+    }
+
+    public override void OnInteract(Tile tile)
+    {   
+        Debug.Log("Interacted with " + tile);
+    }
+
+    public override void OnSelection(Tile tile)
+    {
+        Debug.Log("Selected " + tile);
     }
 }
