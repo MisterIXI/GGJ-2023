@@ -1,5 +1,6 @@
 ﻿public struct WaterMask
 {
+    public bool UpLeft;
     public bool Up;
     public bool UpRight;
     public bool Right;
@@ -7,10 +8,10 @@
     public bool Down;
     public bool DownLeft;
     public bool Left;
-    public bool UpLeft;
 
-    public WaterMask(bool up, bool upRight, bool right, bool downRight, bool down, bool downLeft, bool left, bool upLeft)
+    public WaterMask(bool upLeft, bool up, bool upRight, bool right, bool downRight, bool down, bool downLeft, bool left)
     {
+        UpLeft = upLeft;
         Up = up;
         UpRight = upRight;
         Right = right;
@@ -18,11 +19,11 @@
         Down = down;
         DownLeft = downLeft;
         Left = left;
-        UpLeft = upLeft;
     }
 
     public WaterMask(SoroundingTiles sorounding)
     {
+        UpLeft = sorounding.UpLeft?.TileElementType == TileElementType.Water;
         Up = sorounding.Up?.TileElementType == TileElementType.Water;
         UpRight = sorounding.UpRight?.TileElementType == TileElementType.Water;
         Right = sorounding.Right?.TileElementType == TileElementType.Water;
@@ -30,6 +31,5 @@
         Down = sorounding.Down?.TileElementType == TileElementType.Water;
         DownLeft = sorounding.DownLeft?.TileElementType == TileElementType.Water;
         Left = sorounding.Left?.TileElementType == TileElementType.Water;
-        UpLeft = sorounding.UpLeft?.TileElementType == TileElementType.Water;
     }
 }

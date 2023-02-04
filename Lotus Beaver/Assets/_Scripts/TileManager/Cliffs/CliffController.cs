@@ -16,6 +16,8 @@ public class CliffController : MonoBehaviour
     private void OnEnable()
     {
         _activeCliffControllers.Add(this);
+
+        UpdateCliffSprite();
     }
 
     private void OnDisable()
@@ -23,9 +25,17 @@ public class CliffController : MonoBehaviour
         _activeCliffControllers.Remove(this);
     }
 
+    [ContextMenu(nameof(UpdateCliffSprite))]
     public void UpdateCliffSprite()
     {
-        SoroundingTiles soroundingTiles = TileManager.GetSouroundingTilesElements(GetComponent<Tile>());
+        if (GameManager.GameState != GameState.Ingame)
+        {
+            Debug.Log("Not Ingame");
+
+            return;
+        }
+
+        SoroundingTiles soroundingTiles = TileManager.GetSouroundingTilesElements(GetComponentInParent<Tile>());
 
         WaterMask waterMask = new WaterMask(soroundingTiles);
 

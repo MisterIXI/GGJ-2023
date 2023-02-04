@@ -282,6 +282,11 @@ public class TileManager : MonoBehaviour
 
     public static SoroundingTiles GetSouroundingTilesElements(Tile currentTile)
     {
+        if (currentTile == null)
+        {
+            return new SoroundingTiles();
+        }
+
         Vector2Int coordinates = currentTile.Coordinates;
 
         return new SoroundingTiles()
