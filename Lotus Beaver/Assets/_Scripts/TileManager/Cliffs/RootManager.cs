@@ -48,7 +48,7 @@ public class RootManager : MonoBehaviour
     public static void IncreaseRootLevel()
     {
         _rootLevel++;
-        _instance.GrowRoots();
+        _instance.GrowOutRoots();
     }
 
     [ContextMenu(nameof(TestGrowRoots))]
@@ -80,7 +80,12 @@ public class RootManager : MonoBehaviour
 
         _rootStart = new Vector2Int[_rootStartOffset.Length];
 
+        GrowOutRoots();
+    }
 
+    private void GrowOutRoots()
+    {
+        Tile centerTile = TileManager.GetCenterTile();
         for (int i = 0; i < _rootStartOffset.Length; i++)
         {
             _rootStart[i] = centerTile.Coordinates + _rootStartOffset[i];
@@ -108,7 +113,6 @@ public class RootManager : MonoBehaviour
             }
         }
     }
-
     public class CustomArray<T>
     {
         public T[] GetColumn(T[,] matrix, int columnNumber)
