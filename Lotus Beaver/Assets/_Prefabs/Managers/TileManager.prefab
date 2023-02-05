@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolable: {fileID: 3959618477627814835, guid: 8cdac056ce2469f499e6aec3e225dd2d, type: 3}
-  _initialSize: 2704
+  _initialSize: 2500
 --- !u!1 &5378951988102051602
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolable: {fileID: 5002863882812938521, guid: edb21edc5e2fae547af236e19c457a2b, type: 3}
-  _initialSize: 10000
+  _initialSize: 2500
 --- !u!1 &5378951988163652498
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolable: {fileID: 4527419782147556953, guid: cd9952c3607d01748ab978327d5f8d06, type: 3}
-  _initialSize: 2704
+  _initialSize: 2500
 --- !u!1 &5378951988291322593
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolable: {fileID: 976708269656313312, guid: a90f583e2b9360c42a4c1f67295b0ce8, type: 3}
-  _initialSize: 208
+  _initialSize: 2500
 --- !u!1 &5378951989425758687
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolable: {fileID: 6625642224914783484, guid: c1f09140a29e0a140bebb4c2ccd21aa4, type: 3}
-  _initialSize: 10000
+  _initialSize: 2500
 --- !u!114 &1248990992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +295,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7b320ad37c53e0440933c73d5aa2d296, type: 3}
   - {fileID: 21300000, guid: 51e347ad5f516de478bb452d109d61b4, type: 3}
   - {fileID: 21300000, guid: 10e633e5911bdc0448eff3a99c380a94, type: 3}
+  _lotusPrefab: {fileID: 5213177626744561057, guid: a3662c2fcd57fff49baeb1303ca0a6a5, type: 3}
 --- !u!114 &1248990993
 MonoBehaviour:
   m_ObjectHideFlags: 0

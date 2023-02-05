@@ -187,30 +187,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1248990993, guid: 2b16021d03b6bec4085f039ea424e4e0, type: 3}
-      propertyPath: _damageStageLibrary
-      value: 
-      objectReference: {fileID: 11400000, guid: 2b316b8a3dbe8aa40b44cb6b844821fe, type: 2}
-    - target: {fileID: 4226954344523460680, guid: 2b16021d03b6bec4085f039ea424e4e0, type: 3}
-      propertyPath: _initialSize
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5378951988102051600, guid: 2b16021d03b6bec4085f039ea424e4e0, type: 3}
-      propertyPath: _initialSize
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5378951988163652496, guid: 2b16021d03b6bec4085f039ea424e4e0, type: 3}
-      propertyPath: _initialSize
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5378951988291322143, guid: 2b16021d03b6bec4085f039ea424e4e0, type: 3}
-      propertyPath: _initialSize
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 5378951989425758684, guid: 2b16021d03b6bec4085f039ea424e4e0, type: 3}
-      propertyPath: _initialSize
-      value: 10000
-      objectReference: {fileID: 0}
     - target: {fileID: 5378951989425758685, guid: 2b16021d03b6bec4085f039ea424e4e0, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -268,10 +244,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 540081317, guid: 28f473e38dc3343478a46a0c1429c893, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5007702243351996749, guid: 28f473e38dc3343478a46a0c1429c893, type: 3}
       propertyPath: m_Name
       value: MainMenu
@@ -369,10 +341,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 934836558414853985, guid: 417dc75e6c4635e4a8be10ffdb289453, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4033640662817216188, guid: 417dc75e6c4635e4a8be10ffdb289453, type: 3}
       propertyPath: m_Name
       value: Player
