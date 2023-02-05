@@ -40,13 +40,15 @@ public class HeadUpDisplayActiveElements : MonoBehaviour
 
     }
 
-    public void UpdateEarth(int count)
+    public void UpdateEarth(float count)
     {
+        count = (int)count;
         _ressourceTexts[0].text = count.ToString();
     }
 
-    public void UpdateWater(int count)
+    public void UpdateWater(float count)
     {
+        count = (int)count;
         _ressourceTexts[1].text = count.ToString();
     }
 
