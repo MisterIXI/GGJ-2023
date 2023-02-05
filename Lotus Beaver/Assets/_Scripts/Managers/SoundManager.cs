@@ -1,6 +1,8 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -33,6 +35,13 @@ public class SoundManager : MonoBehaviour
         _instance = this;
 
         GameManager.OnGameStateChanged += OnGameStateChanged;
+
+        Button[] buttons = FindObjectsOfType<Button>();
+
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].AddComponent<ButtonSoundController>();
+        }
     }
 
     private void OnGameStateChanged(GameState gameState)
