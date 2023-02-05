@@ -3,6 +3,10 @@ using UnityEngine.InputSystem;
 using System;
 public class InteractionController : MonoBehaviour
 {
+    [field: SerializeField] public GameObject InteractionPreview { get; private set; }
+    private GameSettings _gameSettings;
+    public SpriteRenderer InteractionPreviewSpriteRenderer { get; private set; }
+    public SpriteRenderer BuildPreviewSpriteRenderer { get; private set; }
     private IInteractable[] Interactions;
     public static event Action<Tile> OnTileInteract;
     public static event Action<Tile> OnTileSelectionChange;
@@ -26,20 +30,25 @@ public class InteractionController : MonoBehaviour
         RefManager.inputManager.OnBuildingKey += OnBuildingKey;
         InitializeInteractions();
         SelectInteraction(0);
+        BuildPreviewSpriteRenderer = InteractionPreview.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        InteractionPreviewSpriteRenderer = InteractionPreview.GetComponent<SpriteRenderer>();
+        _gameSettings = GameSettingsManager.GameSettings();
     }
     private void Update()
     {
         TileSelectionUpdate();
+        UpdatePreview();
+
     }
 
     private void InitializeInteractions()
     {
         Interactions = new IInteractable[2 + _interactionSettings.BuildingSettings.Length];
-        Interactions[0] = new EarthInteraction();
-        Interactions[1] = new WaterInteraction();
+        Interactions[0] = new EarthInteraction(this, 0);
+        Interactions[1] = new WaterInteraction(this, 1);
         for (int i = 0; i < _interactionSettings.BuildingSettings.Length; i++)
         {
-            Interactions[i + 2] = new BuildingInteraction(_interactionSettings.BuildingSettings[i]);
+            Interactions[i + 2] = new BuildingInteraction(_interactionSettings.BuildingSettings[i], this, i + 2);
         }
     }
     private void SelectInteraction(int index)
@@ -50,6 +59,7 @@ public class InteractionController : MonoBehaviour
             _currentInteraction = Interactions[index];
             _currentInteractionIndex = index;
             OnInteractionChange?.Invoke(_currentInteractionIndex);
+            SoundManager.PlaySelectInteraction();
         }
     }
     private void TileSelectionUpdate()
@@ -57,18 +67,46 @@ public class InteractionController : MonoBehaviour
         Tile tile = TileManager.GetClosetTile(transform.position + _interactionOffset);
         if (tile != CurrentTile)
         {
-            if (_currentSpriteRenderer != null)
-            {
-                _currentSpriteRenderer.color = _originalColor;
-            }
             CurrentTile = tile;
-            SpriteRenderer spriteRenderer = CurrentTile.TileElement.GetComponent<SpriteRenderer>();
-            _originalColor = spriteRenderer.color;
-            spriteRenderer.color = Color.red;
-            _currentSpriteRenderer = spriteRenderer;
             OnTileSelectionChange?.Invoke(CurrentTile);
             _currentInteraction?.OnSelection(CurrentTile);
             CurrentBuilding = CurrentTile?.building;
+        }
+    }
+
+    private void UpdatePreview()
+    {
+        if (CurrentTile != null)
+        {
+            InteractionPreview.transform.position = CurrentTile.transform.position;
+            if (_currentInteractionIndex == 0)
+            {
+                // Earth
+                if (RessourceManager.EnoughResources(_gameSettings.EarthPlacementCost, 0))
+                {
+                    InteractionPreviewSpriteRenderer.color = Color.green;
+                }
+                else
+                {
+                    InteractionPreviewSpriteRenderer.color = Color.red;
+                }
+            }
+            else if (_currentInteractionIndex == 1)
+            {
+                // water
+                InteractionPreviewSpriteRenderer.color = Color.red;
+            }
+            else
+            {
+                if (Interactions[_currentInteractionIndex] is BuildingInteraction buildingInteraction)
+                {
+                    if (buildingInteraction.CanBePlaced(CurrentTile))
+                        InteractionPreviewSpriteRenderer.color = Color.green;
+                    else
+                        InteractionPreviewSpriteRenderer.color = Color.red;
+                }
+            }
+
         }
     }
     public void OnInteract(InputAction.CallbackContext context)
@@ -93,12 +131,12 @@ public class InteractionController : MonoBehaviour
         {
             Vector2 input = context.ReadValue<Vector2>();
 
-                _moveInput = input;
-                // if(_moveInput.y > _moveInput.x)
-                //     _moveInput.x = 0;
-                // else
-                //     _moveInput.y = 0;
-                _interactionOffset = new Vector3(_moveInput.x, _moveInput.y, 0) * _interactionSettings.InteractionDistance;
+            _moveInput = input;
+            // if(_moveInput.y > _moveInput.x)
+            //     _moveInput.x = 0;
+            // else
+            //     _moveInput.y = 0;
+            _interactionOffset = new Vector3(_moveInput.x, _moveInput.y, 0) * _interactionSettings.InteractionDistance;
         }
         if (context.canceled)
         {
@@ -135,7 +173,7 @@ public class InteractionController : MonoBehaviour
             // try parse the name of the control to an int
             int index = 1;
             int.TryParse(context.control.name, out index);
-            if(index == 0)
+            if (index == 0)
                 index = 10;
             SelectInteraction(index - 1);
         }

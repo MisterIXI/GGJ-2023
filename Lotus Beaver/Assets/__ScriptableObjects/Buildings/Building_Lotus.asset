@@ -19,9 +19,9 @@ MonoBehaviour:
   <earthProduction>k__BackingField: 10
   <waterProduction>k__BackingField: 10
   InteractionIcon: {fileID: 21300000, guid: a73d2f8f990afb34381a74fdc5cd354a, type: 3}
-  <selfHealAmount>k__BackingField: 0
-  <healAmount>k__BackingField: 0
-  <healRadius>k__BackingField: 0
+  <selfHealAmount>k__BackingField: 100
+  <healAmount>k__BackingField: 10
+  <healRadius>k__BackingField: 1
   <constructionStages>k__BackingField: 0
   <constructionSprites>k__BackingField: []
   <ticksPerStage>k__BackingField: 0

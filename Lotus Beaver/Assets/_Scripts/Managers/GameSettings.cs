@@ -12,6 +12,8 @@ public class GameSettings : ScriptableObject
     [field: SerializeField] public float DamageTickTime { get; private set; }
     [field: SerializeField] public float BuildingTickTime { get; private set; }
     [field: SerializeField] public float ConstructionTickTime { get; private set; }
+    [field: Header("Earth Settings")]
+    [field: SerializeField] public int EarthPlacementCost { get; private set; }
 
     [field: Header("Root Settings")]
     [field: SerializeField] public int RootLevel{ get; private set; }

@@ -16,6 +16,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private SoundPool _upgrade;
     [SerializeField] private SoundPool _waterSound;
     [SerializeField] private SoundPool _waterSplash;
+    [SerializeField] private SoundPool _error;
+    [SerializeField] private SoundPool _menuHover;
+    [SerializeField] private SoundPool _selectInteraction;
 
     private static SoundManager _instance;
 
@@ -73,6 +76,21 @@ public class SoundManager : MonoBehaviour
     public static void PlayWalking(Vector3? position = null)
     {
         PlaySound(_instance._walking, position);
+    }
+
+    public static void PlayMenuHover(Vector3? position = null)
+    {
+        PlaySound(_instance._menuHover, position);
+    }
+
+    public static void PlaySelectInteraction(Vector3? position = null)
+    {
+        PlaySound(_instance._menuHover, position);
+    }
+
+    public static void PlayError(Vector3? position = null)
+    {
+        PlaySound(_instance._error, position);
     }
 
     public static void PlayPlanting(Vector3? position = null)

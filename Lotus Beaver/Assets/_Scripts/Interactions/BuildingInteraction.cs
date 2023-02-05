@@ -6,9 +6,14 @@ using System.Resources;
 public class BuildingInteraction : IInteractable
 {
     private BuildingPreset _settings;
-    public BuildingInteraction(BuildingPreset settings)
+    private InteractionController _interactionController;
+    private int _index;
+    public BuildingInteraction(BuildingPreset settings, InteractionController interactionController, int index)
     {
         _settings = settings;
+        _interactionController = interactionController;
+        _index = index;
+        InteractionController.OnInteractionChange += OnSelectionChange;
     }
 
     public void OnInteract(Tile tile)
@@ -22,12 +27,17 @@ public class BuildingInteraction : IInteractable
                 {
                     RessourceManager.UseResources(_settings.earthCost, _settings.waterCost);
                     GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity, tile.Transform);
+                    SoundManager.PlayPlanting();
                     Debug.Log(building.GetComponent<Building>().buildingName);
                     tile.building = building.GetComponent<Building>();
+                    SpriteRenderer spriteRenderer = building.GetComponentInChildren<SpriteRenderer>();
+                    spriteRenderer.sortingOrder = TileManager.GetTilesMaxY() - TileManager.GetCoordinates(building.transform.position).y;
+                    Debug.Log("New Sorting order: " + spriteRenderer.sortingOrder);
                 }
                 else
                 {
                     Debug.Log("Not enough resources!");
+                    SoundManager.PlayError();
                 }
             }
             else if (tile.building.buildingName == _settings.displayName)
@@ -40,6 +50,7 @@ public class BuildingInteraction : IInteractable
                 Debug.Log(tile.building.buildingName);
                 Debug.Log(_settings.displayName);
                 Debug.Log("There is already a building on this tile");
+                SoundManager.PlayError();
             }
         }
         else
@@ -50,9 +61,15 @@ public class BuildingInteraction : IInteractable
                 // check if lotus is selected and hovered
                 if (tile.building?.buildingName == _settings.displayName)
                     TryUpgrading(tile);
+                else
+                    SoundManager.PlayError();
             }
             else
+            {
                 Debug.Log("Has to be build on Dirt!");
+                SoundManager.PlayError();
+            }
+
         }
 
     }
@@ -66,20 +83,37 @@ public class BuildingInteraction : IInteractable
             {
                 RessourceManager.UseResources(_settings.upgradeEarthCosts[currentUpgradeStage], _settings.upgradeWaterCosts[currentUpgradeStage]);
                 tile.building.Upgrade();
+                SoundManager.PlayUpgrade();
             }
             else
             {
                 Debug.Log("Not enough resources to upgrade!");
+                SoundManager.PlayError();
             }
         }
         else
         {
             Debug.Log("Max Upgrade Reached!");
+            SoundManager.PlayError();
         }
     }
 
     public void OnSelection(Tile tile)
     {
 
+    }
+
+    public bool CanBePlaced(Tile tile)
+    {
+        if(tile.building != null)
+            return false;
+        if(!RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
+            return false;
+        return true;
+    }
+    public void OnSelectionChange(int selectedIndex)
+    {
+        if (selectedIndex == _index)
+            _interactionController.BuildPreviewSpriteRenderer.sprite = _settings.BuildPreview;
     }
 }
