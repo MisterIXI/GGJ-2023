@@ -23,21 +23,24 @@ public class BuildingInteraction : IInteractable
         {
             if (tile.building == null)
             {
-                if (RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
+                if (_settings.displayName != "Lotus")
                 {
-                    RessourceManager.UseResources(_settings.earthCost, _settings.waterCost);
-                    GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity, tile.Transform);
-                    SoundManager.PlayPlanting();
-                    Debug.Log(building.GetComponent<Building>().buildingName);
-                    tile.building = building.GetComponent<Building>();
-                    SpriteRenderer spriteRenderer = building.GetComponentInChildren<SpriteRenderer>();
-                    spriteRenderer.sortingOrder = TileManager.GetTilesMaxY() - TileManager.GetCoordinates(building.transform.position).y;
-                    Debug.Log("New Sorting order: " + spriteRenderer.sortingOrder);
-                }
-                else
-                {
-                    Debug.Log("Not enough resources!");
-                    SoundManager.PlayError();
+                    if (RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
+                    {
+                        RessourceManager.UseResources(_settings.earthCost, _settings.waterCost);
+                        GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity, tile.Transform);
+                        SoundManager.PlayPlanting();
+                        Debug.Log(building.GetComponent<Building>().buildingName);
+                        tile.building = building.GetComponent<Building>();
+                        SpriteRenderer spriteRenderer = building.GetComponentInChildren<SpriteRenderer>();
+                        spriteRenderer.sortingOrder = TileManager.GetTilesMaxY() - TileManager.GetCoordinates(building.transform.position).y;
+                        Debug.Log("New Sorting order: " + spriteRenderer.sortingOrder);
+                    }
+                    else
+                    {
+                        Debug.Log("Not enough resources!");
+                        SoundManager.PlayError();
+                    }
                 }
             }
             else if (tile.building.buildingName == _settings.displayName)
@@ -105,9 +108,9 @@ public class BuildingInteraction : IInteractable
 
     public bool CanBePlaced(Tile tile)
     {
-        if(tile.building != null)
+        if (tile.building != null)
             return false;
-        if(!RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
+        if (!RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
             return false;
         return true;
     }

@@ -15,6 +15,7 @@ public class HeadUpDisplayElement : MonoBehaviour
             return;
         }
         GameManager.OnGameStateChanged += OnGameStateChanged;
+        SetActive(false);
     }
 
     private void OnGameStateChanged(GameState gameState)
