@@ -12,8 +12,12 @@ PrefabInstance:
       value: TileElement_Root Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7665081954327038487, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: deec7cb25385a03478a8e282f3e7081a, type: 3}
+    - target: {fileID: 7665081954327038487, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7665081954327038487, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
       propertyPath: m_Color.g
@@ -21,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7665081954327038487, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
       propertyPath: m_Color.r
-      value: 0.04289031
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7922348945151694464, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
       propertyPath: m_RootOrder

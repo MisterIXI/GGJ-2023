@@ -101,7 +101,7 @@ public class TileManager : MonoBehaviour
         return _tiles[Math.Clamp(coordinates.x, 0, GetTilesMaxX()), Math.Clamp(coordinates.y, 0, GetTilesMaxY())];
     }
 
-    private static Tile FilterOutOfBoundsCoordinates(Vector2Int coordinates)
+    public static Tile FilterOutOfBoundsCoordinates(Vector2Int coordinates)
     {
         if (coordinates.x < 0 || coordinates.x > GetTilesMaxX() || coordinates.y < 0 || coordinates.y > GetTilesMaxY())
         {
@@ -116,6 +116,11 @@ public class TileManager : MonoBehaviour
         position.x /= _instance._gameSettings.TileSize.x;
         position.y /= _instance._gameSettings.TileSize.y;
         return new Vector2Int((int)Mathf.Round(position.x), (int)Mathf.Round(position.y)) + CenterTile();
+    }
+
+    public static Tile GetCenterTile()
+    {
+        return GetClosetTile(CenterTile());
     }
 
     public static Vector2Int CenterTile()
@@ -249,6 +254,11 @@ public class TileManager : MonoBehaviour
 
     public static void SetTileElementType(Tile tile, TileElementType tileElementType)
     {
+        if (tile == null)
+        {
+            return;
+        }
+
         tile.TileElement?.SetActive(false);
         TileElement tileElement = GetTileElement(tileElementType);
         tileElement.Transform.SetParent(tile.Transform);
@@ -351,7 +361,7 @@ public class TileManager : MonoBehaviour
         };
     }
 
-    private static void AddTile(Vector2Int coordinates, List<Tile> result)
+    public static void AddTile(Vector2Int coordinates, List<Tile> result)
     {
         Tile tile = FilterOutOfBoundsCoordinates(coordinates);
 
