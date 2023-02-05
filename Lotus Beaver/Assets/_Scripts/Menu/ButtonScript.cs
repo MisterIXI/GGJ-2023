@@ -20,10 +20,37 @@ public class ButtonScript : MonoBehaviour
     // Start is called before the first frame update
     public void OnChangeMenu(Menu changeMenu)
     {
-        // MENU SET ENABLE AND FALSE IF MENU
-        if(changeMenu== Menu.HMenu)
+        // MENU SET ENABLE AND FALSE OTHER MENUS
+        if(changeMenu == Menu.HMenu)
         {
+            SetMenuState(CreditMenu,false);
+            SetMenuState(ControlMenu, false);
+            SetMenuState(SettingsMenu,false);
+
+            SetMenuState(Hmenu, true);
+
+        }else if (changeMenu == Menu.CreditMenu)
+        {
+            SetMenuState(Hmenu,false);
+            SetMenuState(ControlMenu, false);
+            SetMenuState(SettingsMenu,false);
             
+            SetMenuState(CreditMenu,true);
+
+        }else if(changeMenu == Menu.ControlMenu)
+        {
+            SetMenuState(Hmenu,false);
+            SetMenuState(SettingsMenu,false);
+            SetMenuState(CreditMenu,false);
+            
+            SetMenuState(ControlMenu, true);
+        }else if(changeMenu == Menu.SettingMenu)
+        {
+            SetMenuState(Hmenu,false);
+            SetMenuState(CreditMenu,false);
+            SetMenuState(ControlMenu, false);
+            
+            SetMenuState(SettingsMenu,true);
         }
 
     }
@@ -37,4 +64,9 @@ public class ButtonScript : MonoBehaviour
             menu.SetActive(false);
         }
     }
+    public void OnButtonStart()
+    {
+
+    }
+    
 }
