@@ -4,11 +4,9 @@ using UnityEngine.UI;
 
 public class ButtonSoundController : MonoBehaviour, ISelectHandler
 {
-    private Button _button;
-
     private void Awake()
     {
-        _button.onClick.AddListener(PlayClickSound);
+        GetComponent<Button>()?.onClick.AddListener(PlayClickSound);
     }
 
     private void PlayClickSound()
@@ -18,11 +16,11 @@ public class ButtonSoundController : MonoBehaviour, ISelectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        SoundManager.PlayMenuClick();
+        SoundManager.PlayMenuHover();
     }
 
     private void OnDestroy()
     {
-        _button.onClick.RemoveListener(PlayClickSound);
+        GetComponent<Button>()?.onClick.RemoveListener(PlayClickSound);
     }
 }
