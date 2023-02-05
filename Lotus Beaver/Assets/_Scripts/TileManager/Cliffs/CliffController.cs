@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Collections;
 
 [RequireComponent(typeof(TileElement))]
 public class CliffController : MonoBehaviour
@@ -17,6 +19,14 @@ public class CliffController : MonoBehaviour
     {
         _activeCliffControllers.Add(this);
         _parentTile = GetComponentInParent<Tile>(true);
+        StartCoroutine(DelayedUpdate());
+        UpdateCliffSprite();
+    }
+
+    private IEnumerator DelayedUpdate()
+    {
+        yield return new WaitForEndOfFrame();
+        UpdateCliffSprite();
     }
 
     private void OnDisable()
@@ -50,7 +60,7 @@ public class CliffController : MonoBehaviour
         WaterMask waterMask = new WaterMask(soroundingTiles);
 
         _tileElement.SpriteRenderer.sprite = CliffManager.CliffSpriteLibrary()?.GetSortedSprite(waterMask);
-        Debug.Log("Cliff Update: " + waterMask);
+        // Debug.Log("Cliff Update: " + waterMask);
     }
 
     
