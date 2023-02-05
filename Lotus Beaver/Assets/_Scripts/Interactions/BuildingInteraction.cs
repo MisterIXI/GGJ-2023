@@ -14,13 +14,14 @@ public class BuildingInteraction : IInteractable
     public void OnInteract(Tile tile)
     {
         // instantiate building
-        if (tile.TileElement.TileElementType == TileElementType.Earth) {
+        if (tile.TileElement.TileElementType == TileElementType.Earth)
+        {
             if (tile.building == null)
             {
                 if (RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
                 {
                     RessourceManager.UseResources(_settings.earthCost, _settings.waterCost);
-                    GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity);
+                    GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity, tile.Transform);
                     Debug.Log(building.GetComponent<Building>().buildingName);
                     tile.building = building.GetComponent<Building>();
                 }
@@ -48,7 +49,7 @@ public class BuildingInteraction : IInteractable
                 {
                     Debug.Log("Max Upgrade Reached!");
                 }
-                
+
             }
             else
             {
@@ -61,7 +62,7 @@ public class BuildingInteraction : IInteractable
         {
             Debug.Log("Has to be build on Dirt!");
         }
-        
+
     }
 
     public void OnSelection(Tile tile)

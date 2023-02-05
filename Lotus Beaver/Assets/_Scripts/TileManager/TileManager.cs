@@ -113,7 +113,7 @@ public class TileManager : MonoBehaviour
 
     public static Vector2Int GetCoordinates(Vector3 position)
     {
-        position -= new Vector3(0.5f * _instance._gameSettings.TileSize.x, 0.5f * _instance._gameSettings.TileSize.y,0);
+        position -= new Vector3(0.5f * _instance._gameSettings.TileSize.x, 0.5f * _instance._gameSettings.TileSize.y, 0);
         position.x /= _instance._gameSettings.TileSize.x;
         position.y /= _instance._gameSettings.TileSize.y;
         return new Vector2Int((int)Mathf.Round(position.x), (int)Mathf.Round(position.y)) + CenterTile();
@@ -260,6 +260,11 @@ public class TileManager : MonoBehaviour
             return;
         }
 
+        if (tile.building != null && tileElementType != TileElementType.Earth)
+        {
+            Destroy(tile.building.gameObject);
+            tile.building = null;
+        }
         tile.TileElement?.SetActive(false);
         TileElement tileElement = GetTileElement(tileElementType);
         tileElement.Transform.SetParent(tile.Transform);
@@ -328,7 +333,7 @@ public class TileManager : MonoBehaviour
 
         foreach (Tile surroundingTile in surroundingTiles)
         {
-            if(surroundingTile == null || surroundingTile.TileElement == null)
+            if (surroundingTile == null || surroundingTile.TileElement == null)
                 continue;
             // if a tile is not water or cliff, return false
             if (surroundingTile.TileElement.TileElementType != TileElementType.Water &&
