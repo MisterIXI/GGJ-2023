@@ -19,9 +19,17 @@ public class HeadUpDisplayActiveElements : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] _ressourceTexts;
 
     [SerializeField] public Image FadeImage;
+    [SerializeField] public TextMeshProUGUI CostEarthText;
+    [SerializeField] public TextMeshProUGUI CostWaterText;
+    [SerializeField] public TextMeshProUGUI InteractionText;
 
     private GameObject _selectedTool;
 
+    public static HeadUpDisplayActiveElements Instance { get; private set; }
+
+    private void Awake() {
+        Instance = this;
+    }
     private void Start()
     {
         InitializeRessources();
