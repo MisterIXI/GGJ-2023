@@ -1,6 +1,27 @@
+using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
-public class SoundManager : MonoBehaviour {
+public class SoundManager : MonoBehaviour
+{
+    [SerializeField] private AudioMixer _audioMixer;
+
+    [SerializeField] private AudioMixerSnapshot _inGame;
+    [SerializeField] private AudioMixerSnapshot _paused;
+    [SerializeField] private float _transitionTime;
+
+    [SerializeField] private SoundPool _walking;
+    [SerializeField] private SoundPool _planting;
+    [SerializeField] private SoundPool _menuClick;
+    [SerializeField] private SoundPool _upgrade;
+    [SerializeField] private SoundPool _waterSound;
+    [SerializeField] private SoundPool _waterSplash;
+
+    private static SoundManager _instance;
+
+    private const string _sFXSettings = "SFXSettings";
+    private const string _musicSettings = "MusicSettings";
+
     private void Awake() {
         if(RefManager.soundManager != null)
         {
@@ -8,5 +29,82 @@ public class SoundManager : MonoBehaviour {
             return;
         }
         RefManager.soundManager = this;
+
+        _instance = this;
+
+        GameManager.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnGameStateChanged(GameState gameState)
+    {
+        switch (gameState)
+        {
+            case GameState.Ingame:
+                _inGame.TransitionTo(_transitionTime);
+                break;
+            case GameState.Paused:
+            case GameState.GameOver:
+                _paused.TransitionTo(_transitionTime);
+                break;
+        }
+    }
+
+    public float LogSoundVolume(float volume)
+    {
+        return Mathf.Log10(volume) * 20f;
+    }
+
+    [ContextMenu(nameof(StopMusic))]
+    public void StopMusic()
+    {
+        _audioMixer.SetFloat(_musicSettings, value: -80f);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        _audioMixer.SetFloat(_musicSettings, LogSoundVolume(volume));
+    }
+
+    public void SetSoundVolume(float volume)
+    {
+        _audioMixer.SetFloat(_sFXSettings, LogSoundVolume(volume));
+    }
+
+    public static void PlayWalking(Vector3? position = null)
+    {
+        PlaySound(_instance._walking, position);
+    }
+
+    public static void PlayPlanting(Vector3? position = null)
+    {
+        PlaySound(_instance._planting, position);
+    }
+
+    public static void PlayMenuClick(Vector3? position = null)
+    {
+        PlaySound(_instance._menuClick, position);
+    }
+
+    public static void PlayUpgrade(Vector3? position = null)
+    {
+        PlaySound(_instance._upgrade, position);
+    }
+
+    public static void PlayWaterSound(Vector3? position = null)
+    {
+        PlaySound(_instance._waterSound, position);
+    }
+
+    public static void PlayWaterSplash(Vector3? position = null)
+    {
+        PlaySound(_instance._waterSplash, position);
+    }
+
+    public static void PlaySound(SoundPool soundPool, Vector3? position = null)
+    {
+        SoundPlayer soundPlayer = soundPool.GetPoolable();
+        soundPlayer.Transform.SetParent(null);
+        soundPlayer.Transform.position = position.HasValue? position.Value : Vector3.zero;
+        soundPlayer.PlaySound();
     }
 }
