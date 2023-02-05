@@ -87,15 +87,18 @@ public class InteractionController : MonoBehaviour
         if (context.performed)
         {
             Vector2 input = context.ReadValue<Vector2>();
-            if (input != Vector2.zero)
-            {
+
                 _moveInput = input;
                 // if(_moveInput.y > _moveInput.x)
                 //     _moveInput.x = 0;
                 // else
                 //     _moveInput.y = 0;
                 _interactionOffset = new Vector3(_moveInput.x, _moveInput.y, 0) * _interactionSettings.InteractionDistance;
-            }
+        }
+        if (context.canceled)
+        {
+            _moveInput = Vector2.zero;
+            _interactionOffset = Vector3.zero;
         }
     }
 
