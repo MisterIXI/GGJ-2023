@@ -92,5 +92,6 @@ public class EarthController : MonoBehaviour
         }
 
         SoundManager.PlayWaterSplash();
+        TileCreationPool.ParticlePool.GetPoolable().Play(_tileElement.transform.position);
     }
 }
