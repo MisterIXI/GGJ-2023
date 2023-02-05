@@ -9,7 +9,7 @@ public class ButtonScript : MonoBehaviour
     [SerializeField] private GameObject SettingsMenu;
     [SerializeField] private GameObject ControlMenu;
     private GameObject[] menuList = new GameObject[4];
-    
+    // EDIT IN BUTTON EVENT BOX CHANGE ENUM MENU
     public enum Menu
     {
         HMenu,
