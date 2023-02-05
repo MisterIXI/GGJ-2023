@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 using System;
 public class InteractionController : MonoBehaviour
 {
     [field: SerializeField] public GameObject InteractionPreview { get; private set; }
+
     private GameSettings _gameSettings;
     public SpriteRenderer InteractionPreviewSpriteRenderer { get; private set; }
     public SpriteRenderer BuildPreviewSpriteRenderer { get; private set; }
@@ -20,7 +22,12 @@ public class InteractionController : MonoBehaviour
     private Vector2 _moveInput;
     private Vector3 _interactionOffset;
     private IInteractable _currentInteraction;
+    private HeadUpDisplayActiveElements _hud;
     private int _currentInteractionIndex;
+    private TextMeshProUGUI _interactionText;
+    private TextMeshProUGUI _waterCostText;
+    private TextMeshProUGUI _earthCostText;
+
     private void Start()
     {
         RefManager.inputManager.OnInteract += OnInteract;
@@ -33,6 +40,10 @@ public class InteractionController : MonoBehaviour
         BuildPreviewSpriteRenderer = InteractionPreview.transform.GetChild(0).GetComponent<SpriteRenderer>();
         InteractionPreviewSpriteRenderer = InteractionPreview.GetComponent<SpriteRenderer>();
         _gameSettings = GameSettingsManager.GameSettings();
+        _hud = HeadUpDisplayActiveElements.Instance;
+        _interactionText = _hud.InteractionText;
+        _waterCostText = _hud.CostWaterText;
+        _earthCostText = _hud.CostEarthText;
     }
     private void Update()
     {
@@ -74,6 +85,8 @@ public class InteractionController : MonoBehaviour
         }
     }
 
+    private Color greenColor = new Color(0, 1, 0, 0.5f);
+    private Color redColor = new Color(1, 0, 0, 0.5f);
     private void UpdatePreview()
     {
         if (CurrentTile != null)
@@ -85,25 +98,48 @@ public class InteractionController : MonoBehaviour
                 if (RessourceManager.EnoughResources(_gameSettings.EarthPlacementCost, 0))
                 {
                     InteractionPreviewSpriteRenderer.color = Color.green;
+                    _earthCostText.color = Color.green;
                 }
                 else
                 {
                     InteractionPreviewSpriteRenderer.color = Color.red;
+                    _earthCostText.color = Color.red;
                 }
+                _earthCostText.text = _gameSettings.EarthPlacementCost.ToString();
+                _waterCostText.text = "0";
             }
             else if (_currentInteractionIndex == 1)
             {
                 // water
                 InteractionPreviewSpriteRenderer.color = Color.red;
+                _interactionText.text = "No use yet";
+                _earthCostText.text = "0";
+                _waterCostText.text = "0";
             }
             else
             {
                 if (Interactions[_currentInteractionIndex] is BuildingInteraction buildingInteraction)
                 {
-                    if (buildingInteraction.CanBePlaced(CurrentTile))
-                        InteractionPreviewSpriteRenderer.color = Color.green;
+                    var settings = buildingInteraction.Settings;
+                    _interactionText.text = "Place " + settings.displayName;
+                    _earthCostText.text = settings.earthCost.ToString();
+                    _waterCostText.text = settings.waterCost.ToString();
+                    if (RessourceManager.earth >= settings.earthCost)
+                        _earthCostText.color = Color.green;
                     else
+                        _earthCostText.color = Color.red;
+                    if (RessourceManager.water >= settings.waterCost)
+                        _waterCostText.color = Color.green;
+                    else
+                        _waterCostText.color = Color.red;
+                    if (buildingInteraction.CanBePlaced(CurrentTile))
+                    {
+                        InteractionPreviewSpriteRenderer.color = Color.green;
+                    }
+                    else
+                    {
                         InteractionPreviewSpriteRenderer.color = Color.red;
+                    }
                 }
             }
 
