@@ -9,6 +9,7 @@ public class InteractionController : MonoBehaviour
     public static event Action<int> OnInteractionChange;
     [SerializeField] private InteractionSettings _interactionSettings;
     public Tile CurrentTile { get; private set; }
+    public InteractableBase CurrentBuilding { get; private set; }
     private SpriteRenderer _currentSpriteRenderer;
     private Color _originalColor;
     private TileManager _tileManager;
@@ -67,6 +68,7 @@ public class InteractionController : MonoBehaviour
             _currentSpriteRenderer = spriteRenderer;
             OnTileSelectionChange?.Invoke(CurrentTile);
             _currentInteraction?.OnSelection(CurrentTile);
+            CurrentBuilding = CurrentTile?.building;
         }
     }
     public void OnInteract(InputAction.CallbackContext context)
@@ -75,9 +77,12 @@ public class InteractionController : MonoBehaviour
         {
             if (CurrentTile != null)
             {
+                // if(CurrentBuilding != null)
+                //     CurrentBuilding.OnInteract(CurrentTile);
                 OnTileInteract?.Invoke(CurrentTile);
                 _currentInteraction?.OnInteract(CurrentTile);
                 CurrentTile = null;
+                CurrentBuilding = null;
             }
         }
     }

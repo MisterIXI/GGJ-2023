@@ -18,4 +18,4 @@ MonoBehaviour:
   cameraDamping: 1
   cameraZDistance: 10
   fadeDuration: 0.1
-  resetOnWater: 0
+  resetOnWater: 1

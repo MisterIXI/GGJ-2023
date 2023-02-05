@@ -55,15 +55,15 @@ public class RootManager : MonoBehaviour
         }
         for (int i = 0; i < rootTiles.Count; i++)
         {
+            TileManager.SetTileElementType(rootTiles[i], TileElementType.Root);
+        }
+        for (int i = 0; i < rootTiles.Count; i++)
+        {
             rootTiles[i].building = lotus;
         }
 
         _rootStart = new Vector2Int[_rootStartOffset.Length];
 
-        for (int i = 0; i < rootTiles.Count; i++)
-        {
-            TileManager.SetTileElementType(rootTiles[i], TileElementType.Root);
-        }
 
         for (int i = 0; i < _rootStartOffset.Length; i++)
         {
@@ -81,7 +81,7 @@ public class RootManager : MonoBehaviour
 
                     continue;
                 }
-                else if(j == _rootLevel - 1)
+                else if (j == _rootLevel - 1)
                 {
                     rootTile.TileElement.SpriteRenderer.sprite = _end[i];
 

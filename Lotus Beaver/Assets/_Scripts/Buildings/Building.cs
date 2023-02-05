@@ -135,4 +135,11 @@ public class Building : InteractableBase
         GetComponentInChildren<SpriteRenderer>().sprite = upgradeSprites[currentUpgradeStage];
         currentUpgradeStage++;
     }
+
+    private void OnDestroy()
+    {
+        TickManager.OnBuildingTick -= TickManager_OnBuildingTick;
+        TickManager.OnConstructionTick -= TickManager_OnConstructionTick;
+        TickManager.OnDamageTick -= TickManager_OnDamageTick;
+    }
 }
