@@ -14,6 +14,8 @@ public class RootManager : MonoBehaviour
     [SerializeField] private Sprite[] _start;
     [SerializeField] private Sprite[] _end;
 
+    [SerializeField] private GameObject _lotusPrefab;
+
     private static int _rootLevel;
 
     private void Awake()
@@ -46,9 +48,14 @@ public class RootManager : MonoBehaviour
 
         rootTiles.AddRange(TileManager.GetSurroundingTilesWithDiagonal(centerTile));
 
+        Building lotus = Instantiate(_lotusPrefab, centerTile.transform).GetComponent<Building>();
         for (int i = 0; i < _initalRootExtraFilds.Length; i++)
         {
             TileManager.AddTile(centerTile.Coordinates + _initalRootExtraFilds[i], rootTiles);
+        }
+        for (int i = 0; i < rootTiles.Count; i++)
+        {
+            rootTiles[i].building = lotus;
         }
 
         _rootStart = new Vector2Int[_rootStartOffset.Length];
