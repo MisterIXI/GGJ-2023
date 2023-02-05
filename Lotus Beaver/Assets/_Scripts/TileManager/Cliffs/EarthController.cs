@@ -90,5 +90,7 @@ public class EarthController : MonoBehaviour
         {
             TileManager.SetTileElementType(parentTile, TileElementType.Water);
         }
+
+        SoundManager.PlayWaterSplash();
     }
 }
