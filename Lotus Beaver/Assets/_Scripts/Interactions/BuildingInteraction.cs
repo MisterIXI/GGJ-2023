@@ -6,9 +6,14 @@ using System.Resources;
 public class BuildingInteraction : IInteractable
 {
     private BuildingPreset _settings;
-    public BuildingInteraction(BuildingPreset settings)
+    private InteractionController _interactionController;
+    private int _index;
+    public BuildingInteraction(BuildingPreset settings, InteractionController interactionController, int index)
     {
         _settings = settings;
+        _interactionController = interactionController;
+        _index = index;
+        InteractionController.OnInteractionChange += OnSelectionChange;
     }
 
     public void OnInteract(Tile tile)
@@ -24,6 +29,9 @@ public class BuildingInteraction : IInteractable
                     GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity, tile.Transform);
                     Debug.Log(building.GetComponent<Building>().buildingName);
                     tile.building = building.GetComponent<Building>();
+                    SpriteRenderer spriteRenderer = building.GetComponentInChildren<SpriteRenderer>();
+                    spriteRenderer.sortingOrder = TileManager.GetTilesMaxY() - TileManager.GetCoordinates(building.transform.position).y;
+                    Debug.Log("New Sorting order: " + spriteRenderer.sortingOrder);
                 }
                 else
                 {
@@ -81,5 +89,19 @@ public class BuildingInteraction : IInteractable
     public void OnSelection(Tile tile)
     {
 
+    }
+
+    public bool CanBePlaced(Tile tile)
+    {
+        if(tile.building != null)
+            return false;
+        if(!RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
+            return false;
+        return true;
+    }
+    public void OnSelectionChange(int selectedIndex)
+    {
+        if (selectedIndex == _index)
+            _interactionController.BuildPreviewSpriteRenderer.sprite = _settings.BuildPreview;
     }
 }
