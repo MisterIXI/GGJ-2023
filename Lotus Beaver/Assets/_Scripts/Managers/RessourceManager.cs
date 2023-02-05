@@ -8,11 +8,11 @@ public class RessourceManager : MonoBehaviour
 
     [SerializeField] private GameSettings _gameSettings;
 
-    public static event Action<int> OnEarthChange;
-    public static event Action<int> OnWaterChange;
+    public static event Action<float> OnEarthChange;
+    public static event Action<float> OnWaterChange;
 
-    public static int earth;
-    public static int water;
+    public static float earth;
+    public static float water;
 
     private void Awake()
     {
@@ -26,19 +26,28 @@ public class RessourceManager : MonoBehaviour
         DontDestroyOnLoad(transform.root.gameObject);
     }
 
-    public static void AddEarth(int value)
+    private void Start()
+    {
+        Debug.Log(_gameSettings.startWater);
+        earth += _gameSettings.startEarth;
+        water += _gameSettings.startWater;
+        OnEarthChange?.Invoke(earth);
+        OnWaterChange?.Invoke(water);
+    }
+
+    public static void AddEarth(float value)
     {
         earth += value;
         OnEarthChange?.Invoke(earth);
     }
 
-    public static void AddWater(int value)
+    public static void AddWater(float value)
     {
         water += value;
         OnWaterChange?.Invoke(water);
     }
 
-    public static bool EnoughResources(int earthCost, int waterCost)
+    public static bool EnoughResources(float earthCost, float waterCost)
     {
         if (earthCost <= earth && waterCost <= water)
             return true;
@@ -46,7 +55,7 @@ public class RessourceManager : MonoBehaviour
             return false;
     }
 
-    public static void UseResources(int earthCost, int waterCost)
+    public static void UseResources(float earthCost, float waterCost)
     {
         earth -= earthCost;
         water -= waterCost;

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Building_Tree
   m_EditorClassIdentifier: 
   <displayName>k__BackingField: Tree
-  <earthCost>k__BackingField: 100
+  <earthCost>k__BackingField: 10
   <waterCost>k__BackingField: 100
   <BuildPreview>k__BackingField: {fileID: -521945305, guid: c4fab5eee0a53ff44a09190c9b926215, type: 3}
   <buildingPrefab>k__BackingField: {fileID: 2205704355078781656, guid: 6fe2eb20748e9aa4082c6cb1a2b486fe, type: 3}
@@ -23,13 +23,16 @@ MonoBehaviour:
   <selfHealAmount>k__BackingField: 10
   <healAmount>k__BackingField: 10
   <healRadius>k__BackingField: 1
-  <constructionStages>k__BackingField: 2
+  <constructionStages>k__BackingField: 5
   <constructionSprites>k__BackingField:
-  - {fileID: -1480902838, guid: c4fab5eee0a53ff44a09190c9b926215, type: 3}
-  - {fileID: -272516443, guid: c4fab5eee0a53ff44a09190c9b926215, type: 3}
-  - {fileID: -521945305, guid: c4fab5eee0a53ff44a09190c9b926215, type: 3}
-  <ticksPerStage>k__BackingField: 5
+  - {fileID: 186307197, guid: 90607605a713e9b4eaae6107cc698693, type: 3}
+  - {fileID: -1816803385, guid: 90607605a713e9b4eaae6107cc698693, type: 3}
+  - {fileID: -2075906827, guid: 90607605a713e9b4eaae6107cc698693, type: 3}
+  - {fileID: 231138131, guid: 90607605a713e9b4eaae6107cc698693, type: 3}
+  - {fileID: 916941133, guid: 90607605a713e9b4eaae6107cc698693, type: 3}
+  - {fileID: 1789582175, guid: 90607605a713e9b4eaae6107cc698693, type: 3}
+  <ticksPerStage>k__BackingField: 6
   <upgradeStages>k__BackingField: 0
   <upgradeSprites>k__BackingField: []
-  <upgradeEarthCosts>k__BackingField: 
-  <upgradeWaterCosts>k__BackingField: 
+  <upgradeEarthCosts>k__BackingField: []
+  <upgradeWaterCosts>k__BackingField: []

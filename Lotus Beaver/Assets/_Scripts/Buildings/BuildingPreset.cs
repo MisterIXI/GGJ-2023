@@ -8,14 +8,14 @@ public class BuildingPreset : ScriptableObject
 {
     [field: SerializeField] public string displayName { get; private set; }
 
-    [field: SerializeField] public int earthCost { get; private set; }
-    [field: SerializeField] public int waterCost { get; private set; }
+    [field: SerializeField] public float earthCost { get; private set; }
+    [field: SerializeField] public float waterCost { get; private set; }
     [field: SerializeField] public Sprite BuildPreview { get; private set; }
     [field: SerializeField] public GameObject buildingPrefab { get; private set; }
 
     [field: Header("Resource Production")]
-    [field: SerializeField] public int earthProduction { get; private set; }
-    [field: SerializeField] public int waterProduction { get; private set; }
+    [field: SerializeField] public float earthProduction { get; private set; }
+    [field: SerializeField] public float waterProduction { get; private set; }
 
     [field: SerializeField] public Sprite InteractionIcon;
 
@@ -32,7 +32,7 @@ public class BuildingPreset : ScriptableObject
     [field: Header("Upgrades")]
     [field: SerializeField] public int upgradeStages { get; private set; }
     [field: SerializeField] public Sprite[] upgradeSprites { get; private set; }
-    [field: SerializeField] public int[] upgradeEarthCosts { get; private set; }
-    [field: SerializeField] public int[] upgradeWaterCosts { get; private set; }
+    [field: SerializeField] public float[] upgradeEarthCosts { get; private set; }
+    [field: SerializeField] public float[] upgradeWaterCosts { get; private set; }
 
 }

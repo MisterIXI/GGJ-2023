@@ -7,6 +7,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class BuildingInteraction : IInteractable
 {
     private BuildingPreset _settings;
+    public BuildingPreset Settings => _settings;
     private InteractionController _interactionController;
     private int _index;
     public BuildingInteraction(BuildingPreset settings, InteractionController interactionController, int index)

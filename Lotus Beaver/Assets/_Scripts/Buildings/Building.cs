@@ -24,8 +24,8 @@ public class Building : InteractableBase
     private Sprite[] upgradeSprites;
     public int upgradeStages;
     public int currentUpgradeStage = 0;
-    private int[] upgradeEarthCosts;
-    private int[] upgradeWaterCosts;
+    private float[] upgradeEarthCosts;
+    private float[] upgradeWaterCosts;
 
     private Sprite[] sprites;
 
