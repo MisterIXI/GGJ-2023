@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 [RequireComponent(typeof(TileElement))]
 public class EarthController : MonoBehaviour
@@ -81,6 +82,13 @@ public class EarthController : MonoBehaviour
     {
         Tile parentTile = GetComponentInParent<Tile>(true);
 
-        TileManager.SetTileElementType(parentTile, TileElementType.Water);
+        if (TileManager.GetSurroundingTilesWithDiagonal(parentTile).Any(x => x.TileElement.TileElementType == TileElementType.Earth))
+        {
+            TileManager.SetTileElementType(parentTile, TileElementType.Cliff);
+        }
+        else
+        {
+            TileManager.SetTileElementType(parentTile, TileElementType.Water);
+        }
     }
 }
