@@ -18,9 +18,25 @@ public class RootManager : MonoBehaviour
 
     private static int _rootLevel;
 
+    private static RootManager _instance;
+
     private void Awake()
     {
+        if (_instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        _instance = this;
+        DontDestroyOnLoad(transform.root.gameObject);
+
         GameManager.OnNewGame += OnNewGame;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnNewGame -= OnNewGame;
     }
 
     private void OnNewGame()
@@ -29,10 +45,10 @@ public class RootManager : MonoBehaviour
         GrowRoots();
     }
 
-    public void IncreaseRootLevel()
+    public static void IncreaseRootLevel()
     {
         _rootLevel++;
-        GrowRoots();
+        _instance.GrowRoots();
     }
 
     [ContextMenu(nameof(TestGrowRoots))]
