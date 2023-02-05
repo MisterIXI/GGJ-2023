@@ -15,7 +15,7 @@ MonoBehaviour:
   <displayName>k__BackingField: Lotus
   <earthCost>k__BackingField: 0
   <waterCost>k__BackingField: 0
-  <BuildPreview>k__BackingField: {fileID: 21300000, guid: 41b032a987671a246857a6b3c270bc3d, type: 3}
+  <BuildPreview>k__BackingField: {fileID: 0}
   <buildingPrefab>k__BackingField: {fileID: 5213177626744561057, guid: a3662c2fcd57fff49baeb1303ca0a6a5, type: 3}
   <earthProduction>k__BackingField: 1
   <waterProduction>k__BackingField: 1

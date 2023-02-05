@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/DangerZone/MainScene.unity
-    guid: 17dd10a581dc36b448745361747aa0c6
+    path: Assets/_Scenes/Yannik Scene.unity
+    guid: 13c441ad73b847e4a904df7b9a087950
   m_configObjects: {}

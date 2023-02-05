@@ -123,13 +123,18 @@ public class InteractionController : MonoBehaviour
                     var settings = buildingInteraction.Settings;
                     if (CurrentTile.building != null && CurrentTile.building.buildingName == "Lotus")
                     {
+                    _interactionText.text = "Upgrade " + settings.displayName;
+
                         int index = CurrentTile.building.currentUpgradeStage;
                         _earthCostText.text = CurrentTile.building.upgradeEarthCosts[index].ToString();
                         _waterCostText.text = CurrentTile.building.upgradeWaterCosts[index].ToString();
                     }
-                    _interactionText.text = "Place " + settings.displayName;
+                    else{
+                    _interactionText.text = "No Lotus to upgrade";
                     _earthCostText.text = settings.earthCost.ToString();
                     _waterCostText.text = settings.waterCost.ToString();
+
+                    }
                     if (RessourceManager.earth >= settings.earthCost)
                         _earthCostText.color = greenColor;
                     else
