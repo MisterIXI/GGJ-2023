@@ -6,9 +6,14 @@ using System.Resources;
 public class BuildingInteraction : IInteractable
 {
     private BuildingPreset _settings;
-    public BuildingInteraction(BuildingPreset settings)
+    private InteractionController _interactionController;
+    private int _index;
+    public BuildingInteraction(BuildingPreset settings, InteractionController interactionController, int index)
     {
         _settings = settings;
+        _interactionController = interactionController;
+        _index = index;
+        InteractionController.OnInteractionChange += OnSelectionChange;
     }
 
     public void OnInteract(Tile tile)
@@ -80,6 +85,12 @@ public class BuildingInteraction : IInteractable
 
     public void OnSelection(Tile tile)
     {
+        _interactionController.BuildPreviewSpriteRenderer.sprite = _settings.BuildPreview;
+    }
 
+    public void OnSelectionChange(int selectedIndex)
+    {
+        if (selectedIndex == _index)
+            _interactionController.BuildPreviewSpriteRenderer.sprite = _settings.BuildPreview;
     }
 }
