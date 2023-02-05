@@ -29,6 +29,9 @@ public class BuildingInteraction : IInteractable
                     GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity, tile.Transform);
                     Debug.Log(building.GetComponent<Building>().buildingName);
                     tile.building = building.GetComponent<Building>();
+                    SpriteRenderer spriteRenderer = building.GetComponentInChildren<SpriteRenderer>();
+                    spriteRenderer.sortingOrder = TileManager.GetTilesMaxY() - TileManager.GetCoordinates(building.transform.position).y;
+                    Debug.Log("New Sorting order: " + spriteRenderer.sortingOrder);
                 }
                 else
                 {
