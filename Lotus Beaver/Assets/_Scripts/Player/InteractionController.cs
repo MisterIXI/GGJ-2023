@@ -85,8 +85,8 @@ public class InteractionController : MonoBehaviour
         }
     }
 
-    private Color greenColor = new Color(0, 1, 0, 0.5f);
-    private Color redColor = new Color(1, 0, 0, 0.5f);
+    [field: SerializeField] private Color greenColor = new Color(111 / 255, 157 / 255, 129 / 255, 1f);
+    [field: SerializeField] private Color redColor = new Color(229 / 255, 133 / 255, 140 / 255, 1f);
     private void UpdatePreview()
     {
         if (CurrentTile != null)
@@ -97,13 +97,13 @@ public class InteractionController : MonoBehaviour
                 // Earth
                 if (RessourceManager.EnoughResources(_gameSettings.EarthPlacementCost, 0))
                 {
-                    InteractionPreviewSpriteRenderer.color = Color.green;
-                    _earthCostText.color = Color.green;
+                    InteractionPreviewSpriteRenderer.color = greenColor;
+                    _earthCostText.color = greenColor;
                 }
                 else
                 {
-                    InteractionPreviewSpriteRenderer.color = Color.red;
-                    _earthCostText.color = Color.red;
+                    InteractionPreviewSpriteRenderer.color = redColor;
+                    _earthCostText.color = redColor;
                 }
                 _earthCostText.text = _gameSettings.EarthPlacementCost.ToString();
                 _waterCostText.text = "0";
@@ -111,7 +111,7 @@ public class InteractionController : MonoBehaviour
             else if (_currentInteractionIndex == 1)
             {
                 // water
-                InteractionPreviewSpriteRenderer.color = Color.red;
+                InteractionPreviewSpriteRenderer.color = redColor;
                 _interactionText.text = "No use yet";
                 _earthCostText.text = "0";
                 _waterCostText.text = "0";
@@ -125,20 +125,20 @@ public class InteractionController : MonoBehaviour
                     _earthCostText.text = settings.earthCost.ToString();
                     _waterCostText.text = settings.waterCost.ToString();
                     if (RessourceManager.earth >= settings.earthCost)
-                        _earthCostText.color = Color.green;
+                        _earthCostText.color = greenColor;
                     else
-                        _earthCostText.color = Color.red;
+                        _earthCostText.color = redColor;
                     if (RessourceManager.water >= settings.waterCost)
-                        _waterCostText.color = Color.green;
+                        _waterCostText.color = greenColor;
                     else
-                        _waterCostText.color = Color.red;
+                        _waterCostText.color = redColor;
                     if (buildingInteraction.CanBePlaced(CurrentTile))
                     {
-                        InteractionPreviewSpriteRenderer.color = Color.green;
+                        InteractionPreviewSpriteRenderer.color = greenColor;
                     }
                     else
                     {
-                        InteractionPreviewSpriteRenderer.color = Color.red;
+                        InteractionPreviewSpriteRenderer.color = redColor;
                     }
                 }
             }
@@ -219,7 +219,7 @@ public class InteractionController : MonoBehaviour
     {
         if (_interactionSettings != null && _interactionSettings.DrawGizmos)
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = redColor;
             Gizmos.DrawLine(transform.position, transform.position + _interactionOffset);
         }
     }
