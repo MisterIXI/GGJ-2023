@@ -10,7 +10,7 @@ public class ButtonScript : MonoBehaviour
     [SerializeField] private GameObject ControlMenu;
     private GameObject[] menuList = new GameObject[4];
     // EDIT IN BUTTON EVENT BOX CHANGE ENUM MENU
-    public enum Menu
+    private enum Menu
     {
         HMenu,
         CreditMenu,
@@ -18,7 +18,7 @@ public class ButtonScript : MonoBehaviour
         ControlMenu
     }
     // Start is called before the first frame update
-    public void OnChangeMenu(Menu changeMenu)
+    private void OnChangeMenu(Menu changeMenu)
     {
         // MENU SET ENABLE AND FALSE OTHER MENUS
         if(changeMenu == Menu.HMenu)
@@ -66,7 +66,22 @@ public class ButtonScript : MonoBehaviour
     }
     public void OnButtonStart()
     {
-
+         // START HERE GAMELOOP
     }
-    
+    public void OnButtonSettings()
+    {
+        OnChangeMenu(Menu.SettingMenu);
+    }
+    public void OnButtonCredits()
+    {
+        OnChangeMenu(Menu.CreditMenu); 
+    }
+    public void OnButtonControls()
+    {
+        OnChangeMenu(Menu.ControlMenu);
+    }
+    public void OnButtonBack()
+    {
+        OnChangeMenu(Menu.HMenu);
+    }
 }
