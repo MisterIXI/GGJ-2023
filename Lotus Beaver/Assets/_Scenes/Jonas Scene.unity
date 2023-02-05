@@ -123,6 +123,23 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &530187984 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1803398360, guid: 417dc75e6c4635e4a8be10ffdb289453, type: 3}
+  m_PrefabInstance: {fileID: 4033640663271818920}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &530187988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530187984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33bbc4b7181a4444383406d8f136e4ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1051669524
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -369,6 +386,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1343247791, guid: 417dc75e6c4635e4a8be10ffdb289453, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 934836558414853985, guid: 417dc75e6c4635e4a8be10ffdb289453, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -430,6 +451,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7868271523652566667, guid: 21c0566e2e9e4454d9f41e8a6d682ff3, type: 3}
+      propertyPath: m_Damping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7868271524196134179, guid: 21c0566e2e9e4454d9f41e8a6d682ff3, type: 3}
       propertyPath: m_Name
       value: PlayerVirtCam

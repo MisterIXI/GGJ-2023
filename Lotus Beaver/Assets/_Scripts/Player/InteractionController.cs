@@ -59,6 +59,7 @@ public class InteractionController : MonoBehaviour
             _currentInteraction = Interactions[index];
             _currentInteractionIndex = index;
             OnInteractionChange?.Invoke(_currentInteractionIndex);
+            SoundManager.PlaySelectInteraction();
         }
     }
     private void TileSelectionUpdate()
