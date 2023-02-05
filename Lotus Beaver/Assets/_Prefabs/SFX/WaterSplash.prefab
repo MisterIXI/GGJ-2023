@@ -56,6 +56,10 @@ PrefabInstance:
       value: WaterSplash
       objectReference: {fileID: 0}
     - target: {fileID: 9086356998161414102, guid: e4d58c14da0a4a54ca73bcd3d8d79cfd, type: 3}
+      propertyPath: m_Volume
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086356998161414102, guid: e4d58c14da0a4a54ca73bcd3d8d79cfd, type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: b776867b50e867d46a9720b03722eeaa, type: 3}

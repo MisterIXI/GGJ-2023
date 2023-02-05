@@ -56,6 +56,10 @@ PrefabInstance:
       value: Walking
       objectReference: {fileID: 0}
     - target: {fileID: 9086356998161414102, guid: e4d58c14da0a4a54ca73bcd3d8d79cfd, type: 3}
+      propertyPath: m_Volume
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086356998161414102, guid: e4d58c14da0a4a54ca73bcd3d8d79cfd, type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: ef18df5714d474448b0775d172e43fba, type: 3}
