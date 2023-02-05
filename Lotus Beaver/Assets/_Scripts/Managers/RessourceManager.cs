@@ -40,7 +40,7 @@ public class RessourceManager : MonoBehaviour
 
     public static bool EnoughResources(int earthCost, int waterCost)
     {
-        if(earthCost <= earth && waterCost <= water)
+        if (earthCost <= earth && waterCost <= water)
             return true;
         else
             return false;
@@ -50,5 +50,7 @@ public class RessourceManager : MonoBehaviour
     {
         earth -= earthCost;
         water -= waterCost;
+        OnEarthChange?.Invoke(earth);
+        OnWaterChange?.Invoke(water);
     }
 }
