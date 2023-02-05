@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6581816905555971195}
   - component: {fileID: 3577622179778195517}
+  - component: {fileID: 202328142}
   m_Layer: 0
   m_Name: Sprite_Tree
   m_TagString: Untagged
@@ -84,6 +85,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &202328142
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711118860871990394}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1865fa63c0560e9468b4b046ad518d63, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2205704355078781656
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,3 +151,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPreset: {fileID: 11400000, guid: 9378e485ba540ad42be530d0aa9b505a, type: 2}
+  buildingName: 
+  upgradeStages: 0
+  currentUpgradeStage: 0
