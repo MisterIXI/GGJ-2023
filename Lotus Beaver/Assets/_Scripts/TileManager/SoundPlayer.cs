@@ -9,13 +9,16 @@ public class SoundPlayer : Poolable
 
     private Coroutine _playCoroutine;
 
+    [ContextMenu(nameof(PlaySound))]
     public void PlaySound()
     {
-        _audioSource.PlayOneShot(_audioSource.clip);
+        PlaySound(_audioSource.clip);
     }
 
     public void PlaySound(AudioClip audioClip)
     {
+        SetActive(true);
+
         _audioSource.PlayOneShot(audioClip);
 
         if (_playCoroutine != null)
@@ -23,7 +26,7 @@ public class SoundPlayer : Poolable
             StopCoroutine(_playCoroutine);
         }
 
-        _playCoroutine = StartCoroutine(AudioDurationCoroutine(audioClip.length));
+        _playCoroutine = StartCoroutine(AudioDurationCoroutine(audioClip.length * 2f));
     }
 
     private IEnumerator AudioDurationCoroutine(float audioClipLength)
@@ -40,5 +43,10 @@ public class SoundPlayer : Poolable
     public override void ReturnToPool()
     {
         _pool.ReturnToPool(this);
+    }
+
+    public override void SetActive(bool active)
+    {
+        _gameObject.SetActive(active);
     }
 }
