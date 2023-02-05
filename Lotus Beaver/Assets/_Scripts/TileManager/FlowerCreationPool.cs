@@ -1,17 +1,12 @@
 ﻿using UnityEngine;
 
-public class TileCreationPool : MonoBehaviour
+public class FlowerCreationPool : MonoBehaviour
 {
     [SerializeField] private ParticlePool _particlePool;
 
-    private static TileCreationPool _instance;
+    private static FlowerCreationPool _instance;
 
-    public static ParticlePool ParticlePool
-    {
-        get {
-            return _instance?._particlePool;
-        }
-    }
+    public static ParticlePool ParticlePool => _instance?._particlePool;
 
     private void Awake()
     {

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(TileElement))]
@@ -24,7 +26,16 @@ public class EarthController : MonoBehaviour
 
         _currentDamageStage = _damageStageLibrary.DamageStages[0];
 
+        RefManager.gameManager?.StartCoroutine(DelayRoutine());
+
         UpdateDamageSprite();
+    }
+
+    private IEnumerator DelayRoutine()
+    {
+        yield return null;
+
+        TileCreationPool.ParticlePool?.GetPoolable()?.Play(transform.position);
     }
 
     private void UpdateDamageStage()
@@ -92,6 +103,5 @@ public class EarthController : MonoBehaviour
         }
 
         SoundManager.PlayWaterSplash();
-        TileCreationPool.ParticlePool.GetPoolable().Play(_tileElement.transform.position);
     }
 }

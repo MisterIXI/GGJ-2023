@@ -2,6 +2,7 @@ using UnityEngine;
 
 using System;
 using System.Resources;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class BuildingInteraction : IInteractable
 {
@@ -28,7 +29,10 @@ public class BuildingInteraction : IInteractable
                     if (RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
                     {
                         RessourceManager.UseResources(_settings.earthCost, _settings.waterCost);
-                        GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity, tile.Transform);
+                        GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.Transform.position, Quaternion.identity, tile.Transform);
+
+                        FlowerCreationPool.ParticlePool?.GetPoolable()?.Play(tile.Transform.position);
+
                         SoundManager.PlayPlanting();
                         Debug.Log(building.GetComponent<Building>().buildingName);
                         tile.building = building.GetComponent<Building>();
@@ -74,7 +78,6 @@ public class BuildingInteraction : IInteractable
             }
 
         }
-
     }
 
     private void TryUpgrading(Tile tile)
