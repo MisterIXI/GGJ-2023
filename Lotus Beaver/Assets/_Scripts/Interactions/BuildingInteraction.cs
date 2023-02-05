@@ -22,12 +22,14 @@ public class BuildingInteraction : IInteractable
                 {
                     RessourceManager.UseResources(_settings.earthCost, _settings.waterCost);
                     GameObject building = GameObject.Instantiate(_settings.buildingPrefab, tile.transform.position, Quaternion.identity, tile.Transform);
+                    SoundManager.PlayPlanting();
                     Debug.Log(building.GetComponent<Building>().buildingName);
                     tile.building = building.GetComponent<Building>();
                 }
                 else
                 {
                     Debug.Log("Not enough resources!");
+                    SoundManager.PlayError();
                 }
             }
             else if (tile.building.buildingName == _settings.displayName)
@@ -40,6 +42,7 @@ public class BuildingInteraction : IInteractable
                 Debug.Log(tile.building.buildingName);
                 Debug.Log(_settings.displayName);
                 Debug.Log("There is already a building on this tile");
+                SoundManager.PlayError();
             }
         }
         else
@@ -50,9 +53,15 @@ public class BuildingInteraction : IInteractable
                 // check if lotus is selected and hovered
                 if (tile.building?.buildingName == _settings.displayName)
                     TryUpgrading(tile);
+                else
+                    SoundManager.PlayError();
             }
             else
+            {
                 Debug.Log("Has to be build on Dirt!");
+                SoundManager.PlayError();
+            }
+
         }
 
     }
@@ -66,15 +75,18 @@ public class BuildingInteraction : IInteractable
             {
                 RessourceManager.UseResources(_settings.upgradeEarthCosts[currentUpgradeStage], _settings.upgradeWaterCosts[currentUpgradeStage]);
                 tile.building.Upgrade();
+                SoundManager.PlayUpgrade();
             }
             else
             {
                 Debug.Log("Not enough resources to upgrade!");
+                SoundManager.PlayError();
             }
         }
         else
         {
             Debug.Log("Max Upgrade Reached!");
+            SoundManager.PlayError();
         }
     }
 

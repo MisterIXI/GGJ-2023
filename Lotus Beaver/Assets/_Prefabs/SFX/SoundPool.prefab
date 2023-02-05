@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a80ab8a8807e7547ae64f87cc7cedc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolable: {fileID: 0}
-  _initialSize: 0
+  _poolable: {fileID: 5964363196317624989, guid: 801d44d5b8eb75e45bf92db456d4a32a, type: 3}
+  _initialSize: 10

@@ -8,7 +8,10 @@ public class EarthInteraction : IInteractable
         if (tile.TileElement?.TileElementType != TileElementType.Root)
         {
             TileManager.SetTileElementType(tile, TileElementType.Earth);
+            SoundManager.PlayPlanting();
         }
+        else
+            SoundManager.PlayError();
     }
 
     public void OnSelection(Tile tile)
