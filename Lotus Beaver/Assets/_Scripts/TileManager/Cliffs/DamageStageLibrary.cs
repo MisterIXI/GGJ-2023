@@ -5,6 +5,9 @@ public class DamageStageLibrary : ScriptableObject
 {
     [SerializeField] private DamageStage[] _damageStages;
     [SerializeField] private float _earthMaxHealth;
+    [SerializeField] private float _baseDamage;
+
+    public float BaseDamage => _baseDamage;
 
     public DamageStage[] DamageStages => _damageStages;
     public float EarhMaxHealth => _earthMaxHealth;

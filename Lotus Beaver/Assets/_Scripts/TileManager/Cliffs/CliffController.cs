@@ -6,9 +6,9 @@ using UnityEngine;
 public class CliffController : MonoBehaviour
 {
     public static List<CliffController> _activeCliffControllers = new List<CliffController>();
-
+    public Tile ParentTile => _parentTile ??= GetComponentInParent<Tile>(true);
+    private Tile _parentTile;
     private TileElement _tileElement;
-
     private void Awake()
     {
         _tileElement = GetComponent<TileElement>();
@@ -17,11 +17,13 @@ public class CliffController : MonoBehaviour
     private void OnEnable()
     {
         _activeCliffControllers.Add(this);
+        _parentTile = GetComponentInParent<Tile>(true);
     }
 
     private void OnDisable()
     {
         _activeCliffControllers.Remove(this);
+        _parentTile = null;
     }
 
     private void Update()

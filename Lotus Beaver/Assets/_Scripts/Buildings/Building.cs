@@ -97,20 +97,20 @@ public class Building : InteractableBase
                 }
 
             }
-        } 
+        }
     }
 
     private void TickManager_OnDamageTick(object sender, TickManager.OnTickEventArgs e)
     {
         Tile currentTile = GetComponentInParent<Tile>();
-        //currentTile.Heal(selfHealAmount);
+        currentTile.TileElement.GetComponent<EarthController>().GetHealth(selfHealAmount);
         if (healRadius > 0)
         {
-            foreach(var tile in TileManager.GetSurroundingTilesWithDiagonal(currentTile))
+            foreach (var tile in TileManager.GetSurroundingTilesWithDiagonal(currentTile))
             {
-                if(tile.TileElement.TileElementType == TileElementType.Earth)
+                if (tile.TileElement.TileElementType == TileElementType.Earth)
                 {
-                    //tile.Heal(healAmount);
+                    tile.TileElement.GetComponent<EarthController>().GetHealth(healAmount);
                 }
 
             }
@@ -118,7 +118,7 @@ public class Building : InteractableBase
     }
 
     public override void OnInteract(Tile tile)
-    {   
+    {
         Debug.Log("Interacted with " + tile);
     }
 
