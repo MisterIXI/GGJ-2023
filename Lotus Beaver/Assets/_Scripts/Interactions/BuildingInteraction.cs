@@ -85,7 +85,7 @@ public class BuildingInteraction : IInteractable
 
     public void OnSelection(Tile tile)
     {
-        _interactionController.BuildPreviewSpriteRenderer.sprite = _settings.BuildPreview;
+        
     }
 
     public void OnSelectionChange(int selectedIndex)
