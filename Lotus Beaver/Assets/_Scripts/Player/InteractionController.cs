@@ -4,6 +4,8 @@ using System;
 public class InteractionController : MonoBehaviour
 {
     [field: SerializeField] public GameObject InteractionPreview { get; private set; }
+    private GameSettings _gameSettings;
+    public SpriteRenderer InteractionPreviewSpriteRenderer { get; private set; }
     public SpriteRenderer BuildPreviewSpriteRenderer { get; private set; }
     private IInteractable[] Interactions;
     public static event Action<Tile> OnTileInteract;
@@ -29,6 +31,8 @@ public class InteractionController : MonoBehaviour
         InitializeInteractions();
         SelectInteraction(0);
         BuildPreviewSpriteRenderer = InteractionPreview.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        InteractionPreviewSpriteRenderer = InteractionPreview.GetComponent<SpriteRenderer>();
+        _gameSettings = GameSettingsManager.GameSettings();
     }
     private void Update()
     {
@@ -74,6 +78,33 @@ public class InteractionController : MonoBehaviour
         if (CurrentTile != null)
         {
             InteractionPreview.transform.position = CurrentTile.transform.position;
+            if (_currentInteractionIndex == 0)
+            {
+                // Earth
+                if (RessourceManager.EnoughResources(_gameSettings.EarthPlacementCost, 0))
+                {
+                    InteractionPreviewSpriteRenderer.color = Color.green;
+                }
+                else
+                {
+                    InteractionPreviewSpriteRenderer.color = Color.red;
+                }
+            }
+            else if (_currentInteractionIndex == 1)
+            {
+                // water
+                InteractionPreviewSpriteRenderer.color = Color.red;
+            }
+            else
+            {
+                if (Interactions[_currentInteractionIndex] is BuildingInteraction buildingInteraction)
+                {
+                    if (buildingInteraction.CanBePlaced(CurrentTile))
+                        InteractionPreviewSpriteRenderer.color = Color.green;
+                    else
+                        InteractionPreviewSpriteRenderer.color = Color.red;
+                }
+            }
 
         }
     }

@@ -85,9 +85,17 @@ public class BuildingInteraction : IInteractable
 
     public void OnSelection(Tile tile)
     {
-        
+
     }
 
+    public bool CanBePlaced(Tile tile)
+    {
+        if(tile.building != null)
+            return false;
+        if(!RessourceManager.EnoughResources(_settings.earthCost, _settings.waterCost))
+            return false;
+        return true;
+    }
     public void OnSelectionChange(int selectedIndex)
     {
         if (selectedIndex == _index)
