@@ -77,6 +77,7 @@ public class InteractionController : MonoBehaviour
             {
                 OnTileInteract?.Invoke(CurrentTile);
                 _currentInteraction?.OnInteract(CurrentTile);
+                CurrentTile = null;
             }
         }
     }
@@ -86,15 +87,18 @@ public class InteractionController : MonoBehaviour
         if (context.performed)
         {
             Vector2 input = context.ReadValue<Vector2>();
-            if (input != Vector2.zero)
-            {
+
                 _moveInput = input;
                 // if(_moveInput.y > _moveInput.x)
                 //     _moveInput.x = 0;
                 // else
                 //     _moveInput.y = 0;
                 _interactionOffset = new Vector3(_moveInput.x, _moveInput.y, 0) * _interactionSettings.InteractionDistance;
-            }
+        }
+        if (context.canceled)
+        {
+            _moveInput = Vector2.zero;
+            _interactionOffset = Vector3.zero;
         }
     }
 
@@ -126,6 +130,8 @@ public class InteractionController : MonoBehaviour
             // try parse the name of the control to an int
             int index = 1;
             int.TryParse(context.control.name, out index);
+            if(index == 0)
+                index = 10;
             SelectInteraction(index - 1);
         }
     }

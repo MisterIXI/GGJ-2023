@@ -1,5 +1,9 @@
-﻿public struct WaterMask
+﻿using System;
+using UnityEngine;
+
+public struct WaterMask
 {
+    public bool UpLeft;
     public bool Up;
     public bool UpRight;
     public bool Right;
@@ -7,10 +11,10 @@
     public bool Down;
     public bool DownLeft;
     public bool Left;
-    public bool UpLeft;
 
-    public WaterMask(bool up, bool upRight, bool right, bool downRight, bool down, bool downLeft, bool left, bool upLeft)
+    public WaterMask(bool upLeft, bool up, bool upRight, bool right, bool downRight, bool down, bool downLeft, bool left)
     {
+        UpLeft = upLeft;
         Up = up;
         UpRight = upRight;
         Right = right;
@@ -18,18 +22,39 @@
         Down = down;
         DownLeft = downLeft;
         Left = left;
-        UpLeft = upLeft;
     }
 
-    public WaterMask(SoroundingTiles sorounding)
+    public WaterMask(SurroundingTiles surrounding)
     {
-        Up = sorounding.Up?.TileElementType == TileElementType.Water;
-        UpRight = sorounding.UpRight?.TileElementType == TileElementType.Water;
-        Right = sorounding.Right?.TileElementType == TileElementType.Water;
-        DownRight = sorounding.DownRight?.TileElementType == TileElementType.Water;
-        Down = sorounding.Down?.TileElementType == TileElementType.Water;
-        DownLeft = sorounding.DownLeft?.TileElementType == TileElementType.Water;
-        Left = sorounding.Left?.TileElementType == TileElementType.Water;
-        UpLeft = sorounding.UpLeft?.TileElementType == TileElementType.Water;
+        UpLeft = IsWaterOrCliff(surrounding.UpLeft?.TileElementType);
+        Up = IsWaterOrCliff(surrounding.Up?.TileElementType);
+        UpRight = IsWaterOrCliff(surrounding.UpRight?.TileElementType);
+        Right = IsWaterOrCliff(surrounding.Right?.TileElementType);
+        DownRight = IsWaterOrCliff(surrounding.DownRight?.TileElementType);
+        Down = IsWaterOrCliff(surrounding.Down?.TileElementType);
+        DownLeft = IsWaterOrCliff(surrounding.DownLeft?.TileElementType);
+        Left = IsWaterOrCliff(surrounding.Left?.TileElementType);
+    }
+
+    private static bool IsWaterOrCliff(TileElementType? tileElementType)
+    {
+        if (tileElementType == null)
+            return false;
+        return tileElementType == TileElementType.Water || tileElementType == TileElementType.Cliff;
+    }
+
+
+    public override string ToString()
+    {
+        // return
+        //         $"UpLeft: {UpLeft}  " +
+        //         $"Up: {Up}  " +
+        //         $"UpRight: {UpRight}  " +
+        //         $"Right: {Right}  " +
+        //         $"DownRight: {DownRight}  " +
+        //         $"Down: {Down}  " +
+        //         $"DownLeft: {DownLeft}  " +
+        //         $"Left: {Left}  ";
+        return $"{(UpLeft ? 1 : 0)}{(Up ? 1 : 0)}{(UpRight ? 1 : 0)}{(Right ? 1 : 0)}{(DownRight ? 1 : 0)}{(Down ? 1 : 0)}{(DownLeft ? 1 : 0)}{(Left ? 1 : 0)}";
     }
 }

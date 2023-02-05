@@ -1,5 +1,6 @@
-﻿public struct SoroundingTiles
+﻿public struct SurroundingTiles
 {
+    public TileElement UpLeft;
     public TileElement Up;
     public TileElement UpRight;
     public TileElement Right;
@@ -7,10 +8,10 @@
     public TileElement Down;
     public TileElement DownLeft;
     public TileElement Left;
-    public TileElement UpLeft;
 
-    public SoroundingTiles(TileElement up, TileElement upRight, TileElement right, TileElement downRight, TileElement down, TileElement downLeft, TileElement left, TileElement upLeft)
+    public SurroundingTiles(TileElement upLeft, TileElement up, TileElement upRight, TileElement right, TileElement downRight, TileElement down, TileElement downLeft, TileElement left)
     {
+        UpLeft = upLeft;
         Up = up;
         UpRight = upRight;
         Right = right;
@@ -18,6 +19,5 @@
         Down = down;
         DownLeft = downLeft;
         Left = left;
-        UpLeft = upLeft;
     }
 }

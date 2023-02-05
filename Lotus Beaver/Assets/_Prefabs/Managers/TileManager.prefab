@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolable: {fileID: 3959618477627814835, guid: 8cdac056ce2469f499e6aec3e225dd2d, type: 3}
-  _initialSize: 225
+  _initialSize: 2500
 --- !u!1 &5378951988102051602
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolable: {fileID: 5002863882812938521, guid: edb21edc5e2fae547af236e19c457a2b, type: 3}
-  _initialSize: 225
+  _initialSize: 2500
 --- !u!1 &5378951988163652498
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolable: {fileID: 4527419782147556953, guid: cd9952c3607d01748ab978327d5f8d06, type: 3}
-  _initialSize: 225
+  _initialSize: 2500
 --- !u!1 &5378951988291322593
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolable: {fileID: 976708269656313312, guid: a90f583e2b9360c42a4c1f67295b0ce8, type: 3}
-  _initialSize: 50
+  _initialSize: 2500
 --- !u!1 &5378951989425758687
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +196,7 @@ GameObject:
   - component: {fileID: 5378951989425758686}
   - component: {fileID: 5378951989425758684}
   - component: {fileID: 1248990992}
+  - component: {fileID: 1248990993}
   m_Layer: 0
   m_Name: TileManager
   m_TagString: Untagged
@@ -248,7 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolable: {fileID: 6625642224914783484, guid: c1f09140a29e0a140bebb4c2ccd21aa4, type: 3}
-  _initialSize: 225
+  _initialSize: 2500
 --- !u!114 &1248990992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,3 +262,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7a50db77d3eec48ad29cc9933bf11a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initalRootExtraFilds:
+  - {x: -1, y: 2}
+  - {x: 0, y: 2}
+  - {x: 1, y: 2}
+  - {x: 2, y: 2}
+  - {x: 2, y: 1}
+  - {x: 2, y: 0}
+  - {x: 2, y: -1}
+  _growthDirection:
+  - {x: 0, y: 1}
+  - {x: 1, y: 0}
+  - {x: 0, y: -1}
+  - {x: -1, y: 0}
+  _rootStartOffset:
+  - {x: 0, y: 3}
+  - {x: 3, y: 1}
+  - {x: 1, y: -2}
+  - {x: -2, y: 0}
+  _middle:
+  - {fileID: 21300000, guid: 84afb8b3cb2357849851aaa22f50cab4, type: 3}
+  - {fileID: 21300000, guid: a9528bf468dadf84ea93c4bea895fda3, type: 3}
+  - {fileID: 21300000, guid: 4846c5071a42c9e44bc9883bd3b3ede7, type: 3}
+  - {fileID: 21300000, guid: 3ac706eddac7a07449fa6aad4f26e7d4, type: 3}
+  _start:
+  - {fileID: 21300000, guid: 89d9b28fd6b834449925edae109c438f, type: 3}
+  - {fileID: 21300000, guid: 092df56334c808d4e863f2492cec610d, type: 3}
+  - {fileID: 21300000, guid: 5cfaf5b533e66084fa1c68fcd6b8a5d6, type: 3}
+  - {fileID: 21300000, guid: 924ddff51492e3a4e89e3047d61a9001, type: 3}
+  _end:
+  - {fileID: 21300000, guid: 613d509a0cc98eb4eae3b444f35b8e2e, type: 3}
+  - {fileID: 21300000, guid: 7b320ad37c53e0440933c73d5aa2d296, type: 3}
+  - {fileID: 21300000, guid: 51e347ad5f516de478bb452d109d61b4, type: 3}
+  - {fileID: 21300000, guid: 10e633e5911bdc0448eff3a99c380a94, type: 3}
+--- !u!114 &1248990993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5378951989425758687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a5ee964c69f514fb0e11f56028c64d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cliffSpriteLibrary: {fileID: 11400000, guid: 43917edc208db9c4cb6874d0e9681fbb, type: 2}
+  _damageStageLibrary: {fileID: 11400000, guid: 2b316b8a3dbe8aa40b44cb6b844821fe, type: 2}

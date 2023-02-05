@@ -20,4 +20,4 @@ MonoBehaviour:
   - _healthTreshHold: 0
     _sprite: {fileID: 21300000, guid: 9d634b220a290dd41bc6db7bac748b57, type: 3}
   _earthMaxHealth: 100
-  _baseDamage: 0
+  _baseDamage: 1

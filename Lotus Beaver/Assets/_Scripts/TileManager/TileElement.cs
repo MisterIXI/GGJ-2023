@@ -5,7 +5,7 @@ public class TileElement : Poolable
     [SerializeField] private TileElementType _tileElementType;
     public TileElementType TileElementType => _tileElementType;
 
-    public SpriteRenderer SpriteRenderer { get; set; }
+    [field: SerializeField] public SpriteRenderer SpriteRenderer { get; set; }
 
     private TileElementPool _pool;
 
@@ -18,4 +18,23 @@ public class TileElement : Poolable
     {
         _pool.ReturnToPool(this);
     }
+
+    [ContextMenu("ChangeToWater")]
+    public void ChangeToWater()
+    {
+        TileManager.SetTileElementType(GetComponentInParent<Tile>(), TileElementType.Water);
+    }
+
+    [ContextMenu("ChangeToEart")]
+    public void ChangeToEarth()
+    {
+        TileManager.SetTileElementType(GetComponentInParent<Tile>(), TileElementType.Earth);
+    }
+
+    [ContextMenu("ChangeToCliff")]
+    public void ChangeToCliff()
+    {
+        TileManager.SetTileElementType(GetComponentInParent<Tile>(), TileElementType.Cliff);
+    }
+
 }

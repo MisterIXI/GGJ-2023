@@ -10,4 +10,8 @@ public class MovementSettings : ScriptableObject {
     [Range(0f,10f)] public float cameraDistance = 1f;
     [Range(0f,10f)] public float cameraDamping = 1f;
     [Range(5f,100f)] public float cameraZDistance = 10f;
+
+    [Header("Reset")]
+    [Range(0f,3f)] public float fadeDuration = 0.1f;
+    public bool resetOnWater = true;
 }

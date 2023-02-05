@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class RootManager : MonoBehaviour
 {
+    [SerializeField] private Vector2Int[] _initalRootExtraFilds;
+    [SerializeField] private Vector2Int[] _growthDirection;
+    [SerializeField] private Vector2Int[] _rootStartOffset;
+    private Vector2Int[] _rootStart;
+
+    [SerializeField] private Sprite[] _middle;
+    [SerializeField] private Sprite[] _start;
+    [SerializeField] private Sprite[] _end;
 
     private static int _rootLevel;
 
@@ -19,7 +27,7 @@ public class RootManager : MonoBehaviour
         GrowRoots();
     }
 
-    public static void IncreaseRootLevel()
+    public void IncreaseRootLevel()
     {
         _rootLevel++;
         GrowRoots();
@@ -31,37 +39,50 @@ public class RootManager : MonoBehaviour
         IncreaseRootLevel();
     }
 
-    private static void GrowRoots()
+    private void GrowRoots()
     {
-        Vector2Int cornerOffSet = TileManager.GetSize();
-        cornerOffSet.x /= 2;
-        cornerOffSet.y /= 2;
-        cornerOffSet.x -= _rootLevel;
-        cornerOffSet.y -= _rootLevel;
+        Tile centerTile = TileManager.GetCenterTile();
+        List<Tile> rootTiles = new List<Tile>() { centerTile };
 
-        Vector2Int centerCoordinates = TileManager.CenterTile();
+        rootTiles.AddRange(TileManager.GetSurroundingTilesWithDiagonal(centerTile));
 
-        List<Tile> xTiles = Enumerable.Range(cornerOffSet.x, _rootLevel * 2 + 1).Select(x => TileManager.Tiles[x, centerCoordinates.y]).ToList();
-        List<Tile> yTiles = Enumerable.Range(cornerOffSet.y, _rootLevel * 2 + 1).Select(x => TileManager.Tiles[centerCoordinates.y, x]).ToList();
-
-        for (int x = 0; x < xTiles.Count; x++)
+        for (int i = 0; i < _initalRootExtraFilds.Length; i++)
         {
-            if (x == xTiles.Count / 2)
-            {
-                continue;
-            }
-
-            TileManager.SetTileElementType(xTiles[x], TileElementType.Root);
+            TileManager.AddTile(centerTile.Coordinates + _initalRootExtraFilds[i], rootTiles);
         }
 
-        for (int y = 0; y < yTiles.Count;  y++)
-        {
-            if (y == xTiles.Count / 2)
-            {
-                continue;
-            }
+        _rootStart = new Vector2Int[_rootStartOffset.Length];
 
-            TileManager.SetTileElementType(yTiles[y], TileElementType.Root);
+        for (int i = 0; i < rootTiles.Count; i++)
+        {
+            TileManager.SetTileElementType(rootTiles[i], TileElementType.Root);
+        }
+
+        for (int i = 0; i < _rootStartOffset.Length; i++)
+        {
+            _rootStart[i] = centerTile.Coordinates + _rootStartOffset[i];
+
+            for (int j = 0; j < _rootLevel; j++)
+            {
+                Tile rootTile = TileManager.FilterOutOfBoundsCoordinates(_rootStart[i] + _growthDirection[i] * j);
+
+                TileManager.SetTileElementType(rootTile, TileElementType.Root);
+
+                if (j == 0)
+                {
+                    rootTile.TileElement.SpriteRenderer.sprite = _start[i];
+
+                    continue;
+                }
+                else if(j == _rootLevel - 1)
+                {
+                    rootTile.TileElement.SpriteRenderer.sprite = _end[i];
+
+                    continue;
+                }
+
+                rootTile.TileElement.SpriteRenderer.sprite = _middle[i];
+            }
         }
     }
 

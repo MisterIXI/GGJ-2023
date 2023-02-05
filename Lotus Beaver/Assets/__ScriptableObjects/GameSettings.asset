@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84da5ec976327f640bbfc59ea62ae711, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  <MapSize>k__BackingField: {x: 11, y: 11}
+  <MapSize>k__BackingField: {x: 50, y: 50}
   <TileSize>k__BackingField: {x: 2, y: 2}
-  <RootLevel>k__BackingField: 3
   <TileHeight>k__BackingField: 0
   <DamageTickTime>k__BackingField: 0.2
   <BuildingTickTime>k__BackingField: 1
   <ConstructionTickTime>k__BackingField: 0.1
+  <RootLevel>k__BackingField: 3

@@ -77,3 +77,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
+--- !u!1 &8457970613299734532 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4467046365076314938, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
+  m_PrefabInstance: {fileID: 5232791845792035646}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2296611358583920420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8457970613299734532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38141563daa9ebb47ba5f43242f2d5ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 0
+  _damageStageLibrary: {fileID: 11400000, guid: 2b316b8a3dbe8aa40b44cb6b844821fe, type: 2}
+  _currentDamageStage:
+    _healthTreshHold: 0
+    _sprite: {fileID: 0}
