@@ -63,6 +63,11 @@ public class SoundManager : MonoBehaviour
 
     public float LogSoundVolume(float volume)
     {
+        if (volume <= 0.05f)
+        {
+            return -80f;
+        }
+
         return Mathf.Log10(volume) * 20f;
     }
 

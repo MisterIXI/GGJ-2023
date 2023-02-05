@@ -56,6 +56,10 @@ PrefabInstance:
       value: Upgrade
       objectReference: {fileID: 0}
     - target: {fileID: 9086356998161414102, guid: e4d58c14da0a4a54ca73bcd3d8d79cfd, type: 3}
+      propertyPath: m_Volume
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086356998161414102, guid: e4d58c14da0a4a54ca73bcd3d8d79cfd, type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 9158e4c35abfe4e4a822bdd9b9825372, type: 3}

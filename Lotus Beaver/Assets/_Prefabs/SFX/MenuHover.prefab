@@ -53,7 +53,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4082043250331207449, guid: e4d58c14da0a4a54ca73bcd3d8d79cfd, type: 3}
       propertyPath: m_Name
-      value: MenuClick
+      value: MenuHover
+      objectReference: {fileID: 0}
+    - target: {fileID: 9086356998161414102, guid: e4d58c14da0a4a54ca73bcd3d8d79cfd, type: 3}
+      propertyPath: m_Volume
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 9086356998161414102, guid: e4d58c14da0a4a54ca73bcd3d8d79cfd, type: 3}
       propertyPath: m_audioClip
