@@ -369,21 +369,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2519183561996228424, guid: 417dc75e6c4635e4a8be10ffdb289453, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519183561996228424, guid: 417dc75e6c4635e4a8be10ffdb289453, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519183561996228424, guid: 417dc75e6c4635e4a8be10ffdb289453, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2519183561996228424, guid: 417dc75e6c4635e4a8be10ffdb289453, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
+    - target: {fileID: 934836558414853985, guid: 417dc75e6c4635e4a8be10ffdb289453, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4033640662817216188, guid: 417dc75e6c4635e4a8be10ffdb289453, type: 3}
       propertyPath: m_Name

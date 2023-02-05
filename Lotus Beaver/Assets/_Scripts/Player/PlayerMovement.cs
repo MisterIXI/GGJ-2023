@@ -44,10 +44,13 @@ public class PlayerMovement : MonoBehaviour
         HandleFade();
         animator.SetFloat("Horizontal", _movement.x);
         animator.SetFloat("Vertical", _movement.y);
-        Tile tile = TileManager.GetClosetTile(transform.position);
-        if (tile.TileElement?.TileElementType == TileElementType.Water)
+        if (_movementSettings.resetOnWater)
         {
-            StartReset();
+            Tile tile = TileManager.GetClosetTile(transform.position);
+            if (tile.TileElement?.TileElementType == TileElementType.Water)
+            {
+                StartReset();
+            }
         }
 
     }

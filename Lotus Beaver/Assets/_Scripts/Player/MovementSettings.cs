@@ -13,4 +13,5 @@ public class MovementSettings : ScriptableObject {
 
     [Header("Reset")]
     [Range(0f,3f)] public float fadeDuration = 0.1f;
+    public bool resetOnWater = true;
 }
