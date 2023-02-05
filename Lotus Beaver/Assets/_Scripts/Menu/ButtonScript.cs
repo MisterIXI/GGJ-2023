@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonScript : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class ButtonScript : MonoBehaviour
     [SerializeField] private GameObject CreditMenu;
     [SerializeField] private GameObject SettingsMenu;
     [SerializeField] private GameObject ControlMenu;
+    [SerializeField] private GameObject HUD;
     private GameObject[] menuList = new GameObject[4];
     // EDIT IN BUTTON EVENT BOX CHANGE ENUM MENU
     private enum Menu
@@ -15,58 +17,82 @@ public class ButtonScript : MonoBehaviour
         HMenu,
         CreditMenu,
         SettingMenu,
-        ControlMenu
+        ControlMenu,
+        HUD
     }
     // Start is called before the first frame update
     private void OnChangeMenu(Menu changeMenu)
     {
         // MENU SET ENABLE AND FALSE OTHER MENUS
-        if(changeMenu == Menu.HMenu)
+        if (changeMenu == Menu.HMenu)
         {
-            SetMenuState(CreditMenu,false);
+            SetMenuState(CreditMenu, false);
             SetMenuState(ControlMenu, false);
-            SetMenuState(SettingsMenu,false);
+            SetMenuState(SettingsMenu, false);
+            SetMenuState(SettingsMenu, false);
 
             SetMenuState(Hmenu, true);
 
-        }else if (changeMenu == Menu.CreditMenu)
+        }
+        else if (changeMenu == Menu.CreditMenu)
         {
-            SetMenuState(Hmenu,false);
+            SetMenuState(Hmenu, false);
             SetMenuState(ControlMenu, false);
-            SetMenuState(SettingsMenu,false);
-            
-            SetMenuState(CreditMenu,true);
+            SetMenuState(SettingsMenu, false);
+            SetMenuState(SettingsMenu, false);
 
-        }else if(changeMenu == Menu.ControlMenu)
+            SetMenuState(CreditMenu, true);
+
+        }
+        else if (changeMenu == Menu.ControlMenu)
         {
-            SetMenuState(Hmenu,false);
-            SetMenuState(SettingsMenu,false);
-            SetMenuState(CreditMenu,false);
-            
+            SetMenuState(Hmenu, false);
+            SetMenuState(SettingsMenu, false);
+            SetMenuState(CreditMenu, false);
+            SetMenuState(SettingsMenu, false);
+
             SetMenuState(ControlMenu, true);
-        }else if(changeMenu == Menu.SettingMenu)
+        }
+        else if (changeMenu == Menu.SettingMenu)
         {
-            SetMenuState(Hmenu,false);
-            SetMenuState(CreditMenu,false);
+            SetMenuState(Hmenu, false);
+            SetMenuState(CreditMenu, false);
             SetMenuState(ControlMenu, false);
-            
-            SetMenuState(SettingsMenu,true);
+            SetMenuState(SettingsMenu, false);
+
+            SetMenuState(SettingsMenu, true);
+        }
+        else if (changeMenu == Menu.HUD)
+        {
+            SetMenuState(Hmenu, false);
+            SetMenuState(CreditMenu, false);
+            SetMenuState(ControlMenu, false);
+            SetMenuState(SettingsMenu, false);
+
+            SetMenuState(HUD, true, false);
         }
 
     }
-    private void SetMenuState(GameObject menu, bool newState)
+    private void SetMenuState(GameObject menu, bool newState, bool selectFirstButton = true)
     {
-        if(newState)
+        if (newState)
         {
             menu.SetActive(true);
+            if (selectFirstButton)
+                menu.GetComponentInChildren<Button>().Select();
         }
-        else{
+        else
+        {
             menu.SetActive(false);
         }
     }
     public void OnButtonStart()
     {
-         // START HERE GAMELOOP
+        // START HERE GAMELOOP
+        GameManager.StartNewGame();
+        GameManager.SetGameState(GameState.Ingame);
+
+        OnChangeMenu(Menu.HUD);
     }
     public void OnButtonSettings()
     {
@@ -74,7 +100,7 @@ public class ButtonScript : MonoBehaviour
     }
     public void OnButtonCredits()
     {
-        OnChangeMenu(Menu.CreditMenu); 
+        OnChangeMenu(Menu.CreditMenu);
     }
     public void OnButtonControls()
     {
