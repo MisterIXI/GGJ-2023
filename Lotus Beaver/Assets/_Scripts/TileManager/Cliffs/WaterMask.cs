@@ -38,7 +38,7 @@ public struct WaterMask
 
     private static bool IsWaterOrCliff(TileElementType? tileElementType)
     {
-        if(tileElementType == null)
+        if (tileElementType == null)
             return false;
         return tileElementType == TileElementType.Water || tileElementType == TileElementType.Cliff;
     }
@@ -46,14 +46,15 @@ public struct WaterMask
 
     public override string ToString()
     {
-        return
-                $"UpLeft: {UpLeft}" +
-                $"Up: {Up}" +
-                $"UpRight: {UpRight}" +
-                $"Right: {Right}" +
-                $"DownRight: {DownRight}" +
-                $"Down: {Down}" +
-                $"DownLeft: {DownLeft}" +
-                $"Left: {Left}";
+        // return
+        //         $"UpLeft: {UpLeft}  " +
+        //         $"Up: {Up}  " +
+        //         $"UpRight: {UpRight}  " +
+        //         $"Right: {Right}  " +
+        //         $"DownRight: {DownRight}  " +
+        //         $"Down: {Down}  " +
+        //         $"DownLeft: {DownLeft}  " +
+        //         $"Left: {Left}  ";
+        return $"{(UpLeft ? 1 : 0)}{(Up ? 1 : 0)}{(UpRight ? 1 : 0)}{(Right ? 1 : 0)}{(DownRight ? 1 : 0)}{(Down ? 1 : 0)}{(DownLeft ? 1 : 0)}{(Left ? 1 : 0)}";
     }
 }
