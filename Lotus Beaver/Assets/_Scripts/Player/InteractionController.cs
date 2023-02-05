@@ -121,6 +121,12 @@ public class InteractionController : MonoBehaviour
                 if (Interactions[_currentInteractionIndex] is BuildingInteraction buildingInteraction)
                 {
                     var settings = buildingInteraction.Settings;
+                    if (CurrentTile.building != null && CurrentTile.building.buildingName == "Lotus")
+                    {
+                        int index = CurrentTile.building.currentUpgradeStage;
+                        _earthCostText.text = CurrentTile.building.upgradeEarthCosts[index].ToString();
+                        _waterCostText.text = CurrentTile.building.upgradeWaterCosts[index].ToString();
+                    }
                     _interactionText.text = "Place " + settings.displayName;
                     _earthCostText.text = settings.earthCost.ToString();
                     _waterCostText.text = settings.waterCost.ToString();
