@@ -32,23 +32,7 @@ public class BuildingInteraction : IInteractable
             }
             else if (tile.building.buildingName == _settings.displayName)
             {
-                int currentUpgradeStage = tile.building.currentUpgradeStage;
-                if (currentUpgradeStage < tile.building.upgradeStages)
-                {
-                    if (RessourceManager.EnoughResources(_settings.upgradeEarthCosts[currentUpgradeStage], _settings.upgradeWaterCosts[currentUpgradeStage]))
-                    {
-                        RessourceManager.UseResources(_settings.upgradeEarthCosts[currentUpgradeStage], _settings.upgradeWaterCosts[currentUpgradeStage]);
-                        tile.building.Upgrade();
-                    }
-                    else
-                    {
-                        Debug.Log("Not enough resources to upgrade!");
-                    }
-                }
-                else
-                {
-                    Debug.Log("Max Upgrade Reached!");
-                }
+                TryUpgrading(tile);
 
             }
             else
@@ -60,9 +44,38 @@ public class BuildingInteraction : IInteractable
         }
         else
         {
-            Debug.Log("Has to be build on Dirt!");
+            // check for root ground
+            if (tile.TileElement.TileElementType == TileElementType.Root)
+            {
+                // check if lotus is selected and hovered
+                if (tile.building?.buildingName == _settings.displayName)
+                    TryUpgrading(tile);
+            }
+            else
+                Debug.Log("Has to be build on Dirt!");
         }
 
+    }
+
+    private void TryUpgrading(Tile tile)
+    {
+        int currentUpgradeStage = tile.building.currentUpgradeStage;
+        if (currentUpgradeStage < tile.building.upgradeStages)
+        {
+            if (RessourceManager.EnoughResources(_settings.upgradeEarthCosts[currentUpgradeStage], _settings.upgradeWaterCosts[currentUpgradeStage]))
+            {
+                RessourceManager.UseResources(_settings.upgradeEarthCosts[currentUpgradeStage], _settings.upgradeWaterCosts[currentUpgradeStage]);
+                tile.building.Upgrade();
+            }
+            else
+            {
+                Debug.Log("Not enough resources to upgrade!");
+            }
+        }
+        else
+        {
+            Debug.Log("Max Upgrade Reached!");
+        }
     }
 
     public void OnSelection(Tile tile)

@@ -134,6 +134,14 @@ public class Building : InteractableBase
     {
         GetComponentInChildren<SpriteRenderer>().sprite = upgradeSprites[currentUpgradeStage];
         currentUpgradeStage++;
+        if (buildingPreset.displayName == "Lotus")
+        {
+            int upgradeCount = GameSettingsManager.GameSettings().RootGrowthPerUpgrade;
+            for (int i = 0; i < upgradeCount; i++)
+            {
+                RootManager.IncreaseRootLevel();
+            }
+        }
     }
 
     private void OnDestroy()

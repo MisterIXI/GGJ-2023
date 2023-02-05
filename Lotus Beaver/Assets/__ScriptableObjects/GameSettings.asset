@@ -19,3 +19,4 @@ MonoBehaviour:
   <BuildingTickTime>k__BackingField: 1
   <ConstructionTickTime>k__BackingField: 0.1
   <RootLevel>k__BackingField: 3
+  <RootGrowthPerUpgrade>k__BackingField: 3

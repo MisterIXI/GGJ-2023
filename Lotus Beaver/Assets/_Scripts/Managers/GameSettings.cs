@@ -15,4 +15,5 @@ public class GameSettings : ScriptableObject
 
     [field: Header("Root Settings")]
     [field: SerializeField] public int RootLevel{ get; private set; }
+    [field: SerializeField] public int RootGrowthPerUpgrade { get; private set; }
 }
