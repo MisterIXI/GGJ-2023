@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "CliffSpriteLibrary", menuName = "ScriptableObjects/CliffSpriteLibrary", order = 1)]
 public class CliffSpriteLibrary : ScriptableObject
@@ -70,6 +71,7 @@ public class CliffSpriteLibrary : ScriptableObject
     private void CountEmpties()
     {
         int count = 0;
+        List<String> emptyNames = new List<string>();
         // count all empty sprites in _sortedSprites
         for (int a0 = 0; a0 < _sortedSprites.GetLength(0); a0++)
         {
@@ -88,7 +90,10 @@ public class CliffSpriteLibrary : ScriptableObject
                                     for (int a7 = 0; a7 < _sortedSprites.GetLength(0); a7++)
                                     {
                                         if (_sortedSprites[a0, a1, a2, a3, a4, a5, a6, a7] == null)
+                                        {
                                             count++;
+                                            emptyNames.Add($"{a0}{a1}{a2}{a3}{a4}{a5}{a6}{a7}");
+                                        }
                                     }
                                 }
                             }
@@ -98,6 +103,7 @@ public class CliffSpriteLibrary : ScriptableObject
             }
         }
         Debug.Log("Missing Entries: " + count);
+        Debug.Log("Missing Entries: " + string.Join(", ", emptyNames.ToArray()));
     }
     private void DebugPrint()
     {

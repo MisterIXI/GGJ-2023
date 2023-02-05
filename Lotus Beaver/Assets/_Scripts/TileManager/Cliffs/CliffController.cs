@@ -51,6 +51,7 @@ public class CliffController : MonoBehaviour
         WaterMask waterMask = new WaterMask(soroundingTiles);
 
         _tileElement.SpriteRenderer.sprite = CliffManager.CliffSpriteLibrary()?.GetSortedSprite(waterMask);
+        Debug.Log("Cliff Update: " + waterMask);
     }
 
     

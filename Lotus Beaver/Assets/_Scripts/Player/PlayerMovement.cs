@@ -44,6 +44,12 @@ public class PlayerMovement : MonoBehaviour
         HandleFade();
         animator.SetFloat("Horizontal", _movement.x);
         animator.SetFloat("Vertical", _movement.y);
+        Tile tile = TileManager.GetClosetTile(transform.position);
+        if (tile.TileElement?.TileElementType == TileElementType.Water)
+        {
+            StartReset();
+        }
+
     }
 
     private void HandleMovement()
@@ -95,16 +101,21 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+
+    private void StartReset()
+    {
+        if (_fadeState == fadeState.none)
+        {
+            Debug.Log("Resetting Player...");
+            _fadeStartTime = Time.time;
+            _fadeState = fadeState.fadeout;
+        }
+    }
     public void OnResetInput(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-            if (_fadeState == fadeState.none)
-            {
-                Debug.Log("Resetting Player...");
-                _fadeStartTime = Time.time;
-                _fadeState = fadeState.fadeout;
-            }
+            StartReset();
         }
     }
 
