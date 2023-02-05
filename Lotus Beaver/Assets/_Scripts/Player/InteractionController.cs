@@ -130,6 +130,8 @@ public class InteractionController : MonoBehaviour
             // try parse the name of the control to an int
             int index = 1;
             int.TryParse(context.control.name, out index);
+            if(index == 0)
+                index = 10;
             SelectInteraction(index - 1);
         }
     }
