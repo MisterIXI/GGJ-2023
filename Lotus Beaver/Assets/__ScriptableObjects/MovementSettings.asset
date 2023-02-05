@@ -16,3 +16,6 @@ MonoBehaviour:
   acceleration: 0.7
   cameraDistance: 1
   cameraDamping: 1
+  cameraZDistance: 10
+  fadeDuration: 0.1
+  resetOnWater: 1
