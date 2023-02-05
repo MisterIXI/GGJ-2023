@@ -103,16 +103,19 @@ public class Building : InteractableBase
     private void TickManager_OnDamageTick(object sender, TickManager.OnTickEventArgs e)
     {
         Tile currentTile = GetComponentInParent<Tile>();
-        currentTile.TileElement.GetComponent<EarthController>().GetHealth(selfHealAmount);
-        if (healRadius > 0)
+        var earth = currentTile.TileElement.GetComponent<EarthController>();
+        if (earth != null)
         {
-            foreach (var tile in TileManager.GetSurroundingTilesWithDiagonal(currentTile))
+            earth.GetHealth(selfHealAmount);
+            if (healRadius > 0)
             {
-                if (tile.TileElement.TileElementType == TileElementType.Earth)
+                foreach (var tile in TileManager.GetSurroundingTilesWithDiagonal(currentTile))
                 {
-                    tile.TileElement.GetComponent<EarthController>().GetHealth(healAmount);
+                    if (tile.TileElement.TileElementType == TileElementType.Earth)
+                    {
+                        tile.TileElement.GetComponent<EarthController>().GetHealth(healAmount);
+                    }
                 }
-
             }
         }
     }

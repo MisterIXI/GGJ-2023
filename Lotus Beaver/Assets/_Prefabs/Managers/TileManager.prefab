@@ -295,6 +295,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7b320ad37c53e0440933c73d5aa2d296, type: 3}
   - {fileID: 21300000, guid: 51e347ad5f516de478bb452d109d61b4, type: 3}
   - {fileID: 21300000, guid: 10e633e5911bdc0448eff3a99c380a94, type: 3}
+  _lotusPrefab: {fileID: 5213177626744561057, guid: a3662c2fcd57fff49baeb1303ca0a6a5, type: 3}
 --- !u!114 &1248990993
 MonoBehaviour:
   m_ObjectHideFlags: 0
