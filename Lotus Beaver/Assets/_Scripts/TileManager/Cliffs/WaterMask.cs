@@ -39,7 +39,7 @@ public struct WaterMask
     private static bool IsWaterOrCliff(TileElementType? tileElementType)
     {
         if (tileElementType == null)
-            return false;
+            return true;
         return tileElementType == TileElementType.Water || tileElementType == TileElementType.Cliff;
     }
 
