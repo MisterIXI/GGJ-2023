@@ -89,12 +89,14 @@ public class InteractionController : MonoBehaviour
     [field: SerializeField] private Color redColor = new Color(229 / 255, 133 / 255, 140 / 255, 1f);
     private void UpdatePreview()
     {
-        if (CurrentTile != null)
+        // TODO: Refactor this
+        if (CurrentTile != null && Time.timeScale != 0)
         {
             InteractionPreview.transform.position = CurrentTile.transform.position;
             if (_currentInteractionIndex == 0)
             {
                 // Earth
+                _interactionText.text = "Build Earth";
                 if (RessourceManager.EnoughResources(_gameSettings.EarthPlacementCost, 0))
                 {
                     InteractionPreviewSpriteRenderer.color = greenColor;
@@ -121,18 +123,22 @@ public class InteractionController : MonoBehaviour
                 if (Interactions[_currentInteractionIndex] is BuildingInteraction buildingInteraction)
                 {
                     var settings = buildingInteraction.Settings;
-                    if (CurrentTile.building != null && CurrentTile.building.buildingName == "Lotus")
+                    if (CurrentTile.building != null && CurrentTile.building?.buildingName == "Lotus" && settings.displayName == "Lotus")
                     {
-                    _interactionText.text = "Upgrade " + settings.displayName;
+                        _interactionText.text = "Upgrade " + settings.displayName;
 
                         int index = CurrentTile.building.currentUpgradeStage;
                         _earthCostText.text = CurrentTile.building.upgradeEarthCosts[index].ToString();
                         _waterCostText.text = CurrentTile.building.upgradeWaterCosts[index].ToString();
                     }
-                    else{
-                    _interactionText.text = "No Lotus to upgrade";
-                    _earthCostText.text = settings.earthCost.ToString();
-                    _waterCostText.text = settings.waterCost.ToString();
+                    else
+                    {
+                        if (CurrentTile.building?.buildingName == "Lotus" && settings.displayName == "Lotus")
+                            _interactionText.text = "No Lotus to upgrade";
+                        else
+                            _interactionText.text = "Build " + settings.displayName;
+                        _earthCostText.text = settings.earthCost.ToString();
+                        _waterCostText.text = settings.waterCost.ToString();
 
                     }
                     if (RessourceManager.earth >= settings.earthCost)
@@ -158,7 +164,7 @@ public class InteractionController : MonoBehaviour
     }
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && Time.timeScale != 0)
         {
             if (CurrentTile != null)
             {
@@ -174,7 +180,7 @@ public class InteractionController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && Time.timeScale != 0)
         {
             Vector2 input = context.ReadValue<Vector2>();
 
@@ -195,7 +201,7 @@ public class InteractionController : MonoBehaviour
 
     public void OnNextBuilding(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && Time.timeScale != 0)
         {
             SelectInteraction((_currentInteractionIndex + 1) % Interactions.Length);
         }
@@ -203,7 +209,7 @@ public class InteractionController : MonoBehaviour
 
     public void OnPreviousBuilding(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && Time.timeScale != 0)
         {
             if (_currentInteractionIndex == 0)
                 _currentInteractionIndex = Interactions.Length - 1;
@@ -215,7 +221,7 @@ public class InteractionController : MonoBehaviour
 
     public void OnBuildingKey(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && Time.timeScale != 0)
         {
             // try parse the name of the control to an int
             int index = 1;
