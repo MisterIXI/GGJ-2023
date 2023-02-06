@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 _movement;
     private Rigidbody2D _rigidbody;
     [SerializeField] private MovementSettings _movementSettings;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
 
     private enum fadeState { none, fadein, fadeout };
     private fadeState _fadeState = fadeState.none;
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         _startPosition = transform.position;
         _headUpDisplayActiveElements = HeadUpDisplayElement.Instance.GetComponentInChildren<HeadUpDisplayActiveElements>();
         _fadeImage = _headUpDisplayActiveElements.FadeImage;
+
     }
 
     private void Update()
@@ -42,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
         HandleCameraTargetMovement();
         HandleFade();
+        UpdateSortOrder();
         animator.SetFloat("Horizontal", _movement.x);
         animator.SetFloat("Vertical", _movement.y);
         if (_movementSettings.resetOnWater)
@@ -55,6 +58,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void UpdateSortOrder()
+    {
+        _spriteRenderer.sortingOrder = TileManager.GetSortOrderFromPosition(transform.position);
+    }
     private void HandleMovement()
     {
         _movement = Vector2.MoveTowards(_movement, _moveInput, _movementSettings.acceleration * 2 * 10 * Time.deltaTime);
