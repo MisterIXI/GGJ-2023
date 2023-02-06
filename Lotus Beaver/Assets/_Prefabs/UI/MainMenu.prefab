@@ -1793,7 +1793,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5007702244079654203
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2899,6 +2899,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 124212806377804884, guid: 8536011d48c3eaa43ad1bd48a3d07256, type: 3}
+      propertyPath: m_MinValue
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 124212806377804884, guid: 8536011d48c3eaa43ad1bd48a3d07256, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -2933,6 +2937,10 @@ PrefabInstance:
     - target: {fileID: 483379065367104947, guid: 8536011d48c3eaa43ad1bd48a3d07256, type: 3}
       propertyPath: m_Value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 483379065367104947, guid: 8536011d48c3eaa43ad1bd48a3d07256, type: 3}
+      propertyPath: m_MinValue
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 483379065367104947, guid: 8536011d48c3eaa43ad1bd48a3d07256, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size

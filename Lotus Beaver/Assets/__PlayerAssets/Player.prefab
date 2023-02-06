@@ -168,6 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSettings: {fileID: 11400000, guid: 8bc18eb0f05939442824706211bc9931, type: 2}
+  _spriteRenderer: {fileID: 1803398362}
 --- !u!50 &2519183561996228424
 Rigidbody2D:
   serializedVersion: 4
@@ -203,8 +204,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <InteractionPreview>k__BackingField: {fileID: 6342666202892454864}
   _interactionSettings: {fileID: 11400000, guid: 24a82595506d3ae48b90060961e2efcc, type: 2}
-  greenColor: {r: 0.43529412, g: 0.6156863, b: 0.5058824, a: 1}
-  redColor: {r: 0.8980392, g: 0.52156866, b: 0.54901963, a: 1}
+  greenColor: {r: 0.0016909974, g: 0.3584906, b: 0.13593243, a: 1}
+  redColor: {r: 0.33962262, g: 0, b: 0.022641486, a: 1}
 --- !u!1 &4194643919870804196
 GameObject:
   m_ObjectHideFlags: 0

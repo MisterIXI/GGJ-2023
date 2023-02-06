@@ -1,7 +1,22 @@
-﻿using System;
+﻿
+using System;
+using UnityEngine.InputSystem;
 
 public class PauseScreen : Screen
 {
+    private void Start()
+    {
+        RefManager.inputManager.OnPause += OnPauseButton;
+        gameObject.SetActive(false);
+    }
+
+    public void OnPauseButton(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            SetActive(!gameObject.activeSelf);
+        }
+    }
     public void ResumeGame()
     {
         if (GameManager.GameState == GameState.GameOver)
@@ -16,6 +31,11 @@ public class PauseScreen : Screen
     {
         base.SetActive(active);
 
-        GameManager.SetGameState(active? GameState.Paused : GameState.Ingame);
+        GameManager.SetGameState(active ? GameState.Paused : GameState.Ingame);
+    }
+
+    private void OnDestroy()
+    {
+        RefManager.inputManager.OnPause -= OnPauseButton;
     }
 }
