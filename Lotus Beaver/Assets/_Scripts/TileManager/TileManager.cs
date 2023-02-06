@@ -113,6 +113,14 @@ public class TileManager : MonoBehaviour
         return _tiles[coordinates.x, coordinates.y];
     }
 
+    public static int GetSortOrderFromPosition(Vector3 position)
+    {
+        if(_tiles == null)
+            return 0;
+        int sortY = (TileManager.GetTilesMaxY() - TileManager.GetCoordinates(position).y) * TileManager.GetTilesMaxX();
+        int sortx = TileManager.GetCoordinates(position).x;
+        return sortY + sortx;
+    }
     public static Vector2Int GetCoordinates(Vector3 position)
     {
         position -= new Vector3(0.5f * _instance._gameSettings.TileSize.x, 0.5f * _instance._gameSettings.TileSize.y, 0);
