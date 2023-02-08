@@ -83,6 +83,12 @@ public class TileManager : MonoBehaviour
         return ClampTile(GetCoordinates(position));
     }
 
+    public static bool IsOutOfBounds(Tile tile) =>
+        tile.Coordinates.x <= 0
+        || tile.Coordinates.x >= GetTilesMaxX()
+        || tile.Coordinates.y <= 0
+        || tile.Coordinates.y >= GetTilesMaxY();
+
     public static Tile GetClosetTile(Vector2Int coordinates)
     {
         if (_tiles == null || _tiles.Length == 0)

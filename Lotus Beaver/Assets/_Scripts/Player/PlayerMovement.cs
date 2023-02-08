@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         if (_movementSettings.resetOnWater)
         {
             Tile tile = TileManager.GetClosetTile(transform.position);
-            if (tile != null && tile.TileElement?.TileElementType == TileElementType.Water)
+            if (tile != null && (tile.TileElement?.TileElementType == TileElementType.Water || TileManager.IsOutOfBounds(tile)))
             {
                 StartReset();
             }

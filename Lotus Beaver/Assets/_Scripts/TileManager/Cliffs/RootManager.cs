@@ -65,6 +65,7 @@ public class RootManager : MonoBehaviour
         rootTiles.AddRange(TileManager.GetSurroundingTilesWithDiagonal(centerTile));
 
         Building lotus = Instantiate(_lotusPrefab, centerTile.transform).GetComponent<Building>();
+        lotus.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
         for (int i = 0; i < _initalRootExtraFilds.Length; i++)
         {
             TileManager.AddTile(centerTile.Coordinates + _initalRootExtraFilds[i], rootTiles);
