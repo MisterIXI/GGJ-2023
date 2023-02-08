@@ -1332,7 +1332,6 @@ GameObject:
   - component: {fileID: 5007702243200743378}
   - component: {fileID: 5007702243200743376}
   - component: {fileID: 5007702243200743377}
-  - component: {fileID: 6568489962452828129}
   m_Layer: 5
   m_Name: HeadsUpDisplayElementsText
   m_TagString: Untagged
@@ -1461,30 +1460,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &6568489962452828129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5007702243200743379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cb8242f41489e54ba7d61467274de86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RessourcesRoot: {fileID: 8809197694187495561}
-  ToolsRoot: {fileID: 3120074973828939819}
-  RessourcePrefab: {fileID: 6603909590978960235, guid: bb1195ddc0181fc4a802700ce42586e9, type: 3}
-  ToolPrefab: {fileID: 8375098008264182473, guid: 9a35449bab7ca614f8d6a4d6ab6a8c1e, type: 3}
-  EarthIcon: {fileID: 21300000, guid: e27620a355263ff4b81ed3dc8cbb0cd0, type: 3}
-  WaterIcon: {fileID: 21300000, guid: 8fee5beef0e95b840af62be68643aaf2, type: 3}
-  _interactionSettings: {fileID: 11400000, guid: 24a82595506d3ae48b90060961e2efcc, type: 2}
-  _ressourceTexts: []
-  FadeImage: {fileID: 1756714082}
-  CostEarthText: {fileID: 821222057}
-  CostWaterText: {fileID: 1365931440}
-  InteractionText: {fileID: 61453101}
 --- !u!1 &5007702243351996749
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,6 +1472,8 @@ GameObject:
   - component: {fileID: 5007702243351996754}
   - component: {fileID: 5007702243351996755}
   - component: {fileID: 5007702243351996748}
+  - component: {fileID: 5776615248362357710}
+  - component: {fileID: 5383952585026590689}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1589,6 +1566,43 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5776615248362357710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5007702243351996749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49127475c89716a4fbaba9b4ffcf17dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <HUDGameObject>k__BackingField: {fileID: 5007702243681644321}
+--- !u!114 &5383952585026590689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5007702243351996749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb8242f41489e54ba7d61467274de86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RessourcesRoot: {fileID: 8809197694187495561}
+  ToolsRoot: {fileID: 3120074973828939819}
+  RessourcePrefab: {fileID: 6603909590978960235, guid: bb1195ddc0181fc4a802700ce42586e9, type: 3}
+  ToolPrefab: {fileID: 8375098008264182473, guid: 9a35449bab7ca614f8d6a4d6ab6a8c1e, type: 3}
+  EarthIcon: {fileID: 21300000, guid: e27620a355263ff4b81ed3dc8cbb0cd0, type: 3}
+  WaterIcon: {fileID: 21300000, guid: 8fee5beef0e95b840af62be68643aaf2, type: 3}
+  _interactionSettings: {fileID: 11400000, guid: 24a82595506d3ae48b90060961e2efcc, type: 2}
+  _ressourceTexts: []
+  FadeImage: {fileID: 1756714082}
+  CostEarthText: {fileID: 821222057}
+  CostWaterText: {fileID: 1365931440}
+  InteractionText: {fileID: 61453101}
 --- !u!1 &5007702243681644321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,7 +1612,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5007702243681644320}
-  - component: {fileID: 5007702243681644327}
   m_Layer: 5
   m_Name: HeadsUpDisplay
   m_TagString: Untagged
@@ -1628,18 +1641,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5007702243681644327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5007702243681644321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49127475c89716a4fbaba9b4ffcf17dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5007702243748367292
 GameObject:
   m_ObjectHideFlags: 0

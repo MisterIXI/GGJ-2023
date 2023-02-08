@@ -2,6 +2,7 @@
 
 public class HeadUpDisplayElement : MonoBehaviour
 {
+    [field: SerializeField] public GameObject HUDGameObject { get; private set; }
     public static HeadUpDisplayElement Instance { get; private set; }
     private void Awake()
     {
@@ -34,7 +35,7 @@ public class HeadUpDisplayElement : MonoBehaviour
 
     public void SetActive(bool active)
     {
-        gameObject.SetActive(active);
+        HUDGameObject.SetActive(active);
     }
 
     private void OnDestroy()

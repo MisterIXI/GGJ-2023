@@ -1,7 +1,7 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro;
-using System;
 public class InteractionController : MonoBehaviour
 {
     [field: SerializeField] public GameObject InteractionPreview { get; private set; }
@@ -91,9 +91,10 @@ public class InteractionController : MonoBehaviour
     [field: SerializeField] private Color redColor = new Color(229 / 255, 133 / 255, 140 / 255, 1f);
     private void UpdatePreview()
     {
-        // TODO: Refactor this
+        // TODO: Refactor this 
         if (CurrentTile != null && Time.timeScale != 0)
         {
+
             InteractionPreview.transform.position = CurrentTile.transform.position;
             if (_currentInteractionIndex == 0)
             {
