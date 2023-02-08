@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateSortOrder()
     {
-        _spriteRenderer.sortingOrder = TileManager.GetSortOrderFromPosition(transform.position);
+        _spriteRenderer.sortingOrder = TileManager.GetSortOrderFromPosition(transform.position, 2);
     }
     private void HandleMovement()
     {

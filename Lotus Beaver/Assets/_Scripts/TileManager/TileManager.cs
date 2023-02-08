@@ -113,13 +113,16 @@ public class TileManager : MonoBehaviour
         return _tiles[coordinates.x, coordinates.y];
     }
 
-    public static int GetSortOrderFromPosition(Vector3 position)
+    public static int GetSortOrderFromPosition(Vector3 position, int offset = 0)
     {
-        if(_tiles == null)
+        if (_tiles == null)
             return 0;
-        int sortY = (TileManager.GetTilesMaxY() - TileManager.GetCoordinates(position).y) * TileManager.GetTilesMaxX();
+        int sortY = (TileManager.GetTilesYLength() - TileManager.GetCoordinates(position).y) * TileManager.GetTilesXLength() + 2;
         int sortx = TileManager.GetCoordinates(position).x;
-        return sortY + sortx;
+        int result = sortx + sortY;
+        if (offset > 0)
+            result = sortY + TileManager.GetTilesXLength() + offset;
+        return result;
     }
     public static Vector2Int GetCoordinates(Vector3 position)
     {
@@ -337,7 +340,7 @@ public class TileManager : MonoBehaviour
         return result;
     }
 
-    private static bool IsSurroundedByWaterOrCliff(Tile tile)
+    public static bool IsSurroundedByWaterOrCliff(Tile tile)
     {
         List<Tile> surroundingTiles = GetSurroundingTilesWithDiagonal(tile);
 

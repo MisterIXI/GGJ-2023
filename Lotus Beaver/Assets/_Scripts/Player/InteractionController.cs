@@ -96,6 +96,7 @@ public class InteractionController : MonoBehaviour
         {
 
             InteractionPreview.transform.position = CurrentTile.transform.position;
+            BuildPreviewSpriteRenderer.sortingOrder = TileManager.GetSortOrderFromPosition(CurrentTile.transform.position, 1);
             if (_currentInteractionIndex == 0)
             {
                 // Earth

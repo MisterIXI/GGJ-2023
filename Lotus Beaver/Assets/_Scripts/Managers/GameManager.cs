@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     public static event Action OnNewGame;
     public static event Action OnGameOver;
-
+    public static float GameStartTime { get; private set; }
     private void Awake()
     {
         if (RefManager.gameManager != null)
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log("New Game");
 #endif
-
+        GameStartTime = Time.time;
         OnNewGame?.Invoke();
     }
 

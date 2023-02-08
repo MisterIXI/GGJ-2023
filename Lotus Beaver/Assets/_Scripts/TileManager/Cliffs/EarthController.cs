@@ -25,8 +25,8 @@ public class EarthController : MonoBehaviour
         _health = _damageStageLibrary.EarhMaxHealth;
 
         _currentDamageStage = _damageStageLibrary.DamageStages[0];
-
-        RefManager.gameManager?.StartCoroutine(DelayRoutine());
+        if (Time.time - GameManager.GameStartTime > 0.5f)
+            RefManager.gameManager?.StartCoroutine(DelayRoutine());
 
         UpdateDamageSprite();
     }
@@ -93,17 +93,16 @@ public class EarthController : MonoBehaviour
     {
         Tile parentTile = GetComponentInParent<Tile>(true);
 
-        if (TileManager.GetSurroundingTilesWithDiagonal(parentTile).Any(x => x.TileElement.TileElementType == TileElementType.Earth))
-        {
-            TileManager.SetTileElementType(parentTile, TileElementType.Cliff);
-        }
-        else
+        if (TileManager.IsSurroundedByWaterOrCliff(parentTile))
         {
             TileManager.SetTileElementType(parentTile, TileElementType.Water);
         }
-
+        else
+        {
+            TileManager.SetTileElementType(parentTile, TileElementType.Cliff);
+        }
         SoundManager.PlayWaterSplash();
-
-        TileDestroyPool.ParticlePool?.GetPoolable()?.Play(transform.position);
+        if (Time.time - GameManager.GameStartTime > 0.5f)
+            TileDestroyPool.ParticlePool?.GetPoolable()?.Play(transform.position);
     }
 }
