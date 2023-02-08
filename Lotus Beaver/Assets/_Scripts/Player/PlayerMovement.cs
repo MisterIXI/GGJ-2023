@@ -116,7 +116,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_fadeState == fadeState.none)
         {
+#if UNITY_EDITOR
             Debug.Log("Resetting Player...");
+#endif
             _fadeStartTime = Time.time;
             _fadeState = fadeState.fadeout;
         }

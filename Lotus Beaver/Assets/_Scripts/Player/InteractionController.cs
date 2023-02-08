@@ -66,7 +66,9 @@ public class InteractionController : MonoBehaviour
     {
         if (Interactions.Length > index)
         {
+#if UNITY_EDITOR
             Debug.Log("Interaction changed: " + _currentInteraction?.GetType().Name + " -> " + Interactions[index].GetType().Name);
+#endif
             _currentInteraction = Interactions[index];
             _currentInteractionIndex = index;
             OnInteractionChange?.Invoke(_currentInteractionIndex);

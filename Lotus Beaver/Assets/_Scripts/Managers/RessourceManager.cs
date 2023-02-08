@@ -28,7 +28,9 @@ public class RessourceManager : MonoBehaviour
 
     private void Start()
     {
+#if UNITY_EDITOR
         Debug.Log(_gameSettings.startWater);
+#endif
         earth += _gameSettings.startEarth;
         water += _gameSettings.startWater;
         OnEarthChange?.Invoke(earth);

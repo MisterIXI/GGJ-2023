@@ -102,11 +102,14 @@ public class CliffSpriteLibrary : ScriptableObject
                 }
             }
         }
+#if UNITY_EDITOR
         Debug.Log("Missing Entries: " + count);
         Debug.Log("Missing Entries: " + string.Join(", ", emptyNames.ToArray()));
+#endif
     }
     private void DebugPrint()
     {
+#if UNITY_EDITOR
         for (int a0 = 0; a0 < _sortedSprites.GetLength(0); a0++)
         {
             for (int a1 = 0; a1 < _sortedSprites.GetLength(0); a1++)
@@ -132,6 +135,7 @@ public class CliffSpriteLibrary : ScriptableObject
                 }
             }
         }
+#endif
     }
 
     public Sprite GetSortedSprite(WaterMask waterMask)

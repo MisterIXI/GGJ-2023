@@ -122,12 +122,16 @@ public class Building : InteractableBase
 
     public override void OnInteract(Tile tile)
     {
+#if UNITY_EDITOR
         Debug.Log("Interacted with " + tile);
+#endif
     }
 
     public override void OnSelection(Tile tile)
     {
+#if UNITY_EDITOR
         Debug.Log("Selected " + tile);
+#endif
     }
 
     public void Upgrade()

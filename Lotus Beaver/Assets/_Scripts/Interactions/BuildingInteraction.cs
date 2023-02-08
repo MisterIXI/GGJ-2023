@@ -38,13 +38,17 @@ public class BuildingInteraction : IInteractable
                         Debug.Log(building.GetComponent<Building>().buildingName);
                         tile.building = building.GetComponent<Building>();
                         SpriteRenderer spriteRenderer = building.GetComponentInChildren<SpriteRenderer>();
-                        
+
                         spriteRenderer.sortingOrder = TileManager.GetSortOrderFromPosition(building.transform.position);
+#if UNITY_EDITOR
                         Debug.Log("New Sorting order: " + spriteRenderer.sortingOrder);
+#endif
                     }
                     else
                     {
+#if UNITY_EDITOR
                         Debug.Log("Not enough resources!");
+#endif
                         SoundManager.PlayError();
                     }
                 }
@@ -56,9 +60,11 @@ public class BuildingInteraction : IInteractable
             }
             else
             {
+#if UNITY_EDITOR
                 Debug.Log(tile.building.buildingName);
                 Debug.Log(_settings.displayName);
                 Debug.Log("There is already a building on this tile");
+#endif
                 SoundManager.PlayError();
             }
         }
@@ -95,13 +101,17 @@ public class BuildingInteraction : IInteractable
             }
             else
             {
+#if UNITY_EDITOR
                 Debug.Log("Not enough resources to upgrade!");
+#endif
                 SoundManager.PlayError();
             }
         }
         else
         {
+#if UNITY_EDITOR
             Debug.Log("Max Upgrade Reached!");
+#endif
             SoundManager.PlayError();
         }
     }
