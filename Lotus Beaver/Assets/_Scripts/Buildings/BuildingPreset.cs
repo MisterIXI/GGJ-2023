@@ -7,6 +7,7 @@ using UnityEditor;
 public class BuildingPreset : ScriptableObject
 {
     [field: SerializeField] public string displayName { get; private set; }
+    [field: SerializeField] public string description { get; private set; }
 
     [field: SerializeField] public float earthCost { get; private set; }
     [field: SerializeField] public float waterCost { get; private set; }

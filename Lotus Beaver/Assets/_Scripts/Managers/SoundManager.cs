@@ -39,7 +39,7 @@ public class SoundManager : MonoBehaviour
 
         GameManager.OnGameStateChanged += OnGameStateChanged;
 
-        Button[] buttons = FindObjectsOfType<Button>();
+        Button[] buttons = FindObjectsOfType<Button>(true);
 
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -94,7 +94,7 @@ public class SoundManager : MonoBehaviour
 
     public static void PlayMenuHover(Vector3? position = null)
     {
-        PlaySound(_instance._menuHover, position);
+        // PlaySound(_instance._menuHover, position);
     }
 
     public static void PlaySelectInteraction(Vector3? position = null)

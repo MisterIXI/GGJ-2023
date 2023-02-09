@@ -19,6 +19,8 @@ public class RootManager : MonoBehaviour
     private static int _rootLevel;
 
     private static RootManager _instance;
+    public Building LotusBuilding { get; private set; }
+    public static Building Lotus => _instance.LotusBuilding;
 
     private void Awake()
     {
@@ -66,6 +68,7 @@ public class RootManager : MonoBehaviour
 
         Building lotus = Instantiate(_lotusPrefab, centerTile.transform).GetComponent<Building>();
         lotus.gameObject.GetComponentInChildren<SpriteRenderer>().sortingOrder = 1;
+        LotusBuilding = lotus;
         for (int i = 0; i < _initalRootExtraFilds.Length; i++)
         {
             TileManager.AddTile(centerTile.Coordinates + _initalRootExtraFilds[i], rootTiles);

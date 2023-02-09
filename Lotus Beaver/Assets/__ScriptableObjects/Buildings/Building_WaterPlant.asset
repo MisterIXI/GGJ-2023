@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Building_WaterPlant
   m_EditorClassIdentifier: 
   <displayName>k__BackingField: Water Plant
+  <description>k__BackingField: Produces Water
   <earthCost>k__BackingField: 20
   <waterCost>k__BackingField: 40
   <BuildPreview>k__BackingField: {fileID: 70486234, guid: 385ce4f1468172c4eb9415cb3d23d398, type: 3}

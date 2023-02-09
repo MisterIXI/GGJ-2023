@@ -22,6 +22,7 @@ public class HeadUpDisplayActiveElements : MonoBehaviour
     [SerializeField] public TextMeshProUGUI CostEarthText;
     [SerializeField] public TextMeshProUGUI CostWaterText;
     [SerializeField] public TextMeshProUGUI InteractionText;
+    [SerializeField] public TextMeshProUGUI InteractionDescriptionText;
 
     private GameObject _selectedTool;
 
@@ -96,15 +97,14 @@ public class HeadUpDisplayActiveElements : MonoBehaviour
     {
         GameObject tool = Instantiate(ToolPrefab, ToolsRoot);
         tool.transform.GetChild(0).GetComponentInChildren<Image>().sprite = EarthIcon;
-        tool = Instantiate(ToolPrefab, ToolsRoot);
-        tool.transform.GetChild(0).GetComponentInChildren<Image>().sprite = WaterIcon;
+
         foreach (BuildingPreset buildingPreset in _interactionSettings.BuildingSettings)
         {
             tool = Instantiate(ToolPrefab, ToolsRoot);
             tool.transform.GetChild(0).GetComponentInChildren<Image>().sprite = buildingPreset.InteractionIcon;
             // tool.GetComponentInChildren<Text>().text = buildingPreset.displayName;
         }
-        int toolCount = 2 + _interactionSettings.BuildingSettings.Length;
+        int toolCount = 1 + _interactionSettings.BuildingSettings.Length;
         // set toolsroot rect transform width
         ToolsRoot.GetComponent<RectTransform>().sizeDelta = new Vector2(toolCount * 100, 100);
     }

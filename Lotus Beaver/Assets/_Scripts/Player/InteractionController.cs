@@ -27,6 +27,7 @@ public class InteractionController : MonoBehaviour
     private TextMeshProUGUI _interactionText;
     private TextMeshProUGUI _waterCostText;
     private TextMeshProUGUI _earthCostText;
+    private TextMeshProUGUI _interactionDescriptionText;
 
     private void Start()
     {
@@ -44,6 +45,7 @@ public class InteractionController : MonoBehaviour
         _interactionText = _hud.InteractionText;
         _waterCostText = _hud.CostWaterText;
         _earthCostText = _hud.CostEarthText;
+        _interactionDescriptionText = _hud.InteractionDescriptionText;
     }
     private void Update()
     {
@@ -54,12 +56,11 @@ public class InteractionController : MonoBehaviour
 
     private void InitializeInteractions()
     {
-        Interactions = new IInteractable[2 + _interactionSettings.BuildingSettings.Length];
+        Interactions = new IInteractable[1 + _interactionSettings.BuildingSettings.Length];
         Interactions[0] = new EarthInteraction(this, 0);
-        Interactions[1] = new WaterInteraction(this, 1);
         for (int i = 0; i < _interactionSettings.BuildingSettings.Length; i++)
         {
-            Interactions[i + 2] = new BuildingInteraction(_interactionSettings.BuildingSettings[i], this, i + 2);
+            Interactions[i + 1] = new BuildingInteraction(_interactionSettings.BuildingSettings[i], this, i + 1);
         }
     }
     private void SelectInteraction(int index)
@@ -89,37 +90,31 @@ public class InteractionController : MonoBehaviour
 
     [field: SerializeField] private Color greenColor = new Color(111 / 255, 157 / 255, 129 / 255, 1f);
     [field: SerializeField] private Color redColor = new Color(229 / 255, 133 / 255, 140 / 255, 1f);
+    [field: SerializeField] private Color previewBorderRedColor = new Color(255 / 255, 0 / 255, 0 / 255, 1f);
+    [field: SerializeField] private Color previewBorderGreenColor = new Color(0 / 255, 255 / 255, 0 / 255, 1f);
     private void UpdatePreview()
     {
-        // TODO: Refactor this 
         if (CurrentTile != null && Time.timeScale != 0)
         {
-
             InteractionPreview.transform.position = CurrentTile.transform.position;
             BuildPreviewSpriteRenderer.sortingOrder = TileManager.GetSortOrderFromPosition(CurrentTile.transform.position, 1);
             if (_currentInteractionIndex == 0)
             {
                 // Earth
                 _interactionText.text = "Build Earth";
+                _interactionDescriptionText.text = "Crumbles without trees";
                 if (RessourceManager.EnoughResources(_gameSettings.EarthPlacementCost, 0))
                 {
-                    InteractionPreviewSpriteRenderer.color = greenColor;
+                    InteractionPreviewSpriteRenderer.color = previewBorderGreenColor;
                     _earthCostText.color = greenColor;
                 }
                 else
                 {
-                    InteractionPreviewSpriteRenderer.color = redColor;
+                    InteractionPreviewSpriteRenderer.color = previewBorderRedColor;
                     _earthCostText.color = redColor;
                 }
+                _waterCostText.color = greenColor;
                 _earthCostText.text = _gameSettings.EarthPlacementCost.ToString();
-                _waterCostText.text = "0";
-            }
-            else if (_currentInteractionIndex == 1)
-            {
-                // water
-                InteractionPreviewSpriteRenderer.color = redColor;
-                _interactionText.text = "No use yet";
-                _earthCostText.text = "0";
                 _waterCostText.text = "0";
             }
             else
@@ -127,23 +122,37 @@ public class InteractionController : MonoBehaviour
                 if (Interactions[_currentInteractionIndex] is BuildingInteraction buildingInteraction)
                 {
                     var settings = buildingInteraction.Settings;
-                    if (CurrentTile.building != null && CurrentTile.building?.buildingName == "Lotus" && settings.displayName == "Lotus")
+                    _interactionDescriptionText.text = settings.description;
+                    if (settings == RootManager.Lotus.BuildingPreset)
                     {
-                        _interactionText.text = "Upgrade " + settings.displayName;
-
-                        int index = CurrentTile.building.currentUpgradeStage;
-                        _earthCostText.text = CurrentTile.building.upgradeEarthCosts[index].ToString();
-                        _waterCostText.text = CurrentTile.building.upgradeWaterCosts[index].ToString();
+                        if (RootManager.Lotus.currentUpgradeStage < settings.upgradeStages)
+                        {
+                            _interactionText.text = "Upgrade " + settings.displayName;
+                            if (CurrentTile != null && CurrentTile.building == RootManager.Lotus)
+                            {
+                                _interactionDescriptionText.text = settings.description;
+                            }
+                            else
+                            {
+                                _interactionDescriptionText.text = "Go to Lotus to upgrade";
+                            }
+                            int index = RootManager.Lotus.currentUpgradeStage;
+                            _earthCostText.text = RootManager.Lotus.upgradeEarthCosts[index].ToString();
+                            _waterCostText.text = RootManager.Lotus.upgradeWaterCosts[index].ToString();
+                        }
+                        else
+                        {
+                            _interactionText.text = "Max upgrade reached";
+                            _interactionDescriptionText.text = "Congratulations!";
+                            _earthCostText.text = "0";
+                            _waterCostText.text = "0";
+                        }
                     }
                     else
                     {
-                        if (CurrentTile.building?.buildingName == "Lotus" && settings.displayName == "Lotus")
-                            _interactionText.text = "No Lotus to upgrade";
-                        else
-                            _interactionText.text = "Build " + settings.displayName;
+                        _interactionText.text = "Build " + settings.displayName;
                         _earthCostText.text = settings.earthCost.ToString();
                         _waterCostText.text = settings.waterCost.ToString();
-
                     }
                     if (RessourceManager.earth >= settings.earthCost)
                         _earthCostText.color = greenColor;
@@ -155,11 +164,11 @@ public class InteractionController : MonoBehaviour
                         _waterCostText.color = redColor;
                     if (buildingInteraction.CanBePlaced(CurrentTile))
                     {
-                        InteractionPreviewSpriteRenderer.color = greenColor;
+                        InteractionPreviewSpriteRenderer.color = previewBorderGreenColor;
                     }
                     else
                     {
-                        InteractionPreviewSpriteRenderer.color = redColor;
+                        InteractionPreviewSpriteRenderer.color = previewBorderRedColor;
                     }
                 }
             }

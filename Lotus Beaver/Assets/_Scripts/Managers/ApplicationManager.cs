@@ -29,4 +29,10 @@ public class ApplicationManager : MonoBehaviour
 
         OnQuit?.Invoke();
     }
+
+    public void Quit()
+    {
+        OnApplicationQuit();
+        Application.Quit();
+    }
 }

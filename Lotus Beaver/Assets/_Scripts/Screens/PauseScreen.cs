@@ -34,6 +34,11 @@ public class PauseScreen : Screen
         GameManager.SetGameState(active ? GameState.Paused : GameState.Ingame);
     }
 
+    public void BackToMenu()
+    {
+        base.SetActive(false);
+    }
+
     private void OnDestroy()
     {
         RefManager.inputManager.OnPause -= OnPauseButton;

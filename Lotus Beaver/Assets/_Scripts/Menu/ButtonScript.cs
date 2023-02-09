@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
 public class ButtonScript : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI StartGameButtonText;
+    [SerializeField] private TextMeshProUGUI StartGameButtonTextShadow;
     [SerializeField] private GameObject Hmenu;
     [SerializeField] private GameObject CreditMenu;
     [SerializeField] private GameObject SettingsMenu;
     [SerializeField] private GameObject ControlMenu;
     [SerializeField] private GameObject HUD;
+    [SerializeField] private Button QuitButton;
     private GameObject[] menuList = new GameObject[4];
     // EDIT IN BUTTON EVENT BOX CHANGE ENUM MENU
     private enum Menu
@@ -20,7 +23,15 @@ public class ButtonScript : MonoBehaviour
         ControlMenu,
         HUD
     }
-    // Start is called before the first frame update
+    private void Awake() {
+        #if UNITY_WEBGL
+            QuitButton.interactable = false;
+        #endif
+    }
+    private IEnumerator Start() {
+        yield return new WaitForEndOfFrame();
+        OnChangeMenu(Menu.HMenu);
+    }
     private void OnChangeMenu(Menu changeMenu)
     {
         // MENU SET ENABLE AND FALSE OTHER MENUS
@@ -88,10 +99,13 @@ public class ButtonScript : MonoBehaviour
     }
     public void OnButtonStart()
     {
-        // START HERE GAMELOOP
-        GameManager.StartNewGame();
+        StartGameButtonText.text = "Resume Game";
+        StartGameButtonTextShadow.text = "Resume Game";
+        if (GameManager.GameState == GameState.GameOver)
+        {
+            GameManager.StartNewGame();
+        }
         GameManager.SetGameState(GameState.Ingame);
-
         OnChangeMenu(Menu.HUD);
     }
     public void OnButtonSettings()
@@ -107,6 +121,11 @@ public class ButtonScript : MonoBehaviour
         OnChangeMenu(Menu.ControlMenu);
     }
     public void OnButtonBack()
+    {
+        OnChangeMenu(Menu.HMenu);
+    }
+
+    public void OnButtonMenu()
     {
         OnChangeMenu(Menu.HMenu);
     }

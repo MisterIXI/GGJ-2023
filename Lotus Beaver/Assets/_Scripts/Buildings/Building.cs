@@ -5,7 +5,7 @@ using UnityEngine;
 public class Building : InteractableBase
 {
     [SerializeField] private BuildingPreset buildingPreset;
-
+    public BuildingPreset BuildingPreset => buildingPreset;
     public string buildingName;
 
     private int selfHealAmount;

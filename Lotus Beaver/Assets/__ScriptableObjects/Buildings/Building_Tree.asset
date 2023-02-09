@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Building_Tree
   m_EditorClassIdentifier: 
   <displayName>k__BackingField: Tree
+  <description>k__BackingField: Protects adjacent earth
   <earthCost>k__BackingField: 10
   <waterCost>k__BackingField: 100
   <BuildPreview>k__BackingField: {fileID: -521945305, guid: c4fab5eee0a53ff44a09190c9b926215, type: 3}

@@ -13,7 +13,7 @@ public class CloudScroll : MonoBehaviour
     private void Update()
     {
         // move cloud
-        transform.position += Vector3.right * scrollSpeed * Time.deltaTime;
+        transform.position += Vector3.right * scrollSpeed * Time.unscaledDeltaTime;
         if(transform.position.x > 1280 + _startX)
         {
             transform.position = new Vector3(-1280 + _startX, transform.position.y, transform.position.z);

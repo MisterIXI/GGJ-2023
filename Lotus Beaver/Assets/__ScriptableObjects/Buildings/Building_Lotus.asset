@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: Building_Lotus
   m_EditorClassIdentifier: 
   <displayName>k__BackingField: Lotus
+  <description>k__BackingField: Grow roots & win
   <earthCost>k__BackingField: 0
   <waterCost>k__BackingField: 0
   <BuildPreview>k__BackingField: {fileID: 0}
   <buildingPrefab>k__BackingField: {fileID: 5213177626744561057, guid: a3662c2fcd57fff49baeb1303ca0a6a5, type: 3}
   <earthProduction>k__BackingField: 1
   <waterProduction>k__BackingField: 1
-  InteractionIcon: {fileID: 21300000, guid: a73d2f8f990afb34381a74fdc5cd354a, type: 3}
+  InteractionIcon: {fileID: 21300000, guid: 6474556335725944698ad9076395cd87, type: 3}
   <selfHealAmount>k__BackingField: 100
   <healAmount>k__BackingField: 10
   <healRadius>k__BackingField: 1
