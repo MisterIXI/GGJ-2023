@@ -28,6 +28,7 @@ MonoBehaviour:
   <ticksPerStage>k__BackingField: 0
   <upgradeStages>k__BackingField: 9
   <upgradeSprites>k__BackingField:
+  - {fileID: 21300000, guid: 41b032a987671a246857a6b3c270bc3d, type: 3}
   - {fileID: 21300000, guid: c84bfaa59cd47cf439d53e602fbde717, type: 3}
   - {fileID: 21300000, guid: b0210222783ae2c419a7e61031fe35ca, type: 3}
   - {fileID: 21300000, guid: 9db5441febcb8c04a90c25d6a9699d0c, type: 3}
