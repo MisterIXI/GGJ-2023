@@ -1,5 +1,7 @@
 using System;
+using System.Data;
 using TMPro;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,13 +10,12 @@ public class InteractionController : MonoBehaviour
     [SerializeField] private InteractionSettings _interactionSettings;
     [field: SerializeField] public InteractionPreview InteractionPreview { get; private set; }
 
-    [SerializeField] private Color greenColor;
-    [SerializeField] private Color redColor;
-    [SerializeField] private Color previewBorderRedColor;
-    [SerializeField] private Color previewBorderGreenColor;
+    [field: SerializeField] private Color greenColor;
+    [field: SerializeField] private Color redColor;
+    [field: SerializeField] private Color previewBorderRedColor;
+    [field: SerializeField] private Color previewBorderGreenColor;
 
     private GameSettings _gameSettings;
-
     private IInteractable[] Interactions;
 
     private Vector2 _moveInput;
@@ -27,8 +28,8 @@ public class InteractionController : MonoBehaviour
     private TextMeshProUGUI _earthCostText;
     private TextMeshProUGUI _interactionDescriptionText;
 
-    public SpriteRenderer InteractionPreviewSpriteRenderer => InteractionPreview.SpriteRenderer;
-    [field: SerializeField] public SpriteRenderer BuildPreviewSpriteRenderer { get; private set; }
+    public SpriteRenderer BuildPreviewSpriteRenderer { get; private set; }
+    public SpriteRenderer InteractionPreviewSpriteRenderer { get; private set; }
     public InteractableBase CurrentBuilding { get; private set; }
     public Tile CurrentTile { get; private set; }
 
@@ -38,15 +39,21 @@ public class InteractionController : MonoBehaviour
 
     public static event Action<int> OnInteractionChange;
 
-    private void Start()
+    private void Awake()
     {
         InputManager.OnInteract += OnInteract;
         InputManager.OnMove += OnMove;
         InputManager.OnNextBuilding += OnNextBuilding;
         InputManager.OnPrevBuilding += OnPreviousBuilding;
         InputManager.OnBuildingKey += OnBuildingKey;
+    }
+
+    private void Start()
+    {
         InitializeInteractions();
         SelectInteraction(0);
+        BuildPreviewSpriteRenderer = InteractionPreview.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        InteractionPreviewSpriteRenderer = InteractionPreview.GetComponent<SpriteRenderer>();
         _gameSettings = GameSettingsManager.GameSettings();
         _hud = HeadUpDisplayActiveElements.Instance;
         _interactionText = _hud.InteractionText;
@@ -88,15 +95,13 @@ public class InteractionController : MonoBehaviour
     private void TileSelectionUpdate()
     {
         Tile tile = TileManager.GetClosetTile(transform.position + _interactionOffset);
-        if (tile == CurrentTile)
+        if (tile != CurrentTile)
         {
-            return;
+            CurrentTile = tile;
+            OnTileSelectionChange?.Invoke(CurrentTile);
+            _currentInteraction?.OnSelection(CurrentTile);
+            CurrentBuilding = CurrentTile?.Building;
         }
-
-        CurrentTile = tile;
-        OnTileSelectionChange?.Invoke(CurrentTile);
-        _currentInteraction?.OnSelection(CurrentTile);
-        CurrentBuilding = CurrentTile?.Building;
     }
 
 
@@ -108,8 +113,9 @@ public class InteractionController : MonoBehaviour
             return;
         }
 
-        InteractionPreview.Transform.position = CurrentTile.transform.position;
+        InteractionPreview.transform.position = CurrentTile.transform.position;
         BuildPreviewSpriteRenderer.sortingOrder = TileManager.GetSortOrderFromPosition(CurrentTile.transform.position, 1);
+
         if (_currentInteractionIndex == 0)
         {
             // Earth
@@ -196,7 +202,7 @@ public class InteractionController : MonoBehaviour
             _moveInput = context.ReadValue<Vector2>();
             _interactionOffset = new Vector3(_moveInput.x, _moveInput.y, 0) * _interactionSettings.InteractionDistance;
         }
-        else if (context.canceled)
+        else if(context.canceled)
         {
             _moveInput = Vector2.zero;
             _interactionOffset = Vector3.zero;

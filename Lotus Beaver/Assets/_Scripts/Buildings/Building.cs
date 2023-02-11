@@ -80,27 +80,29 @@ public class Building : InteractableBase
 
     private void TickManager_OnConstructionTick(object sender, TickManager.OnTickEventArgs e)
     {
-        if (!isBuild && currentConstructionStage < ConstructionStages)
+        if (isBuild || currentConstructionStage >= ConstructionStages)
         {
-            constructionTicks++;
-            if (constructionTicks >= TicksPerStage)
+            return;
+        }
+
+        constructionTicks++;
+        if (constructionTicks >= TicksPerStage)
+        {
+            constructionTicks = 0;
+
+            currentConstructionStage++;
+            spriteRenderer.sprite = buildingPreset.ConstructionStages[currentConstructionStage].Sprite;
+
+            if (currentConstructionStage == ConstructionStages - 1)
             {
-                currentConstructionStage++;
-                constructionTicks = 0;
-                spriteRenderer.sprite = buildingPreset.ConstructionStages[currentConstructionStage].Sprite;
+                isBuild = true;
 
-                if (currentConstructionStage == ConstructionStages)
+                TickManager.OnConstructionTick -= TickManager_OnConstructionTick;
+
+                Animator anim = GetComponentInChildren<Animator>();
+                if (anim != null)
                 {
-                    isBuild = true;
-
-                    TickManager.OnConstructionTick -= TickManager_OnConstructionTick;
-
-                    Animator anim = GetComponentInChildren<Animator>();
-                    if (anim != null)
-                    {
-                        anim.enabled = true;
-                        //anim.SetBool("isBuild", true);
-                    }
+                    anim.enabled = true;
                 }
             }
         }
@@ -114,9 +116,9 @@ public class Building : InteractableBase
             earthController.GetHealth(SelfHealAmount);
             if (HealRadius > 0)
             {
-                foreach (EarthController souroundingEarthController in TileManager.GetSurroundingTilesWithDiagonal(_tile).Select(x => x.TileElement?.TileController as EarthController))
+                foreach (EarthController souroundingEarthController in TileManager.GetSurroundingTilesWithDiagonal(_tile).Select(x => x?.TileElement?.TileController as EarthController))
                 {
-                    souroundingEarthController.GetHealth(HealAmount);
+                    souroundingEarthController?.GetHealth(HealAmount);
                 }
             }
         }

@@ -27,15 +27,16 @@ public class SoundManager : MonoBehaviour
     private const string _sFXSettings = "SFXSettings";
     private const string _musicSettings = "MusicSettings";
 
-    private void Awake() {
-        if(RefManager.soundManager != null)
+    private void Awake()
+    {
+        if (_instance != null)
         {
             Destroy(gameObject);
             return;
         }
-        RefManager.soundManager = this;
 
         _instance = this;
+        DontDestroyOnLoad(transform.root.gameObject);
 
         GameManager.OnGameStateChanged += OnGameStateChanged;
 

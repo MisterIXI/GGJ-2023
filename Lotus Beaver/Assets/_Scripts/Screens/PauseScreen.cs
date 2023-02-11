@@ -4,7 +4,7 @@ public class PauseScreen : Screen
 {
     private void Start()
     {
-        RefManager.inputManager.OnPause += OnPauseButton;
+        InputManager.OnPause += OnPauseButton;
         gameObject.SetActive(false);
     }
 
@@ -40,6 +40,6 @@ public class PauseScreen : Screen
 
     private void OnDestroy()
     {
-        RefManager.inputManager.OnPause -= OnPauseButton;
+        InputManager.OnPause -= OnPauseButton;
     }
 }

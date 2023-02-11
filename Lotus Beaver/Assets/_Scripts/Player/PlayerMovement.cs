@@ -33,8 +33,8 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        RefManager.inputManager.OnMove += OnMoveInput;
-        RefManager.inputManager.OnReset += OnResetInput;
+        InputManager.OnMove += OnMoveInput;
+        InputManager.OnReset += OnResetInput;
         _startPosition = transform.position;
         _headUpDisplayActiveElements = HeadUpDisplayElement.Instance.GetComponentInChildren<HeadUpDisplayActiveElements>();
         _fadeImage = _headUpDisplayActiveElements.FadeImage;
@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDestroy()
     {
-        RefManager.inputManager.OnMove -= OnMoveInput;
-        RefManager.inputManager.OnReset -= OnResetInput;
+        InputManager.OnMove -= OnMoveInput;
+        InputManager.OnReset -= OnResetInput;
     }
 }

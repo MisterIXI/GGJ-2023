@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager _instance;
+    public static GameManager Instance => _instance;
+
     public static event Action<GameState> OnGameStateChanged;
 
     public static GameState GameState { get; private set; }
@@ -17,12 +20,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (RefManager.gameManager != null)
+        if (_instance != null)
         {
             Destroy(gameObject);
             return;
         }
-        RefManager.gameManager = this;
+
+        _instance = this;
         DontDestroyOnLoad(transform.root.gameObject);
 
         SetGameState(GameState.GameOver);

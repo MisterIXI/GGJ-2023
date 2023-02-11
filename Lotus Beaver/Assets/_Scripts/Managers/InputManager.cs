@@ -1,34 +1,40 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using static UnityEngine.InputSystem.InputAction;
 
 public class InputManager : MonoBehaviour
 {
-    public event Action<CallbackContext> OnMove;
+    private static InputManager _instance;
 
-    public event Action<CallbackContext> OnInteract;
+    public static event Action<CallbackContext> OnMove;
 
-    public event Action<CallbackContext> OnReset;
+    public static event Action<CallbackContext> OnInteract;
 
-    public event Action<CallbackContext> OnPause;
+    public static event Action<CallbackContext> OnReset;
 
-    public event Action<CallbackContext> OnPrevBuilding;
+    public static event Action<CallbackContext> OnPause;
 
-    public event Action<CallbackContext> OnNextBuilding;
+    public static event Action<CallbackContext> OnPrevBuilding;
 
-    public event Action<CallbackContext> OnBuildingKey;
+    public static event Action<CallbackContext> OnNextBuilding;
+
+    public static event Action<CallbackContext> OnBuildingKey;
 
     private PlayerInput _playerInput;
 
     private void Awake()
     {
-        if (RefManager.inputManager != null)
+        if (_instance != null)
         {
             Destroy(gameObject);
             return;
         }
-        RefManager.inputManager = this;
+
+        _instance = this;
+        DontDestroyOnLoad(transform.root.gameObject);
+
         _playerInput = GetComponent<PlayerInput>();
     }
 
