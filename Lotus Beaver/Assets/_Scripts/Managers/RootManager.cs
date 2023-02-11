@@ -13,13 +13,14 @@ public class RootManager : MonoBehaviour
     [SerializeField] private Sprite[] _start;
     [SerializeField] private Sprite[] _end;
 
-    [SerializeField] private Building _lotusPrefab;
+    [SerializeField] private BuildingPreset _lotusBuildingPreset;
 
     private static int _rootLevel;
 
     private static RootManager _instance;
     public Building LotusBuilding { get; private set; }
     public static Building Lotus => _instance.LotusBuilding;
+    public static BuildingPreset LotusBuildingPreset => _instance._lotusBuildingPreset;
 
     private void Awake()
     {
@@ -34,7 +35,6 @@ public class RootManager : MonoBehaviour
 
         GameManager.OnNewGame += OnNewGame;
     }
-
     private void OnDestroy()
     {
         GameManager.OnNewGame -= OnNewGame;
@@ -45,19 +45,6 @@ public class RootManager : MonoBehaviour
         _rootLevel = GameSettingsManager.GameSettings().RootLevel;
         GrowRoots();
     }
-
-    public static void IncreaseRootLevel()
-    {
-        _rootLevel++;
-        _instance.GrowOutRoots();
-    }
-
-    [ContextMenu(nameof(TestGrowRoots))]
-    public void TestGrowRoots()
-    {
-        IncreaseRootLevel();
-    }
-
     private void GrowRoots()
     {
         Tile centerTile = TileManager.GetCenterTile();
@@ -65,7 +52,7 @@ public class RootManager : MonoBehaviour
 
         rootTiles.AddRange(TileManager.GetSurroundingTilesWithDiagonal(centerTile));
 
-        LotusBuilding = Instantiate(_lotusPrefab, centerTile.transform);
+        LotusBuilding = Instantiate(_lotusBuildingPreset.BuildingPrefab, centerTile.transform);
         LotusBuilding.SpriteRenderer.sortingOrder = 1;
 
         for (int i = 0; i < _initalRootExtraFilds.Length; i++)
@@ -84,6 +71,12 @@ public class RootManager : MonoBehaviour
         _rootStart = new Vector2Int[_rootStartOffset.Length];
 
         LotusBuilding.Upgrade();
+    }
+
+    public static void IncreaseRootLevel()
+    {
+        _rootLevel++;
+        _instance.GrowOutRoots();
     }
 
     private void GrowOutRoots()
@@ -116,4 +109,12 @@ public class RootManager : MonoBehaviour
             }
         }
     }
+
+#if UNITY_EDITOR
+    [ContextMenu(nameof(TestGrowRoots))]
+    public void TestGrowRoots()
+    {
+        IncreaseRootLevel();
+    }
+#endif
 }

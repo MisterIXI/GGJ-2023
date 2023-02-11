@@ -85,6 +85,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
+--- !u!114 &4527419782147556953 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8523691457981576551, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
+  m_PrefabInstance: {fileID: 5232791845792035646}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8457970613299734532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f92dcbe94da481448192570c01dd462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8457970613299734532 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4467046365076314938, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
@@ -102,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38141563daa9ebb47ba5f43242f2d5ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tileElement: {fileID: 4527419782147556953}
   _health: 0
   _damageStageLibrary: {fileID: 11400000, guid: 2b316b8a3dbe8aa40b44cb6b844821fe, type: 2}
   _currentDamageStage:

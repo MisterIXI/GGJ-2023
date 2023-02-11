@@ -6,41 +6,28 @@ public class WaterController : TileController
 {
     public static List<WaterController> _activeWaterControllers = new();
 
-    private TileElement _tileElement;
-
-    private void Awake()
-    {
-        _tileElement = GetComponent<TileElement>();
-    }
-
     private void OnEnable()
     {
         _activeWaterControllers.Add(this);
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         _ = _activeWaterControllers.Remove(this);
     }
 
-    [ContextMenu(nameof(UpdateWater))]
-    public void UpdateWater()
-    {
-    }
-
+#if UNITY_EDITOR
     [ContextMenu(nameof(MakeEarth))]
     public void MakeEarth()
     {
-        Tile tile = GetComponentInParent<Tile>();
-
-        TileManager.SetTileElementType(tile, TileElementType.Earth);
+        TileManager.SetTileElementType(ParentTile, TileElementType.Earth);
     }
 
     [ContextMenu(nameof(MakeCliff))]
     public void MakeCliff()
     {
-        Tile tile = GetComponentInParent<Tile>();
-
-        TileManager.SetTileElementType(tile, TileElementType.Cliff);
+        TileManager.SetTileElementType(ParentTile, TileElementType.Cliff);
     }
+#endif
 }

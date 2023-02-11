@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TileElement))]
@@ -8,18 +9,8 @@ public class EarthController : TileController
     [SerializeField] private DamageStageLibrary _damageStageLibrary;
     [SerializeField] private DamageStage _currentDamageStage;
 
-    private Tile _parentTile;
-    private TileElement _tileElement;
-
-    private void Awake()
-    {
-        _tileElement = GetComponent<TileElement>();
-    }
-
     private void OnEnable()
     {
-        _parentTile = GetComponentInParent<Tile>(true);
-
         _health = _damageStageLibrary.EarhMaxHealth;
 
         _currentDamageStage = _damageStageLibrary.DamageStages[0];
@@ -35,7 +26,7 @@ public class EarthController : TileController
     {
         yield return null;
 
-        TileCreationPool.ParticlePool?.GetPoolable()?.Play(transform.position);
+        TileCreationPool.ParticlePool?.GetPoolable()?.Play(_tileElement.Transform.position);
     }
 
     private void UpdateDamageStage()
@@ -55,18 +46,6 @@ public class EarthController : TileController
     private void UpdateDamageSprite()
     {
         _tileElement.SpriteRenderer.sprite = _currentDamageStage.Sprite;
-    }
-
-    [ContextMenu(nameof(TestTakeDamage))]
-    private void TestTakeDamage()
-    {
-        LoseHealth(25f);
-    }
-
-    [ContextMenu(nameof(GetHealth))]
-    private void GetHealth()
-    {
-        GetHealth(25f);
     }
 
     public void LoseHealth(float healthPoints)
@@ -104,7 +83,22 @@ public class EarthController : TileController
         SoundManager.PlayWaterSplash();
         if (Time.time - GameManager.GameStartTime > 0.5f)
         {
-            TileDestroyPool.ParticlePool?.GetPoolable()?.Play(transform.position);
+            TileDestroyPool.ParticlePool?.GetPoolable()?.Play(_tileElement.Transform.position);
         }
     }
+
+
+#if UNITY_EDITOR
+    [ContextMenu(nameof(TestTakeDamage))]
+    private void TestTakeDamage()
+    {
+        LoseHealth(25f);
+    }
+
+    [ContextMenu(nameof(GetHealth))]
+    private void GetHealth()
+    {
+        GetHealth(25f);
+    }
+#endif
 }

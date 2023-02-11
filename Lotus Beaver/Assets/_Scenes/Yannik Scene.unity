@@ -202,6 +202,10 @@ PrefabInstance:
       propertyPath: _lotusPrefab
       value: 
       objectReference: {fileID: 275784829, guid: a3662c2fcd57fff49baeb1303ca0a6a5, type: 3}
+    - target: {fileID: 1248990992, guid: 2b16021d03b6bec4085f039ea424e4e0, type: 3}
+      propertyPath: _lotusBuildingPreset
+      value: 
+      objectReference: {fileID: 11400000, guid: 201145eeb71261640b46bd492fa304a9, type: 2}
     - target: {fileID: 5378951989425758685, guid: 2b16021d03b6bec4085f039ea424e4e0, type: 3}
       propertyPath: m_RootOrder
       value: 5

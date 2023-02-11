@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CliffManager : MonoBehaviour
@@ -17,28 +18,30 @@ public class CliffManager : MonoBehaviour
         }
 
         _instance = this;
-        DontDestroyOnLoad(transform.root.gameObject);
+            DontDestroyOnLoad(transform.root.gameObject);
+
         TickManager.OnDamageTick += OnDamageTickCliffs;
+    }
+
+    private void OnDestroy()
+    {
+        TickManager.OnDamageTick -= OnDamageTickCliffs;
     }
 
     public void OnDamageTickCliffs(object sender, TickManager.OnTickEventArgs e)
     {
-        CliffController[] cliffControllers = CliffController._activeCliffControllers.ToArray();
-        foreach (CliffController cliffC in cliffControllers)
+        foreach (CliffController cliffController in CliffController._activeCliffControllers.ToArray())
         {
-            // get Tile of cliffController
-            if (!cliffC.isActiveAndEnabled)
+            if (!cliffController.isActiveAndEnabled)
             {
                 continue;
             }
 
-            Tile currentTile = cliffC.ParentTile;
-            List<Tile> tilesToCheck = TileManager.GetSurroundingTilesWithDiagonal(currentTile);
-            // filter list to only include tiles with TileElementTypes.Earth
-            _ = tilesToCheck.RemoveAll(tile => tile.TileElement.TileElementType != TileElementType.Earth);
-            foreach (Tile tile in tilesToCheck)
+            Tile currentTile = cliffController.ParentTile;
+
+            foreach (EarthController earthController in TileManager.GetSurroundingTilesWithDiagonal(currentTile).Select(x => x.TileElement.TileController as EarthController).ToList())
             {
-                tile.TileElement.GetComponent<EarthController>().LoseHealth(_damageStageLibrary.BaseDamage);
+                earthController?.LoseHealth(_damageStageLibrary.BaseDamage);
             }
         }
     }

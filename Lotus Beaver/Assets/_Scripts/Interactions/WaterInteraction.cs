@@ -10,6 +10,11 @@ public class WaterInteraction : IInteractable
         _interactionController = interactionController;
     }
 
+    ~WaterInteraction()
+    {
+        InteractionController.OnInteractionChange -= OnSelectionChange;
+    }
+
     public void OnSelectionChange(int index)
     {
         if (_index == index && _interactionController.BuildPreviewSpriteRenderer != null)

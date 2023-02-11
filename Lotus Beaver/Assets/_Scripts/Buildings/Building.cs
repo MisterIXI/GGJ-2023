@@ -110,17 +110,21 @@ public class Building : InteractableBase
 
     private void TickManager_OnDamageTick(object sender, TickManager.OnTickEventArgs e)
     {
-        EarthController earthController = _tile?.TileElement?.TileController as EarthController;
-        if (earthController != null)
+        if (!(_tile?.TileElement?.TileController is EarthController earthController))
         {
-            earthController.GetHealth(SelfHealAmount);
-            if (HealRadius > 0)
-            {
-                foreach (EarthController souroundingEarthController in TileManager.GetSurroundingTilesWithDiagonal(_tile).Select(x => x?.TileElement?.TileController as EarthController))
-                {
-                    souroundingEarthController?.GetHealth(HealAmount);
-                }
-            }
+            return;
+        }
+
+        earthController.GetHealth(SelfHealAmount);
+
+        if (HealRadius <= 0)
+        {
+            return;
+        }
+
+        foreach (EarthController souroundingEarthController in TileManager.GetSurroundingTilesWithDiagonal(_tile).Select(x => x?.TileElement?.TileController as EarthController))
+        {
+            souroundingEarthController?.GetHealth(HealAmount);
         }
     }
 
@@ -142,7 +146,7 @@ public class Building : InteractableBase
     {
         spriteRenderer.sprite = buildingPreset.UpgradeStages[currentUpgradeStage].Sprite;
         currentUpgradeStage++;
-        if (buildingPreset.DisplayName == "Lotus")
+        if (buildingPreset == RootManager.LotusBuildingPreset)
         {
             int upgradeCount = GameSettingsManager.GameSettings().RootGrowthPerUpgrade;
             for (int i = 0; i < upgradeCount; i++)

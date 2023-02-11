@@ -14,14 +14,18 @@ public class BuildingInteraction : IInteractable
         InteractionController.OnInteractionChange += OnSelectionChange;
     }
 
+    ~BuildingInteraction()
+    {
+        InteractionController.OnInteractionChange -= OnSelectionChange;
+    }
+
     public void OnInteract(Tile tile)
     {
-        // instantiate building
         if (tile.TileElement.TileElementType == TileElementType.Earth)
         {
             if (tile.Building == null)
             {
-                if (Settings.DisplayName != "Lotus")
+                if (Settings != RootManager.LotusBuildingPreset)
                 {
                     if (RessourceManager.EnoughResources(Settings.EarthCost, Settings.WaterCost))
                     {
@@ -31,18 +35,16 @@ public class BuildingInteraction : IInteractable
 
                         building.SetTile(tile);
 
+                        tile.Building = building;
+
+                        building.SpriteRenderer.sortingOrder = TileManager.GetSortOrderFromCoordinate(tile.Coordinates);
+
                         FlowerCreationPool.ParticlePool?.GetPoolable()?.Play(tile.Transform.position);
 
                         SoundManager.PlayPlanting();
-
-                        Debug.Log(building.BuildingName);
-
-                        tile.Building = building;
-                        SpriteRenderer spriteRenderer = building.GetComponentInChildren<SpriteRenderer>();
-
-                        spriteRenderer.sortingOrder = TileManager.GetSortOrderFromPosition(building.transform.position);
 #if UNITY_EDITOR
-                        Debug.Log("New Sorting order: " + spriteRenderer.sortingOrder);
+                        Debug.Log(building.BuildingName);
+                        Debug.Log("New Sorting order: " + building.SpriteRenderer.sortingOrder);
 #endif
                     }
                     else
@@ -54,7 +56,7 @@ public class BuildingInteraction : IInteractable
                     }
                 }
             }
-            else if (tile.Building.BuildingName == Settings.DisplayName)
+            else if (tile.Building == Settings)
             {
                 TryUpgrading(tile);
             }
@@ -74,7 +76,7 @@ public class BuildingInteraction : IInteractable
             if (tile.TileElement.TileElementType == TileElementType.Root)
             {
                 // check if lotus is selected and hovered
-                if (tile.Building?.BuildingName == Settings.DisplayName)
+                if (tile.Building?.BuildingPreset == Settings)
                 {
                     TryUpgrading(tile);
                 }
@@ -85,7 +87,9 @@ public class BuildingInteraction : IInteractable
             }
             else
             {
+#if UNITY_EDITOR
                 Debug.Log("Has to be build on Dirt!");
+#endif
                 SoundManager.PlayError();
             }
         }

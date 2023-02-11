@@ -16,7 +16,7 @@ public class ButtonSoundController : MonoBehaviour, ISelectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
-        SoundManager.PlayMenuHover();
+        //SoundManager.PlayMenuHover();
     }
 
     private void OnDestroy()

@@ -125,6 +125,24 @@ public class TileManager : MonoBehaviour
         return result;
     }
 
+    public static int GetSortOrderFromCoordinate(Vector2Int coordinate, int offset = 0)
+    {
+        if (_tiles == null)
+        {
+            return 0;
+        }
+
+        int sortY = ((GetTilesYLength() - coordinate.y) * GetTilesXLength()) + 2;
+        int sortx = coordinate.x;
+        int result = sortx + sortY;
+        if (offset > 0)
+        {
+            result = sortY + GetTilesXLength() + offset;
+        }
+
+        return result;
+    }
+
     public static Vector2Int GetCoordinates(Vector3 position)
     {
         position -= new Vector3(0.5f * _instance._gameSettings.TileSize.x, 0.5f * _instance._gameSettings.TileSize.y, 0);
