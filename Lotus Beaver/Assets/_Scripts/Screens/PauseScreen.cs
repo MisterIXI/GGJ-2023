@@ -1,6 +1,4 @@
-﻿
-using System;
-using UnityEngine.InputSystem;
+﻿using UnityEngine.InputSystem;
 
 public class PauseScreen : Screen
 {
@@ -17,6 +15,7 @@ public class PauseScreen : Screen
             SetActive(!gameObject.activeSelf);
         }
     }
+
     public void ResumeGame()
     {
         if (GameManager.GameState == GameState.GameOver)

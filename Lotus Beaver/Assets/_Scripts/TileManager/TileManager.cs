@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(TilePool))]
 public class TileManager : MonoBehaviour
 {
-    private static Dictionary<TileElementType, Pool<TileElement>> _tileElementPools = new Dictionary<TileElementType, Pool<TileElement>>();
+    private static readonly Dictionary<TileElementType, Pool<TileElement>> _tileElementPools = new();
 
     [SerializeField] private GameSettings _gameSettings;
 
@@ -23,12 +22,12 @@ public class TileManager : MonoBehaviour
 
     public static int GetTilesMaxX()
     {
-        return _tiles.GetLength(0) - 1;
+        return GetTilesXLength() - 1;
     }
 
     public static int GetTilesMaxY()
     {
-        return _tiles.GetLength(1) - 1;
+        return GetTilesYLength() - 1;
     }
 
     public static int GetTilesXLength()
@@ -75,28 +74,20 @@ public class TileManager : MonoBehaviour
 
     public static Tile GetClosetTile(Vector3 position)
     {
-        if (_tiles == null || _tiles.Length == 0)
-        {
-            return null;
-        }
-
-        return ClampTile(GetCoordinates(position));
+        return _tiles == null || _tiles.Length == 0 ? null : ClampTile(GetCoordinates(position));
     }
 
-    public static bool IsOutOfBounds(Tile tile) =>
-        tile.Coordinates.x <= 0
+    public static bool IsOutOfBounds(Tile tile)
+    {
+        return tile.Coordinates.x <= 0
         || tile.Coordinates.x >= GetTilesMaxX()
         || tile.Coordinates.y <= 0
         || tile.Coordinates.y >= GetTilesMaxY();
+    }
 
     public static Tile GetClosetTile(Vector2Int coordinates)
     {
-        if (_tiles == null || _tiles.Length == 0)
-        {
-            return null;
-        }
-
-        return ClampTile(coordinates);
+        return _tiles == null || _tiles.Length == 0 ? null : ClampTile(coordinates);
     }
 
     private static Vector2Int ApplyCenterOffset(Vector2Int coordinates)
@@ -111,25 +102,29 @@ public class TileManager : MonoBehaviour
 
     public static Tile FilterOutOfBoundsCoordinates(Vector2Int coordinates)
     {
-        if (coordinates.x < 0 || coordinates.x > GetTilesMaxX() || coordinates.y < 0 || coordinates.y > GetTilesMaxY())
-        {
-            return null;
-        }
-
-        return _tiles[coordinates.x, coordinates.y];
+        return coordinates.x < 0 || coordinates.x > GetTilesMaxX() || coordinates.y < 0 || coordinates.y > GetTilesMaxY()
+            ? null
+            : _tiles[coordinates.x, coordinates.y];
     }
 
     public static int GetSortOrderFromPosition(Vector3 position, int offset = 0)
     {
         if (_tiles == null)
+        {
             return 0;
-        int sortY = (TileManager.GetTilesYLength() - TileManager.GetCoordinates(position).y) * TileManager.GetTilesXLength() + 2;
-        int sortx = TileManager.GetCoordinates(position).x;
+        }
+
+        int sortY = ((GetTilesYLength() - GetCoordinates(position).y) * GetTilesXLength()) + 2;
+        int sortx = GetCoordinates(position).x;
         int result = sortx + sortY;
         if (offset > 0)
-            result = sortY + TileManager.GetTilesXLength() + offset;
+        {
+            result = sortY + GetTilesXLength() + offset;
+        }
+
         return result;
     }
+
     public static Vector2Int GetCoordinates(Vector3 position)
     {
         position -= new Vector3(0.5f * _instance._gameSettings.TileSize.x, 0.5f * _instance._gameSettings.TileSize.y, 0);
@@ -220,13 +215,15 @@ public class TileManager : MonoBehaviour
     {
         _tiles = new Tile[_gameSettings.MapSize.x, _gameSettings.MapSize.y];
 
-        for (int x = 0; x < _gameSettings.MapSize.x; x++)
+        for (int x = 0; x < GetTilesXLength(); x++)
         {
-            for (int y = 0; y < _gameSettings.MapSize.y; y++)
+            for (int y = 0; y < GetTilesYLength(); y++)
             {
                 Tile tile = _tilePool.GetPoolable();
                 tile.Transform.position = GetTilePosition(x, y);
+#if UNITY_EDITOR
                 tile.Transform.name = $"Tile {x},{y}";
+#endif
                 tile.Coordinates = new Vector2Int(x, y);
                 tile.SetActive(true);
                 _tiles[x, y] = tile;
@@ -256,7 +253,7 @@ public class TileManager : MonoBehaviour
             SetTileElementType(tile, TileElementType.Water);
         }
 
-        Vector2Int center = new Vector2Int(GetTilesXLength() / 2, GetTilesYLength() / 2);
+        Vector2Int center = new(GetTilesXLength() / 2, GetTilesYLength() / 2);
 
         SetTileElementType(_tiles[center.x, center.y], TileElementType.Earth);
     }
@@ -279,10 +276,10 @@ public class TileManager : MonoBehaviour
             return;
         }
 
-        if (tile.building != null && tileElementType != TileElementType.Earth)
+        if (tile.Building != null && tileElementType != TileElementType.Earth)
         {
-            Destroy(tile.building.gameObject);
-            tile.building = null;
+            Destroy(tile.Building.gameObject);
+            tile.Building = null;
         }
         tile.TileElement?.SetActive(false);
         TileElement tileElement = GetTileElement(tileElementType);
@@ -304,9 +301,13 @@ public class TileManager : MonoBehaviour
             if (type == TileElementType.Cliff)
             {
                 if (surrByWater)
+                {
                     SetTileElementType(tile, TileElementType.Water);
+                }
                 else
+                {
                     tile.GetComponentInChildren<CliffController>().UpdateCliffSprite();
+                }
             }
             else if (type == TileElementType.Water)
             {
@@ -322,9 +323,10 @@ public class TileManager : MonoBehaviour
             }
         }
     }
+
     public static List<Tile> GetSurroundingTiles(Tile currentTile)
     {
-        List<Tile> result = new List<Tile>();
+        List<Tile> result = new();
 
         AddTile(currentTile.Coordinates + Vector2Int.left, result);
         AddTile(currentTile.Coordinates + Vector2Int.right, result);
@@ -353,10 +355,12 @@ public class TileManager : MonoBehaviour
         foreach (Tile surroundingTile in surroundingTiles)
         {
             if (surroundingTile == null || surroundingTile.TileElement == null)
+            {
                 continue;
+            }
             // if a tile is not water or cliff, return false
-            if (surroundingTile.TileElement.TileElementType != TileElementType.Water &&
-                surroundingTile.TileElement.TileElementType != TileElementType.Cliff)
+            if (surroundingTile.TileElement.TileElementType is not TileElementType.Water and
+                not TileElementType.Cliff)
             {
                 return false;
             }

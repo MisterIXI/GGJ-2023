@@ -47,11 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPreset: {fileID: 11400000, guid: 201145eeb71261640b46bd492fa304a9, type: 2}
-  buildingName: 
-  upgradeStages: 0
+  spriteRenderer: {fileID: 7449681008525563716}
   currentUpgradeStage: 0
-  upgradeEarthCosts: []
-  upgradeWaterCosts: []
 --- !u!58 &1692081782165080519
 CircleCollider2D:
   m_ObjectHideFlags: 0

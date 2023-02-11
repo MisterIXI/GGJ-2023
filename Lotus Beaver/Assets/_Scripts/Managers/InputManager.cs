@@ -1,19 +1,26 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
-using System;
+
 public class InputManager : MonoBehaviour
 {
-
     public event Action<CallbackContext> OnMove;
+
     public event Action<CallbackContext> OnInteract;
+
     public event Action<CallbackContext> OnReset;
+
     public event Action<CallbackContext> OnPause;
+
     public event Action<CallbackContext> OnPrevBuilding;
+
     public event Action<CallbackContext> OnNextBuilding;
+
     public event Action<CallbackContext> OnBuildingKey;
 
     private PlayerInput _playerInput;
+
     private void Awake()
     {
         if (RefManager.inputManager != null)
@@ -32,7 +39,7 @@ public class InputManager : MonoBehaviour
 
     private void SubscribeActions()
     {
-        var map = _playerInput.actions.FindActionMap("Player");
+        InputActionMap map = _playerInput.actions.FindActionMap("Player");
         map["Move"].started += OnMoveInput;
         map["Move"].performed += OnMoveInput;
         map["Move"].canceled += OnMoveInput;
@@ -96,6 +103,4 @@ public class InputManager : MonoBehaviour
     {
         OnBuildingKey?.Invoke(context);
     }
-
-
 }

@@ -1,16 +1,20 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static event Action<GameState> OnGameStateChanged;
-    private static GameState _gameState;
-    public static GameState GameState => _gameState;
+
+    public static GameState GameState { get; private set; }
 
     public static event Action OnNewGame;
+
     public static event Action OnGameOver;
+
     public static float GameStartTime { get; private set; }
+
+    public static bool IsInGame() => GameState == GameState.Ingame;
+
     private void Awake()
     {
         if (RefManager.gameManager != null)
@@ -19,18 +23,9 @@ public class GameManager : MonoBehaviour
             return;
         }
         RefManager.gameManager = this;
-        SceneManager.activeSceneChanged += OnSceneChanged;
         DontDestroyOnLoad(transform.root.gameObject);
 
         SetGameState(GameState.GameOver);
-    }
-
-    private void OnSceneChanged(Scene current, Scene next)
-    {
-        if (next.name == "Game")
-        {
-            // Do something
-        }
     }
 
     public static void SetGameState(GameState gameState)
@@ -44,14 +39,15 @@ public class GameManager : MonoBehaviour
             case GameState.Ingame:
                 Time.timeScale = 1f;
                 break;
+
             case GameState.Paused:
             case GameState.GameOver:
                 Time.timeScale = 0f;
                 break;
         }
 
-        _gameState = gameState;
-        OnGameStateChanged?.Invoke(_gameState);
+        GameState = gameState;
+        OnGameStateChanged?.Invoke(GameState);
     }
 
     public static void StartNewGame()

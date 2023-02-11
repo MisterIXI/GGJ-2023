@@ -1,92 +1,99 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using System.Linq;
 using UnityEngine;
 
 public class Building : InteractableBase
 {
     [SerializeField] private BuildingPreset buildingPreset;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     public BuildingPreset BuildingPreset => buildingPreset;
-    public string buildingName;
+    public SpriteRenderer SpriteRenderer => spriteRenderer;
+    public string BuildingName => buildingPreset.DisplayName;
 
-    private int selfHealAmount;
-    private int healAmount;
-    private int healRadius;
+    private int SelfHealAmount => buildingPreset.SelfHealAmount;
+    private int HealAmount => buildingPreset.HealAmount;
+    private int HealRadius => buildingPreset.HealRadius;
 
-    private bool isBuild = false;
+    private int TicksPerStage => buildingPreset.TicksPerStage;
 
-    private int constructionTicks = 0;
-    private int ticksPerStage;
+    private int ConstructionStages => buildingPreset.ConstructionStagesLength;
+    public int UpgradeStages => buildingPreset.UpgradeStagesLength;
 
-    private int constructionStages;
-    private int currentConstructionStage = 0;
+    private bool isBuild;
 
+    private int currentConstructionStage;
+    private int constructionTicks;
 
-    private Sprite[] upgradeSprites;
-    public int upgradeStages;
-    public int currentUpgradeStage = 0;
-    public float[] upgradeEarthCosts;
-    public float[] upgradeWaterCosts;
+    public int currentUpgradeStage;
 
-    private Sprite[] sprites;
+    private Tile _tile;
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void SetTile(Tile tile)
     {
-        TickManager.OnBuildingTick += TickManager_OnBuildingTick;
-        TickManager.OnConstructionTick += TickManager_OnConstructionTick;
+        _tile = tile;
+    }
+
+    private void OnEnable()
+    {
         TickManager.OnDamageTick += TickManager_OnDamageTick;
 
-        buildingName = buildingPreset.displayName;
+        currentConstructionStage = 0;
+        constructionTicks = 0;
+        currentUpgradeStage = 0;
 
-        constructionStages = buildingPreset.constructionStages;
-        ticksPerStage = buildingPreset.ticksPerStage;
-        sprites = buildingPreset.constructionSprites;
-
-        selfHealAmount = buildingPreset.selfHealAmount;
-        healAmount = buildingPreset.healAmount;
-        healRadius = buildingPreset.healRadius;
-
-        upgradeSprites = buildingPreset.upgradeSprites;
-        upgradeStages = buildingPreset.upgradeStages;
-        upgradeEarthCosts = buildingPreset.upgradeEarthCosts;
-        upgradeWaterCosts = buildingPreset.upgradeWaterCosts;
-
-        if (constructionStages > 0)
+        if (ConstructionStages > 0)
         {
-            GetComponentInChildren<SpriteRenderer>().sprite = sprites[0];
+            spriteRenderer.sprite = buildingPreset.ConstructionStages[0].Sprite;
+            StartConstruction();
         }
         else
         {
-            isBuild = true;
+            OnConstructionComplete();
+        }
+
+        StartConstruction();
+    }
+
+    private void StartConstruction()
+    {
+        TickManager.OnConstructionTick += TickManager_OnConstructionTick;
+    }
+
+    private void OnConstructionComplete()
+    {
+        if (ProducesEarthOrWater())
+        {
+            TickManager.OnBuildingTick += TickManager_OnBuildingTick;
         }
     }
 
-
+    private bool ProducesEarthOrWater()
+    {
+        return buildingPreset.EarthProduction > 0 || buildingPreset.WaterProduction > 0;
+    }
 
     private void TickManager_OnBuildingTick(object sender, TickManager.OnTickEventArgs e)
     {
-        if (isBuild)
-        {
-            RessourceManager.AddEarth(buildingPreset.earthProduction);
-            RessourceManager.AddWater(buildingPreset.waterProduction);
-        }
+        RessourceManager.AddEarth(buildingPreset.EarthProduction);
+        RessourceManager.AddWater(buildingPreset.WaterProduction);
     }
 
     private void TickManager_OnConstructionTick(object sender, TickManager.OnTickEventArgs e)
     {
-        if (!isBuild && currentConstructionStage < constructionStages)
+        if (!isBuild && currentConstructionStage < ConstructionStages)
         {
             constructionTicks++;
-            if (constructionTicks >= ticksPerStage)
+            if (constructionTicks >= TicksPerStage)
             {
                 currentConstructionStage++;
                 constructionTicks = 0;
-                GetComponentInChildren<SpriteRenderer>().sprite = sprites[currentConstructionStage];
+                spriteRenderer.sprite = buildingPreset.ConstructionStages[currentConstructionStage].Sprite;
 
-                if (currentConstructionStage == constructionStages)
+                if (currentConstructionStage == ConstructionStages)
                 {
                     isBuild = true;
+
+                    TickManager.OnConstructionTick -= TickManager_OnConstructionTick;
 
                     Animator anim = GetComponentInChildren<Animator>();
                     if (anim != null)
@@ -95,26 +102,21 @@ public class Building : InteractableBase
                         //anim.SetBool("isBuild", true);
                     }
                 }
-
             }
         }
     }
 
     private void TickManager_OnDamageTick(object sender, TickManager.OnTickEventArgs e)
     {
-        Tile currentTile = GetComponentInParent<Tile>();
-        var earth = currentTile.TileElement.GetComponent<EarthController>();
-        if (earth != null)
+        EarthController earthController = _tile?.TileElement?.TileController as EarthController;
+        if (earthController != null)
         {
-            earth.GetHealth(selfHealAmount);
-            if (healRadius > 0)
+            earthController.GetHealth(SelfHealAmount);
+            if (HealRadius > 0)
             {
-                foreach (var tile in TileManager.GetSurroundingTilesWithDiagonal(currentTile))
+                foreach (EarthController souroundingEarthController in TileManager.GetSurroundingTilesWithDiagonal(_tile).Select(x => x.TileElement?.TileController as EarthController))
                 {
-                    if (tile.TileElement.TileElementType == TileElementType.Earth)
-                    {
-                        tile.TileElement.GetComponent<EarthController>().GetHealth(healAmount);
-                    }
+                    souroundingEarthController.GetHealth(HealAmount);
                 }
             }
         }
@@ -136,9 +138,9 @@ public class Building : InteractableBase
 
     public void Upgrade()
     {
-        GetComponentInChildren<SpriteRenderer>().sprite = upgradeSprites[currentUpgradeStage];
+        spriteRenderer.sprite = buildingPreset.UpgradeStages[currentUpgradeStage].Sprite;
         currentUpgradeStage++;
-        if (buildingPreset.displayName == "Lotus")
+        if (buildingPreset.DisplayName == "Lotus")
         {
             int upgradeCount = GameSettingsManager.GameSettings().RootGrowthPerUpgrade;
             for (int i = 0; i < upgradeCount; i++)
@@ -148,10 +150,22 @@ public class Building : InteractableBase
         }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        TickManager.OnBuildingTick -= TickManager_OnBuildingTick;
-        TickManager.OnConstructionTick -= TickManager_OnConstructionTick;
+        _tile = null;
+
         TickManager.OnDamageTick -= TickManager_OnDamageTick;
+
+        if (isBuild)
+        {
+            if (ProducesEarthOrWater())
+            {
+                TickManager.OnBuildingTick -= TickManager_OnBuildingTick;
+            }
+        }
+        else
+        {
+            TickManager.OnConstructionTick -= TickManager_OnConstructionTick;
+        }
     }
 }

@@ -12,50 +12,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c388026e8f6e884bb60657fce1ea5f6, type: 3}
   m_Name: Building_Lotus
   m_EditorClassIdentifier: 
-  <displayName>k__BackingField: Lotus
-  <description>k__BackingField: Grow roots & win
-  <earthCost>k__BackingField: 0
-  <waterCost>k__BackingField: 0
-  <BuildPreview>k__BackingField: {fileID: 0}
-  <buildingPrefab>k__BackingField: {fileID: 5213177626744561057, guid: a3662c2fcd57fff49baeb1303ca0a6a5, type: 3}
-  <earthProduction>k__BackingField: 1
-  <waterProduction>k__BackingField: 1
+  <DisplayName>k__BackingField: Lotus
+  <Description>k__BackingField: Grow roots & win
   InteractionIcon: {fileID: 21300000, guid: 6474556335725944698ad9076395cd87, type: 3}
-  <selfHealAmount>k__BackingField: 100
-  <healAmount>k__BackingField: 10
-  <healRadius>k__BackingField: 1
-  <constructionStages>k__BackingField: 0
-  <constructionSprites>k__BackingField: []
-  <ticksPerStage>k__BackingField: 0
-  <upgradeStages>k__BackingField: 9
-  <upgradeSprites>k__BackingField:
-  - {fileID: 21300000, guid: 41b032a987671a246857a6b3c270bc3d, type: 3}
-  - {fileID: 21300000, guid: c84bfaa59cd47cf439d53e602fbde717, type: 3}
-  - {fileID: 21300000, guid: b0210222783ae2c419a7e61031fe35ca, type: 3}
-  - {fileID: 21300000, guid: 9db5441febcb8c04a90c25d6a9699d0c, type: 3}
-  - {fileID: 21300000, guid: 34bf89f8dec28cb4dbd2ba55b8d3aea1, type: 3}
-  - {fileID: 21300000, guid: f31990fe3d57d3c4eb23cca25cd7546b, type: 3}
-  - {fileID: 21300000, guid: 072392016db68c549855e1410e27891f, type: 3}
-  - {fileID: 21300000, guid: d4e7c856dd29ec3459396b764cc5b27a, type: 3}
-  - {fileID: 21300000, guid: e1f286dfa3725104b8808e4a31309edc, type: 3}
-  - {fileID: 21300000, guid: ae0ad89c91ae5e3499c6325622c8dafd, type: 3}
-  <upgradeEarthCosts>k__BackingField:
-  - 45
-  - 60
-  - 90
-  - 120
-  - 180
-  - 240
-  - 360
-  - 480
-  - 1000
-  <upgradeWaterCosts>k__BackingField:
-  - 20
-  - 30
-  - 40
-  - 50
-  - 60
-  - 70
-  - 80
-  - 90
-  - 100
+  <BuildPreview>k__BackingField: {fileID: 0}
+  <BuildingPrefab>k__BackingField: {fileID: 275784829, guid: a3662c2fcd57fff49baeb1303ca0a6a5, type: 3}
+  <EarthCost>k__BackingField: 0
+  <WaterCost>k__BackingField: 0
+  <EarthProduction>k__BackingField: 1
+  <WaterProduction>k__BackingField: 1
+  <SelfHealAmount>k__BackingField: 100
+  <HealAmount>k__BackingField: 10
+  <HealRadius>k__BackingField: 1
+  <ConstructionStages>k__BackingField: []
+  <TicksPerStage>k__BackingField: 0
+  <UpgradeStages>k__BackingField:
+  - _sprite: {fileID: 21300000, guid: 41b032a987671a246857a6b3c270bc3d, type: 3}
+    _upgradeEarthCost: 0
+    _upgradeWaterCost: 0
+  - _sprite: {fileID: 21300000, guid: c84bfaa59cd47cf439d53e602fbde717, type: 3}
+    _upgradeEarthCost: 45
+    _upgradeWaterCost: 20
+  - _sprite: {fileID: 21300000, guid: b0210222783ae2c419a7e61031fe35ca, type: 3}
+    _upgradeEarthCost: 60
+    _upgradeWaterCost: 30
+  - _sprite: {fileID: 21300000, guid: 9db5441febcb8c04a90c25d6a9699d0c, type: 3}
+    _upgradeEarthCost: 90
+    _upgradeWaterCost: 40
+  - _sprite: {fileID: 21300000, guid: 34bf89f8dec28cb4dbd2ba55b8d3aea1, type: 3}
+    _upgradeEarthCost: 120
+    _upgradeWaterCost: 50
+  - _sprite: {fileID: 21300000, guid: f31990fe3d57d3c4eb23cca25cd7546b, type: 3}
+    _upgradeEarthCost: 180
+    _upgradeWaterCost: 60
+  - _sprite: {fileID: 21300000, guid: 072392016db68c549855e1410e27891f, type: 3}
+    _upgradeEarthCost: 240
+    _upgradeWaterCost: 70
+  - _sprite: {fileID: 21300000, guid: d4e7c856dd29ec3459396b764cc5b27a, type: 3}
+    _upgradeEarthCost: 360
+    _upgradeWaterCost: 80
+  - _sprite: {fileID: 21300000, guid: e1f286dfa3725104b8808e4a31309edc, type: 3}
+    _upgradeEarthCost: 480
+    _upgradeWaterCost: 90
+  - _sprite: {fileID: 21300000, guid: ae0ad89c91ae5e3499c6325622c8dafd, type: 3}
+    _upgradeEarthCost: 1000
+    _upgradeWaterCost: 100

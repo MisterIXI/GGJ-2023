@@ -5,11 +5,9 @@ public class ApplicationManager : MonoBehaviour
 {
     private static ApplicationManager _instance;
 
-    private static bool _isQuitting;
-
     public static event Action OnQuit;
 
-    public static bool IsQuitting => _isQuitting;
+    public static bool IsQuitting { get; private set; }
 
     private void Awake()
     {
@@ -25,7 +23,7 @@ public class ApplicationManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        _isQuitting = true;
+        IsQuitting = true;
 
         OnQuit?.Invoke();
     }

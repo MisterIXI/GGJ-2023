@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7858958573704360161
 Transform:
@@ -55,7 +55,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1418091584595113843}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92cf3463628782f41a8c0504590b2b90, type: 3}
+  m_Script: {fileID: 11500000, guid: c80a720bacb07684fb77d72a9a9f45e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _poolable: {fileID: -8784383664191297088, guid: eaafdd4331108214d90b3ed80bfd70ea, type: 3}
@@ -76,7 +76,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8225662273125497782
 Transform:
@@ -237,7 +237,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2147243135471219993
 Transform:
@@ -271,7 +271,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8853125313790847203
 Transform:
@@ -310,7 +310,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &41686555441917286
 Transform:
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7903891430179243864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c72e690ca60ff84a93f154a3b7706aa, type: 3}
+  m_Script: {fileID: 11500000, guid: e8599d0e165b74d44b59c655f59a87a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _particlePool: {fileID: 9055674743628961725}
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7903891430179243864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92cf3463628782f41a8c0504590b2b90, type: 3}
+  m_Script: {fileID: 11500000, guid: c80a720bacb07684fb77d72a9a9f45e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _poolable: {fileID: -4231998948084941902, guid: fb1e1d4291b1f304da45e66cab9aa6d6, type: 3}
@@ -370,7 +370,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8581020739103542179
 Transform:
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9070768599935935992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bead866c02e179748a9bae4afe150512, type: 3}
+  m_Script: {fileID: 11500000, guid: 6cb31f90d35c9524db609072fd30e343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _particlePool: {fileID: 6225644873327639995}
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9070768599935935992}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92cf3463628782f41a8c0504590b2b90, type: 3}
+  m_Script: {fileID: 11500000, guid: c80a720bacb07684fb77d72a9a9f45e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _poolable: {fileID: 1364957795674544002, guid: 6c5e7dfb700f4ae4ea7803ee8b48a638, type: 3}
@@ -424,6 +424,10 @@ PrefabInstance:
     - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: m_Name
       value: SoundPoolMenuHover
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4973674914784877219, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: _poolable
@@ -487,7 +491,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a80ab8a8807e7547ae64f87cc7cedc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e7cc85ccd2d4546bdf3cfadf91f9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &5322348762856169100 stripped
@@ -505,6 +509,10 @@ PrefabInstance:
     - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: m_Name
       value: SoundPoolSelectInteraction
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4973674914784877219, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: _poolable
@@ -568,7 +576,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a80ab8a8807e7547ae64f87cc7cedc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e7cc85ccd2d4546bdf3cfadf91f9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &5322348762673540683 stripped
@@ -631,6 +639,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TickManager
       objectReference: {fileID: 0}
+    - target: {fileID: 218245998837239439, guid: 540d09d132de6ae44b17a2fb2992291e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 540d09d132de6ae44b17a2fb2992291e, type: 3}
 --- !u!4 &347619023 stripped
@@ -648,6 +660,10 @@ PrefabInstance:
     - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: m_Name
       value: SoundPoolWaterSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4973674914784877219, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: _poolable
@@ -711,7 +727,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a80ab8a8807e7547ae64f87cc7cedc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e7cc85ccd2d4546bdf3cfadf91f9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &7950511516967464767 stripped
@@ -729,6 +745,10 @@ PrefabInstance:
     - target: {fileID: 3866828488276339056, guid: 33fd69078cf711b4d8322bb500766213, type: 3}
       propertyPath: m_Name
       value: Gamemanager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866828488276339056, guid: 33fd69078cf711b4d8322bb500766213, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3947518322269792869, guid: 33fd69078cf711b4d8322bb500766213, type: 3}
       propertyPath: m_RootOrder
@@ -791,6 +811,10 @@ PrefabInstance:
     - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: m_Name
       value: SoundPoolUpgrade
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4973674914784877219, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: _poolable
@@ -859,7 +883,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a80ab8a8807e7547ae64f87cc7cedc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e7cc85ccd2d4546bdf3cfadf91f9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3906970007581939817
@@ -872,6 +896,10 @@ PrefabInstance:
     - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: m_Name
       value: SoundPoolWaterSplash
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4973674914784877219, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: _poolable
@@ -935,7 +963,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a80ab8a8807e7547ae64f87cc7cedc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e7cc85ccd2d4546bdf3cfadf91f9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &9215649642233785219 stripped
@@ -953,6 +981,10 @@ PrefabInstance:
     - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: m_Name
       value: SoundPoolMenuClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4973674914784877219, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: _poolable
@@ -1021,7 +1053,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a80ab8a8807e7547ae64f87cc7cedc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e7cc85ccd2d4546bdf3cfadf91f9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &6154202406379889452
@@ -1034,6 +1066,10 @@ PrefabInstance:
     - target: {fileID: 4358654799653122216, guid: c4277a3d8d380c34bb218c3f1b7b377c, type: 3}
       propertyPath: m_Name
       value: InputManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358654799653122216, guid: c4277a3d8d380c34bb218c3f1b7b377c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4358654799653122221, guid: c4277a3d8d380c34bb218c3f1b7b377c, type: 3}
       propertyPath: m_RootOrder
@@ -1096,6 +1132,10 @@ PrefabInstance:
     - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: m_Name
       value: SoundPoolError
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4973674914784877219, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: _poolable
@@ -1164,7 +1204,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a80ab8a8807e7547ae64f87cc7cedc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e7cc85ccd2d4546bdf3cfadf91f9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &6454211938338940154
@@ -1177,6 +1217,10 @@ PrefabInstance:
     - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: m_Name
       value: SoundPoolWalking
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4973674914784877219, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: _poolable
@@ -1245,7 +1289,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a80ab8a8807e7547ae64f87cc7cedc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e7cc85ccd2d4546bdf3cfadf91f9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7866225589415429413
@@ -1258,6 +1302,10 @@ PrefabInstance:
     - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: m_Name
       value: SoundPoolPlanting
+      objectReference: {fileID: 0}
+    - target: {fileID: 2721078449437751689, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4973674914784877219, guid: 0770afa6f8d65ea44b14dabe9a371e38, type: 3}
       propertyPath: _poolable
@@ -1326,7 +1374,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a80ab8a8807e7547ae64f87cc7cedc3, type: 3}
+  m_Script: {fileID: 11500000, guid: 28e7cc85ccd2d4546bdf3cfadf91f9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8751386611467768423
@@ -1339,6 +1387,10 @@ PrefabInstance:
     - target: {fileID: 6399555955420018292, guid: 228ebb010c227f946ba1dc074d8cf116, type: 3}
       propertyPath: m_Name
       value: RessourceManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6399555955420018292, guid: 228ebb010c227f946ba1dc074d8cf116, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6399555955420018299, guid: 228ebb010c227f946ba1dc074d8cf116, type: 3}
       propertyPath: m_RootOrder

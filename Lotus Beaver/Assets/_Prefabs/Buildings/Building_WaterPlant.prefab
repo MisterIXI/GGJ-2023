@@ -46,8 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPreset: {fileID: 11400000, guid: 9b6a973cdf22af743a3ad70532b01abe, type: 2}
-  buildingName: 
-  upgradeStages: 0
+  spriteRenderer: {fileID: 99166325600211344}
   currentUpgradeStage: 0
 --- !u!1 &4114158671736528343
 GameObject:

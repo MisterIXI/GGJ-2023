@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
+using UnityEngine;
+
 public class RessourceManager : MonoBehaviour
 {
     private static RessourceManager _instance;
@@ -9,10 +8,11 @@ public class RessourceManager : MonoBehaviour
     [SerializeField] private GameSettings _gameSettings;
 
     public static event Action<float> OnEarthChange;
+
     public static event Action<float> OnWaterChange;
 
-    public static float earth;
-    public static float water;
+    public static float Earth;
+    public static float Water;
 
     private void Awake()
     {
@@ -31,37 +31,34 @@ public class RessourceManager : MonoBehaviour
 #if UNITY_EDITOR
         Debug.Log(_gameSettings.startWater);
 #endif
-        earth += _gameSettings.startEarth;
-        water += _gameSettings.startWater;
-        OnEarthChange?.Invoke(earth);
-        OnWaterChange?.Invoke(water);
+        Earth = _gameSettings.startEarth;
+        Water = _gameSettings.startWater;
+        OnEarthChange?.Invoke(Earth);
+        OnWaterChange?.Invoke(Water);
     }
 
     public static void AddEarth(float value)
     {
-        earth += value;
-        OnEarthChange?.Invoke(earth);
+        Earth += value;
+        OnEarthChange?.Invoke(Earth);
     }
 
     public static void AddWater(float value)
     {
-        water += value;
-        OnWaterChange?.Invoke(water);
+        Water += value;
+        OnWaterChange?.Invoke(Water);
     }
 
     public static bool EnoughResources(float earthCost, float waterCost)
     {
-        if (earthCost <= earth && waterCost <= water)
-            return true;
-        else
-            return false;
+        return earthCost <= Earth && waterCost <= Water;
     }
 
     public static void UseResources(float earthCost, float waterCost)
     {
-        earth -= earthCost;
-        water -= waterCost;
-        OnEarthChange?.Invoke(earth);
-        OnWaterChange?.Invoke(water);
+        Earth -= earthCost;
+        Water -= waterCost;
+        OnEarthChange?.Invoke(Earth);
+        OnWaterChange?.Invoke(Water);
     }
 }

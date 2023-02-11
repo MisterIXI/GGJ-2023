@@ -12,25 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c388026e8f6e884bb60657fce1ea5f6, type: 3}
   m_Name: Building_WaterPlant
   m_EditorClassIdentifier: 
-  <displayName>k__BackingField: Water Plant
-  <description>k__BackingField: Produces Water
-  <earthCost>k__BackingField: 20
-  <waterCost>k__BackingField: 40
-  <BuildPreview>k__BackingField: {fileID: 70486234, guid: 385ce4f1468172c4eb9415cb3d23d398, type: 3}
-  <buildingPrefab>k__BackingField: {fileID: 3340042791620746101, guid: 0d493411f9ae6ec41bd981f6b999ad05, type: 3}
-  <earthProduction>k__BackingField: 0
-  <waterProduction>k__BackingField: 0.67
+  <DisplayName>k__BackingField: Water Plant
+  <Description>k__BackingField: Produces Water
   InteractionIcon: {fileID: 1274222128, guid: 28a741c0365eb794ba1bbab48788978f, type: 3}
-  <selfHealAmount>k__BackingField: 2
-  <healAmount>k__BackingField: 0
-  <healRadius>k__BackingField: 0
-  <constructionStages>k__BackingField: 2
-  <constructionSprites>k__BackingField:
-  - {fileID: -646067831, guid: 53c51cd9f59f51a49aae876cecbd86c1, type: 3}
-  - {fileID: 463707233, guid: 860258bbeb86404499990d37ad41e712, type: 3}
-  - {fileID: 1274222128, guid: 28a741c0365eb794ba1bbab48788978f, type: 3}
-  <ticksPerStage>k__BackingField: 10
-  <upgradeStages>k__BackingField: 0
-  <upgradeSprites>k__BackingField: []
-  <upgradeEarthCosts>k__BackingField: []
-  <upgradeWaterCosts>k__BackingField: []
+  <BuildPreview>k__BackingField: {fileID: 70486234, guid: 385ce4f1468172c4eb9415cb3d23d398, type: 3}
+  <BuildingPrefab>k__BackingField: {fileID: 7350677610097484457, guid: 0d493411f9ae6ec41bd981f6b999ad05, type: 3}
+  <EarthCost>k__BackingField: 20
+  <WaterCost>k__BackingField: 40
+  <EarthProduction>k__BackingField: 0
+  <WaterProduction>k__BackingField: 0.67
+  <SelfHealAmount>k__BackingField: 2
+  <HealAmount>k__BackingField: 0
+  <HealRadius>k__BackingField: 0
+  <ConstructionStages>k__BackingField:
+  - _sprite: {fileID: -646067831, guid: 53c51cd9f59f51a49aae876cecbd86c1, type: 3}
+  - _sprite: {fileID: 914535912, guid: 53c51cd9f59f51a49aae876cecbd86c1, type: 3}
+  - _sprite: {fileID: 978454295, guid: 53c51cd9f59f51a49aae876cecbd86c1, type: 3}
+  <TicksPerStage>k__BackingField: 10
+  <UpgradeStages>k__BackingField: []

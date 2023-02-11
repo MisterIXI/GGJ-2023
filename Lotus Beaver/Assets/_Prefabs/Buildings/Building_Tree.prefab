@@ -151,6 +151,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingPreset: {fileID: 11400000, guid: 9378e485ba540ad42be530d0aa9b505a, type: 2}
-  buildingName: 
-  upgradeStages: 0
+  spriteRenderer: {fileID: 3577622179778195517}
   currentUpgradeStage: 0

@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class TickManager : MonoBehaviour
 {
@@ -16,12 +13,14 @@ public class TickManager : MonoBehaviour
     }
 
     public static event EventHandler<OnTickEventArgs> OnDamageTick;
+
     public static event EventHandler<OnTickEventArgs> OnBuildingTick;
+
     public static event EventHandler<OnTickEventArgs> OnConstructionTick;
 
-    private float damageTickTimerMax;
-    private float buildingTickTimerMax;
-    private float constructionTickTimerMax;
+    private float DamageTickTimerMax => _gameSettings.DamageTickTime;
+    private float BuildingTickTimerMax => _gameSettings.BuildingTickTime;
+    private float ConstructionTickTimerMax=> _gameSettings.ConstructionTickTime;
 
     private int damageTick;
     private int buildingTick;
@@ -41,14 +40,13 @@ public class TickManager : MonoBehaviour
 
         _instance = this;
         DontDestroyOnLoad(transform.root.gameObject);
+    }
 
+    private void OnEnable()
+    {
         damageTick = 0;
         buildingTick = 0;
         constructionTick = 0;
-
-        damageTickTimerMax = _gameSettings.DamageTickTime;
-        buildingTickTimerMax = _gameSettings.BuildingTickTime;
-        constructionTickTimerMax = _gameSettings.ConstructionTickTime;
     }
 
     private void Update()
@@ -57,26 +55,25 @@ public class TickManager : MonoBehaviour
         buildingTickTimer += Time.deltaTime;
         constructionTickTimer += Time.deltaTime;
 
-        if (damageTickTimer >= damageTickTimerMax)
+        if (damageTickTimer >= DamageTickTimerMax)
         {
             damageTick++;
-            damageTickTimer -= damageTickTimerMax;
-            if (OnDamageTick != null) OnDamageTick(this, new OnTickEventArgs { tick = damageTick});
+            damageTickTimer -= DamageTickTimerMax;
+            OnDamageTick?.Invoke(this, new OnTickEventArgs { tick = damageTick });
         }
 
-        if(buildingTickTimer >= buildingTickTimerMax)
+        if (buildingTickTimer >= BuildingTickTimerMax)
         {
             buildingTick++;
-            buildingTickTimer -= buildingTickTimerMax;
-            if (OnBuildingTick != null) OnBuildingTick(this, new OnTickEventArgs { tick = buildingTick });
+            buildingTickTimer -= BuildingTickTimerMax;
+            OnBuildingTick?.Invoke(this, new OnTickEventArgs { tick = buildingTick });
         }
 
-        if (constructionTickTimer >= constructionTickTimerMax)
+        if (constructionTickTimer >= ConstructionTickTimerMax)
         {
             constructionTick++;
-            constructionTickTimer -= constructionTickTimerMax;
-            if (OnConstructionTick != null) OnConstructionTick(this, new OnTickEventArgs { tick = constructionTick });
+            constructionTickTimer -= ConstructionTickTimerMax;
+            OnConstructionTick?.Invoke(this, new OnTickEventArgs { tick = constructionTick });
         }
     }
-
 }

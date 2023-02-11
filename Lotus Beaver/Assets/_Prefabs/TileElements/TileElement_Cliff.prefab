@@ -68,6 +68,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8523691457981576551, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
+      propertyPath: _tileController
+      value: 
+      objectReference: {fileID: 7631022685091519924}
+    - target: {fileID: 8523691457981576551, guid: f1f06c2be361795459d0ab9ef6ecbfe2, type: 3}
       propertyPath: _tileElementType
       value: 3
       objectReference: {fileID: 0}

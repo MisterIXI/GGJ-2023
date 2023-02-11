@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Cinemachine;
+using UnityEngine;
+
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private MovementSettings _movementSettings;
     private float _lastDamping;
     private CinemachineVirtualCamera _vcam;
     private CinemachineHardLockToTarget _hardLockToTarget;
+
     private void Start()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");

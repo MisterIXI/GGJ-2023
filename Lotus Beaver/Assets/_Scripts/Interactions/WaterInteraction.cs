@@ -1,10 +1,8 @@
-using UnityEngine;
-using System;
-
 public class WaterInteraction : IInteractable
 {
-    private int _index;
-    private InteractionController _interactionController;
+    private readonly int _index;
+    private readonly InteractionController _interactionController;
+
     public WaterInteraction(InteractionController interactionController, int index)
     {
         InteractionController.OnInteractionChange += OnSelectionChange;
@@ -19,13 +17,12 @@ public class WaterInteraction : IInteractable
             _interactionController.BuildPreviewSpriteRenderer.sprite = null;
         }
     }
+
     public void OnInteract(Tile tile)
     {
-
     }
 
     public void OnSelection(Tile tile)
     {
-
     }
 }

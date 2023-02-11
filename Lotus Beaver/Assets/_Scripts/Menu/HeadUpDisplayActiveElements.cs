@@ -1,8 +1,7 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System;
-using TMPro;
 
 public class HeadUpDisplayActiveElements : MonoBehaviour
 {
@@ -28,25 +27,28 @@ public class HeadUpDisplayActiveElements : MonoBehaviour
 
     public static HeadUpDisplayActiveElements Instance { get; private set; }
 
-    private void Awake() {
+    private void Awake()
+    {
         Instance = this;
     }
+
     private void Start()
     {
         InitializeRessources();
         InitializeTools();
         InteractionController.OnInteractionChange += UpdateToolSelection;
     }
+
     private void OnEnable()
     {
-        StartCoroutine(DelayedEnable());
+        _ = StartCoroutine(DelayedEnable());
     }
+
     private IEnumerator DelayedEnable()
     {
         yield return new WaitForEndOfFrame();
         // InitializeRessources();
         // InitializeTools();
-
     }
 
     public void UpdateEarth(float count)
@@ -80,11 +82,11 @@ public class HeadUpDisplayActiveElements : MonoBehaviour
     {
         GameObject earth = Instantiate(RessourcePrefab, RessourcesRoot);
         earth.transform.GetChild(0).GetComponentInChildren<Image>().sprite = EarthIcon;
-        earth.GetComponentInChildren<TextMeshProUGUI>().text = RessourceManager.earth.ToString();
+        earth.GetComponentInChildren<TextMeshProUGUI>().text = RessourceManager.Earth.ToString();
 
         GameObject water = Instantiate(RessourcePrefab, RessourcesRoot);
         water.transform.GetChild(0).GetComponentInChildren<Image>().sprite = WaterIcon;
-        water.GetComponentInChildren<TextMeshProUGUI>().text = RessourceManager.water.ToString();
+        water.GetComponentInChildren<TextMeshProUGUI>().text = RessourceManager.Water.ToString();
         _ressourceTexts = new TextMeshProUGUI[2];
         _ressourceTexts[0] = earth.GetComponentInChildren<TextMeshProUGUI>();
         _ressourceTexts[1] = water.GetComponentInChildren<TextMeshProUGUI>();
@@ -108,6 +110,4 @@ public class HeadUpDisplayActiveElements : MonoBehaviour
         // set toolsroot rect transform width
         ToolsRoot.GetComponent<RectTransform>().sizeDelta = new Vector2(toolCount * 100, 100);
     }
-
-
 }

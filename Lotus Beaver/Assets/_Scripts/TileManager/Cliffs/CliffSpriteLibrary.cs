@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "CliffSpriteLibrary", menuName = "ScriptableObjects/CliffSpriteLibrary", order = 1)]
 public class CliffSpriteLibrary : ScriptableObject
@@ -20,7 +20,9 @@ public class CliffSpriteLibrary : ScriptableObject
         _sortedSprites = new Sprite[2, 2, 2, 2, 2, 2, 2, 2];
 
         foreach (Sprite sprite in _sprites)
+        {
             RecReplaceChar(sprite, sprite.name.ToCharArray());
+        }
 
         // DebugPrint();
         CountEmpties();
@@ -48,14 +50,14 @@ public class CliffSpriteLibrary : ScriptableObject
     {
         WaterMask waterMask = new()
         {
-            UpLeft = name[0] == _waterChar ? true : false,
-            Up = name[2] == _waterChar ? true : false,
-            UpRight = name[4] == _waterChar ? true : false,
-            Right = name[6] == _waterChar ? true : false,
-            DownRight = name[8] == _waterChar ? true : false,
-            Down = name[10] == _waterChar ? true : false,
-            DownLeft = name[12] == _waterChar ? true : false,
-            Left = name[14] == _waterChar ? true : false,
+            UpLeft = name[0] == _waterChar,
+            Up = name[2] == _waterChar,
+            UpRight = name[4] == _waterChar,
+            Right = name[6] == _waterChar,
+            DownRight = name[8] == _waterChar,
+            Down = name[10] == _waterChar,
+            DownLeft = name[12] == _waterChar,
+            Left = name[14] == _waterChar,
         };
         _sortedSprites[
             waterMask.UpLeft ? 1 : 0,
@@ -68,10 +70,11 @@ public class CliffSpriteLibrary : ScriptableObject
             waterMask.Left ? 1 : 0
         ] = sprite;
     }
+
     private void CountEmpties()
     {
         int count = 0;
-        List<String> emptyNames = new List<string>();
+        List<string> emptyNames = new();
         // count all empty sprites in _sortedSprites
         for (int a0 = 0; a0 < _sortedSprites.GetLength(0); a0++)
         {
@@ -107,6 +110,7 @@ public class CliffSpriteLibrary : ScriptableObject
         Debug.Log("Missing Entries: " + string.Join(", ", emptyNames.ToArray()));
 #endif
     }
+
     private void DebugPrint()
     {
 #if UNITY_EDITOR

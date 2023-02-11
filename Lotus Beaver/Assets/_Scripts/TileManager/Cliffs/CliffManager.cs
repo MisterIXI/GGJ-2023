@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CliffManager : MonoBehaviour
 {
@@ -23,31 +23,28 @@ public class CliffManager : MonoBehaviour
 
     public void OnDamageTickCliffs(object sender, TickManager.OnTickEventArgs e)
     {
-        var cliffControllers = CliffController._activeCliffControllers.ToArray();
+        CliffController[] cliffControllers = CliffController._activeCliffControllers.ToArray();
         foreach (CliffController cliffC in cliffControllers)
         {
             // get Tile of cliffController
             if (!cliffC.isActiveAndEnabled)
+            {
                 continue;
+            }
+
             Tile currentTile = cliffC.ParentTile;
             List<Tile> tilesToCheck = TileManager.GetSurroundingTilesWithDiagonal(currentTile);
             // filter list to only include tiles with TileElementTypes.Earth
-            tilesToCheck.RemoveAll(tile => tile.TileElement.TileElementType != TileElementType.Earth);
+            _ = tilesToCheck.RemoveAll(tile => tile.TileElement.TileElementType != TileElementType.Earth);
             foreach (Tile tile in tilesToCheck)
             {
                 tile.TileElement.GetComponent<EarthController>().LoseHealth(_damageStageLibrary.BaseDamage);
             }
-
         }
     }
 
     public static CliffSpriteLibrary CliffSpriteLibrary()
     {
-        if (_instance == null)
-        {
-            return null;
-        }
-
-        return _instance._cliffSpriteLibrary;
+        return _instance == null ? null : _instance._cliffSpriteLibrary;
     }
 }

@@ -2,6 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class InteractionController : MonoBehaviour
 {
     [field: SerializeField] public GameObject InteractionPreview { get; private set; }
@@ -10,15 +11,16 @@ public class InteractionController : MonoBehaviour
     public SpriteRenderer InteractionPreviewSpriteRenderer { get; private set; }
     public SpriteRenderer BuildPreviewSpriteRenderer { get; private set; }
     private IInteractable[] Interactions;
+
     public static event Action<Tile> OnTileInteract;
+
     public static event Action<Tile> OnTileSelectionChange;
+
     public static event Action<int> OnInteractionChange;
+
     [SerializeField] private InteractionSettings _interactionSettings;
     public Tile CurrentTile { get; private set; }
     public InteractableBase CurrentBuilding { get; private set; }
-    private SpriteRenderer _currentSpriteRenderer;
-    private Color _originalColor;
-    private TileManager _tileManager;
     private Vector2 _moveInput;
     private Vector3 _interactionOffset;
     private IInteractable _currentInteraction;
@@ -47,11 +49,11 @@ public class InteractionController : MonoBehaviour
         _earthCostText = _hud.CostEarthText;
         _interactionDescriptionText = _hud.InteractionDescriptionText;
     }
+
     private void Update()
     {
         TileSelectionUpdate();
         UpdatePreview();
-
     }
 
     private void InitializeInteractions()
@@ -63,6 +65,7 @@ public class InteractionController : MonoBehaviour
             Interactions[i + 1] = new BuildingInteraction(_interactionSettings.BuildingSettings[i], this, i + 1);
         }
     }
+
     private void SelectInteraction(int index)
     {
         if (Interactions.Length > index)
@@ -76,6 +79,7 @@ public class InteractionController : MonoBehaviour
             SoundManager.PlaySelectInteraction();
         }
     }
+
     private void TileSelectionUpdate()
     {
         Tile tile = TileManager.GetClosetTile(transform.position + _interactionOffset);
@@ -84,14 +88,15 @@ public class InteractionController : MonoBehaviour
             CurrentTile = tile;
             OnTileSelectionChange?.Invoke(CurrentTile);
             _currentInteraction?.OnSelection(CurrentTile);
-            CurrentBuilding = CurrentTile?.building;
+            CurrentBuilding = CurrentTile?.Building;
         }
     }
 
-    [field: SerializeField] private Color greenColor = new Color(111 / 255, 157 / 255, 129 / 255, 1f);
-    [field: SerializeField] private Color redColor = new Color(229 / 255, 133 / 255, 140 / 255, 1f);
-    [field: SerializeField] private Color previewBorderRedColor = new Color(255 / 255, 0 / 255, 0 / 255, 1f);
-    [field: SerializeField] private Color previewBorderGreenColor = new Color(0 / 255, 255 / 255, 0 / 255, 1f);
+    [field: SerializeField] private Color greenColor = new(111 / 255, 157 / 255, 129 / 255, 1f);
+    [field: SerializeField] private Color redColor = new(229 / 255, 133 / 255, 140 / 255, 1f);
+    [field: SerializeField] private Color previewBorderRedColor = new(255 / 255, 0 / 255, 0 / 255, 1f);
+    [field: SerializeField] private Color previewBorderGreenColor = new(0 / 255, 255 / 255, 0 / 255, 1f);
+
     private void UpdatePreview()
     {
         if (CurrentTile != null && Time.timeScale != 0)
@@ -121,24 +126,17 @@ public class InteractionController : MonoBehaviour
             {
                 if (Interactions[_currentInteractionIndex] is BuildingInteraction buildingInteraction)
                 {
-                    var settings = buildingInteraction.Settings;
-                    _interactionDescriptionText.text = settings.description;
+                    BuildingPreset settings = buildingInteraction.Settings;
+                    _interactionDescriptionText.text = settings.Description;
                     if (settings == RootManager.Lotus.BuildingPreset)
                     {
-                        if (RootManager.Lotus.currentUpgradeStage < settings.upgradeStages)
+                        if (RootManager.Lotus.currentUpgradeStage < settings.UpgradeStagesLength)
                         {
-                            _interactionText.text = "Upgrade " + settings.displayName;
-                            if (CurrentTile != null && CurrentTile.building == RootManager.Lotus)
-                            {
-                                _interactionDescriptionText.text = settings.description;
-                            }
-                            else
-                            {
-                                _interactionDescriptionText.text = "Go to Lotus to upgrade";
-                            }
+                            _interactionText.text = "Upgrade " + settings.DisplayName;
+                            _interactionDescriptionText.text = CurrentTile != null && CurrentTile.Building == RootManager.Lotus ? settings.Description : "Go to Lotus to upgrade";
                             int index = RootManager.Lotus.currentUpgradeStage;
-                            _earthCostText.text = RootManager.Lotus.upgradeEarthCosts[index].ToString();
-                            _waterCostText.text = RootManager.Lotus.upgradeWaterCosts[index].ToString();
+                            _earthCostText.text = settings.UpgradeStages[index].UpgradeEarthCosts.ToString();
+                            _waterCostText.text = settings.UpgradeStages[index].UpgradeWaterCosts.ToString();
                         }
                         else
                         {
@@ -150,31 +148,18 @@ public class InteractionController : MonoBehaviour
                     }
                     else
                     {
-                        _interactionText.text = "Build " + settings.displayName;
-                        _earthCostText.text = settings.earthCost.ToString();
-                        _waterCostText.text = settings.waterCost.ToString();
+                        _interactionText.text = "Build " + settings.DisplayName;
+                        _earthCostText.text = settings.EarthCost.ToString();
+                        _waterCostText.text = settings.WaterCost.ToString();
                     }
-                    if (RessourceManager.earth >= settings.earthCost)
-                        _earthCostText.color = greenColor;
-                    else
-                        _earthCostText.color = redColor;
-                    if (RessourceManager.water >= settings.waterCost)
-                        _waterCostText.color = greenColor;
-                    else
-                        _waterCostText.color = redColor;
-                    if (buildingInteraction.CanBePlaced(CurrentTile))
-                    {
-                        InteractionPreviewSpriteRenderer.color = previewBorderGreenColor;
-                    }
-                    else
-                    {
-                        InteractionPreviewSpriteRenderer.color = previewBorderRedColor;
-                    }
+                    _earthCostText.color = RessourceManager.Earth >= settings.EarthCost ? greenColor : redColor;
+                    _waterCostText.color = RessourceManager.Water >= settings.WaterCost ? greenColor : redColor;
+                    InteractionPreviewSpriteRenderer.color = buildingInteraction.CanBePlaced(CurrentTile) ? previewBorderGreenColor : previewBorderRedColor;
                 }
             }
-
         }
     }
+
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.performed && Time.timeScale != 0)
@@ -211,7 +196,6 @@ public class InteractionController : MonoBehaviour
         }
     }
 
-
     public void OnNextBuilding(InputAction.CallbackContext context)
     {
         if (context.performed && Time.timeScale != 0)
@@ -225,9 +209,14 @@ public class InteractionController : MonoBehaviour
         if (context.performed && Time.timeScale != 0)
         {
             if (_currentInteractionIndex == 0)
+            {
                 _currentInteractionIndex = Interactions.Length - 1;
+            }
             else
+            {
                 _currentInteractionIndex -= 1;
+            }
+
             SelectInteraction(_currentInteractionIndex);
         }
     }
@@ -237,10 +226,12 @@ public class InteractionController : MonoBehaviour
         if (context.performed && Time.timeScale != 0)
         {
             // try parse the name of the control to an int
-            int index = 1;
-            int.TryParse(context.control.name, out index);
+            _ = int.TryParse(context.control.name, out int index);
             if (index == 0)
+            {
                 index = 10;
+            }
+
             SelectInteraction(index - 1);
         }
     }
@@ -253,6 +244,7 @@ public class InteractionController : MonoBehaviour
             Gizmos.DrawLine(transform.position, transform.position + _interactionOffset);
         }
     }
+
     private void OnDestroy()
     {
         RefManager.inputManager.OnInteract -= OnInteract;
