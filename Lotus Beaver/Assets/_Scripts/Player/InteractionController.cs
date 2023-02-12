@@ -13,19 +13,12 @@ public class InteractionController : MonoBehaviour
     [SerializeField] private Color previewBorderRedColor;
     [SerializeField] private Color previewBorderGreenColor;
 
-    private GameSettings _gameSettings;
-
     private IInteractable[] Interactions;
 
     private Vector2 _moveInput;
     private Vector3 _interactionOffset;
     private IInteractable _currentInteraction;
-    private HeadUpDisplayActiveElements _hud;
     private int _currentInteractionIndex;
-    private TextMeshProUGUI _interactionText;
-    private TextMeshProUGUI _waterCostText;
-    private TextMeshProUGUI _earthCostText;
-    private TextMeshProUGUI _interactionDescriptionText;
 
     public SpriteRenderer InteractionPreviewSpriteRenderer => InteractionPreview.SpriteRenderer;
     [field: SerializeField] public SpriteRenderer BuildPreviewSpriteRenderer { get; private set; }
@@ -38,21 +31,19 @@ public class InteractionController : MonoBehaviour
 
     public static event Action<int> OnInteractionChange;
 
-    private void Start()
+    private void Awake()
     {
         InputManager.OnInteract += OnInteract;
         InputManager.OnMove += OnMove;
         InputManager.OnNextBuilding += OnNextBuilding;
         InputManager.OnPrevBuilding += OnPreviousBuilding;
         InputManager.OnBuildingKey += OnBuildingKey;
+    }
+
+    private void Start()
+    {
         InitializeInteractions();
         SelectInteraction(0);
-        _gameSettings = GameSettingsManager.GameSettings();
-        _hud = HeadUpDisplayActiveElements.Instance;
-        _interactionText = _hud.InteractionText;
-        _waterCostText = _hud.CostWaterText;
-        _earthCostText = _hud.CostEarthText;
-        _interactionDescriptionText = _hud.InteractionDescriptionText;
     }
 
     private void Update()
@@ -113,54 +104,54 @@ public class InteractionController : MonoBehaviour
         if (_currentInteractionIndex == 0)
         {
             // Earth
-            _interactionText.text = "Build Earth";
-            _interactionDescriptionText.text = "Crumbles without trees";
-            if (RessourceManager.EnoughResources(_gameSettings.EarthPlacementCost, 0))
+            HeadUpDisplayActiveElements.InteractionText.text = "Build Earth";
+            HeadUpDisplayActiveElements.InteractionDescriptionText.text = "Crumbles without trees";
+            if (RessourceManager.EnoughResources(GameSettingsManager.GameSettings().EarthPlacementCost, 0))
             {
                 InteractionPreviewSpriteRenderer.color = previewBorderGreenColor;
-                _earthCostText.color = greenColor;
+                HeadUpDisplayActiveElements.CostEarthText.color = greenColor;
             }
             else
             {
                 InteractionPreviewSpriteRenderer.color = previewBorderRedColor;
-                _earthCostText.color = redColor;
+                HeadUpDisplayActiveElements.CostEarthText.color = redColor;
             }
-            _waterCostText.color = greenColor;
-            _earthCostText.text = _gameSettings.EarthPlacementCost.ToString();
-            _waterCostText.text = "0";
+            HeadUpDisplayActiveElements.CostEarthText.text = GameSettingsManager.GameSettings().EarthPlacementCost.ToString();
+            HeadUpDisplayActiveElements.CostWaterText.color = greenColor;
+            HeadUpDisplayActiveElements.CostWaterText.text = "0";
         }
         else
         {
             if (Interactions[_currentInteractionIndex] is BuildingInteraction buildingInteraction)
             {
                 BuildingPreset settings = buildingInteraction.Settings;
-                _interactionDescriptionText.text = settings.Description;
+                HeadUpDisplayActiveElements.InteractionDescriptionText.text = settings.Description;
                 if (settings == RootManager.Lotus.BuildingPreset)
                 {
-                    if (RootManager.Lotus.currentUpgradeStage < settings.UpgradeStagesLength)
+                    if (RootManager.Lotus._currentUpgradeStage < settings.UpgradeStagesLength)
                     {
-                        _interactionText.text = "Upgrade " + settings.DisplayName;
-                        _interactionDescriptionText.text = CurrentTile != null && CurrentTile.Building == RootManager.Lotus ? settings.Description : "Go to Lotus to upgrade";
-                        int index = RootManager.Lotus.currentUpgradeStage;
-                        _earthCostText.text = settings.UpgradeStages[index].UpgradeEarthCosts.ToString();
-                        _waterCostText.text = settings.UpgradeStages[index].UpgradeWaterCosts.ToString();
+                        HeadUpDisplayActiveElements.InteractionText.text = "Upgrade " + settings.DisplayName;
+                        HeadUpDisplayActiveElements.InteractionDescriptionText.text = CurrentTile != null && CurrentTile.Building == RootManager.Lotus ? settings.Description : "Go to Lotus to upgrade";
+                        int index = RootManager.Lotus._currentUpgradeStage;
+                        HeadUpDisplayActiveElements.CostEarthText.text = settings.UpgradeStages[index].UpgradeEarthCosts.ToString();
+                        HeadUpDisplayActiveElements.CostWaterText.text = settings.UpgradeStages[index].UpgradeWaterCosts.ToString();
                     }
                     else
                     {
-                        _interactionText.text = "Max upgrade reached";
-                        _interactionDescriptionText.text = "Congratulations!";
-                        _earthCostText.text = "0";
-                        _waterCostText.text = "0";
+                        HeadUpDisplayActiveElements.InteractionText.text = "Max upgrade reached";
+                        HeadUpDisplayActiveElements.InteractionDescriptionText.text = "Congratulations!";
+                        HeadUpDisplayActiveElements.CostEarthText.text = "0";
+                        HeadUpDisplayActiveElements.CostWaterText.text = "0";
                     }
                 }
                 else
                 {
-                    _interactionText.text = "Build " + settings.DisplayName;
-                    _earthCostText.text = settings.EarthCost.ToString();
-                    _waterCostText.text = settings.WaterCost.ToString();
+                    HeadUpDisplayActiveElements.InteractionText.text = "Build " + settings.DisplayName;
+                    HeadUpDisplayActiveElements.CostEarthText.text = settings.EarthCost.ToString();
+                    HeadUpDisplayActiveElements.CostWaterText.text = settings.WaterCost.ToString();
                 }
-                _earthCostText.color = RessourceManager.Earth >= settings.EarthCost ? greenColor : redColor;
-                _waterCostText.color = RessourceManager.Water >= settings.WaterCost ? greenColor : redColor;
+                HeadUpDisplayActiveElements.CostEarthText.color = RessourceManager.Earth >= settings.EarthCost ? greenColor : redColor;
+                HeadUpDisplayActiveElements.CostWaterText.color = RessourceManager.Water >= settings.WaterCost ? greenColor : redColor;
                 InteractionPreviewSpriteRenderer.color = buildingInteraction.CanBePlaced(CurrentTile) ? previewBorderGreenColor : previewBorderRedColor;
             }
         }

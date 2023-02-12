@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameSettings", menuName = "ScriptableObjects/GameSettings", order = 1)]
 public class GameSettings : ScriptableObject
@@ -27,4 +28,19 @@ public class GameSettings : ScriptableObject
     [field: SerializeField] public float startEarth { get; private set; }
 
     [field: SerializeField] public float startWater { get; private set; }
+
+#if UNITY_EDITOR
+    [ContextMenu(nameof(SetTilePools))]
+    private void SetTilePools()
+    {
+        int size = MapSize.x * MapSize.y;
+        FindObjectOfType<TilePool>()?.SetInitialSize(size);
+        TileElementPool[] pools = FindObjectsOfType<TileElementPool>();
+
+        pools.FirstOrDefault(x => x.name == "WaterTileElementPool")?.SetInitialSize(size);
+        pools.FirstOrDefault(x => x.name == "EarthTileElementPool")?.SetInitialSize(size);
+        pools.FirstOrDefault(x => x.name == "CliffTileElementPool")?.SetInitialSize(size);
+        pools.FirstOrDefault(x => x.name == "RootTileElementPool")?.SetInitialSize(MapSize.x + MapSize.y + 17);
+    }
+#endif
 }

@@ -12,8 +12,6 @@ public class TileManager : MonoBehaviour
 
     private TilePool _tilePool;
 
-    public Building Lotus;
-    public static Building LotusStatic => _instance.Lotus;
     private static TileManager _instance;
 
     public static Tile[,] _tiles;

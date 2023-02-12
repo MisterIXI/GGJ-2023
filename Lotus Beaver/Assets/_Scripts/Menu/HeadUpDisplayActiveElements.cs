@@ -17,26 +17,46 @@ public class HeadUpDisplayActiveElements : MonoBehaviour
     [SerializeField] private InteractionSettings _interactionSettings;
     [SerializeField] private TextMeshProUGUI[] _ressourceTexts;
 
-    [SerializeField] public Image FadeImage;
-    [SerializeField] public TextMeshProUGUI CostEarthText;
-    [SerializeField] public TextMeshProUGUI CostWaterText;
-    [SerializeField] public TextMeshProUGUI InteractionText;
-    [SerializeField] public TextMeshProUGUI InteractionDescriptionText;
+    [SerializeField] public Image _fadeImage;
+    [SerializeField] public TextMeshProUGUI _costEarthText;
+    [SerializeField] public TextMeshProUGUI _costWaterText;
+    [SerializeField] public TextMeshProUGUI _interactionText;
+    [SerializeField] public TextMeshProUGUI _interactionDescriptionText;
+
+    [SerializeField] public static Image FadeImage => _instance._fadeImage;
+    [SerializeField] public static TextMeshProUGUI CostEarthText => _instance._costEarthText;
+    [SerializeField] public static TextMeshProUGUI CostWaterText => _instance._costWaterText;
+    [SerializeField] public static TextMeshProUGUI InteractionText => _instance._interactionText;
+    [SerializeField] public static TextMeshProUGUI InteractionDescriptionText => _instance._interactionDescriptionText;
 
     private GameObject _selectedTool;
 
-    public static HeadUpDisplayActiveElements Instance { get; private set; }
+    public static HeadUpDisplayActiveElements _instance;
+    public static HeadUpDisplayActiveElements Instance => _instance;
 
     private void Awake()
     {
-        Instance = this;
+        if (_instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        _instance = this;
+        DontDestroyOnLoad(transform.root.gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        InteractionController.OnInteractionChange -= UpdateToolSelection;
     }
 
     private void Start()
     {
+        InteractionController.OnInteractionChange += UpdateToolSelection;
+
         InitializeRessources();
         InitializeTools();
-        InteractionController.OnInteractionChange += UpdateToolSelection;
     }
 
     private void OnEnable()
@@ -47,8 +67,8 @@ public class HeadUpDisplayActiveElements : MonoBehaviour
     private IEnumerator DelayedEnable()
     {
         yield return new WaitForEndOfFrame();
-        // InitializeRessources();
-        // InitializeTools();
+
+        UpdateToolSelection(0);
     }
 
     public void UpdateEarth(float count)

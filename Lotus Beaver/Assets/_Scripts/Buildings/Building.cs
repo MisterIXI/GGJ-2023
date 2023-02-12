@@ -19,12 +19,12 @@ public class Building : InteractableBase
     private int ConstructionStages => buildingPreset.ConstructionStagesLength;
     public int UpgradeStages => buildingPreset.UpgradeStagesLength;
 
-    private bool isBuild;
+    private bool _isBuild;
 
-    private int currentConstructionStage;
-    private int constructionTicks;
+    private int _currentConstructionStage;
+    private int _constructionTicks;
 
-    public int currentUpgradeStage;
+    public int _currentUpgradeStage;
 
     private Tile _tile;
 
@@ -37,9 +37,11 @@ public class Building : InteractableBase
     {
         TickManager.OnDamageTick += TickManager_OnDamageTick;
 
-        currentConstructionStage = 0;
-        constructionTicks = 0;
-        currentUpgradeStage = 0;
+        _isBuild = false;
+
+        _currentConstructionStage = 0;
+        _constructionTicks = 0;
+        _currentUpgradeStage = 0;
 
         if (ConstructionStages > 0)
         {
@@ -50,8 +52,6 @@ public class Building : InteractableBase
         {
             OnConstructionComplete();
         }
-
-        StartConstruction();
     }
 
     private void StartConstruction()
@@ -61,6 +61,8 @@ public class Building : InteractableBase
 
     private void OnConstructionComplete()
     {
+        _isBuild = true;
+
         if (ProducesEarthOrWater())
         {
             TickManager.OnBuildingTick += TickManager_OnBuildingTick;
@@ -80,22 +82,22 @@ public class Building : InteractableBase
 
     private void TickManager_OnConstructionTick(object sender, TickManager.OnTickEventArgs e)
     {
-        if (isBuild || currentConstructionStage >= ConstructionStages)
+        if (_isBuild || _currentConstructionStage >= ConstructionStages)
         {
             return;
         }
 
-        constructionTicks++;
-        if (constructionTicks >= TicksPerStage)
+        _constructionTicks++;
+        if (_constructionTicks >= TicksPerStage)
         {
-            constructionTicks = 0;
+            _constructionTicks = 0;
 
-            currentConstructionStage++;
-            spriteRenderer.sprite = buildingPreset.ConstructionStages[currentConstructionStage].Sprite;
+            _currentConstructionStage++;
+            spriteRenderer.sprite = buildingPreset.ConstructionStages[_currentConstructionStage].Sprite;
 
-            if (currentConstructionStage == ConstructionStages - 1)
+            if (_currentConstructionStage == ConstructionStages - 1)
             {
-                isBuild = true;
+                OnConstructionComplete();
 
                 TickManager.OnConstructionTick -= TickManager_OnConstructionTick;
 
@@ -144,8 +146,8 @@ public class Building : InteractableBase
 
     public void Upgrade()
     {
-        spriteRenderer.sprite = buildingPreset.UpgradeStages[currentUpgradeStage].Sprite;
-        currentUpgradeStage++;
+        spriteRenderer.sprite = buildingPreset.UpgradeStages[_currentUpgradeStage].Sprite;
+        _currentUpgradeStage++;
         if (buildingPreset == RootManager.LotusBuildingPreset)
         {
             int upgradeCount = GameSettingsManager.GameSettings().RootGrowthPerUpgrade;
@@ -162,7 +164,7 @@ public class Building : InteractableBase
 
         TickManager.OnDamageTick -= TickManager_OnDamageTick;
 
-        if (isBuild)
+        if (_isBuild)
         {
             if (ProducesEarthOrWater())
             {

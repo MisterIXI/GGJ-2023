@@ -62,4 +62,11 @@ public abstract class Pool<T> : MonoBehaviour, IPool<T> where T : Poolable
 
         _poolables.Enqueue(poolable);
     }
+
+#if UNITY_EDITOR
+    public void SetInitialSize(int size)
+    {
+        _initialSize = size;
+    }
+#endif
 }

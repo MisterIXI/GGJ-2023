@@ -97,7 +97,7 @@ public class BuildingInteraction : IInteractable
 
     private void TryUpgrading(Tile tile)
     {
-        int currentUpgradeStage = tile.Building.currentUpgradeStage;
+        int currentUpgradeStage = tile.Building._currentUpgradeStage;
         if (currentUpgradeStage < tile.Building.UpgradeStages)
         {
             if (RessourceManager.EnoughResources(Settings.UpgradeStages[currentUpgradeStage].UpgradeEarthCosts, Settings.UpgradeStages[currentUpgradeStage].UpgradeWaterCosts))
