@@ -47,10 +47,20 @@ public class TileManager : MonoBehaviour
     private static Vector3 CenterOffset()
     {
         return new Vector3(
-            -0.5f * (_instance._gameSettings.MapSize.x * _instance._gameSettings.TileSize.x),
-            -0.5f * (_instance._gameSettings.MapSize.y * _instance._gameSettings.TileSize.y),
+            -0.5f * (GetTilesXLength() * GetTileSizeX()),
+            -0.5f * (GetTilesYLength() * GetTileSizeY()),
             0f)
             - HalfTileOffset();
+    }
+
+    private static float GetTileSizeY()
+    {
+        return _instance._gameSettings.TileSize.y;
+    }
+
+    private static float GetTileSizeX()
+    {
+        return _instance._gameSettings.TileSize.x;
     }
 
     private static Vector3 HalfTileOffset()
@@ -144,9 +154,9 @@ public class TileManager : MonoBehaviour
 
     public static Vector2Int GetCoordinates(Vector3 position)
     {
-        position -= new Vector3(0.5f * _instance._gameSettings.TileSize.x, 0.5f * _instance._gameSettings.TileSize.y, 0);
-        position.x /= _instance._gameSettings.TileSize.x;
-        position.y /= _instance._gameSettings.TileSize.y;
+        position -= new Vector3(0.5f * GetTileSizeX(), 0.5f * GetTileSizeY(), 0);
+        position.x /= GetTileSizeX();
+        position.y /= GetTileSizeY();
         return new Vector2Int((int)Mathf.Round(position.x), (int)Mathf.Round(position.y)) + CenterTile();
     }
 
@@ -168,7 +178,12 @@ public class TileManager : MonoBehaviour
 
     private Vector3 GetTilePosition(int x, int y)
     {
-        return new Vector3(x * _gameSettings.TileSize.x, y * _gameSettings.TileSize.y, _gameSettings.TileHeight) + CenterOffset();
+        return new Vector3(x * GetTileSizeX(), y * GetTileSizeY(), GetTileHeight()) + CenterOffset();
+    }
+
+    private float GetTileHeight()
+    {
+        return _gameSettings.TileHeight;
     }
 
     public static void AddTileElementPool(TileElementType tileElementType, Pool<TileElement> pool)
