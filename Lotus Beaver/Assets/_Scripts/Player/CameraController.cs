@@ -1,6 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 
+[RequireComponent(typeof(CinemachineVirtualCamera))]
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private MovementSettings _movementSettings;
@@ -8,17 +9,17 @@ public class CameraController : MonoBehaviour
     private CinemachineVirtualCamera _vcam;
     private CinemachineHardLockToTarget _hardLockToTarget;
 
-    private void Start()
+    private void Awake()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
 
         _vcam = GetComponent<CinemachineVirtualCamera>();
         _hardLockToTarget = _vcam.GetCinemachineComponent<CinemachineHardLockToTarget>();
-        if (player != null)
+        if (playerMovement != null)
         {
             _vcam.Follow = playerMovement.CameraTarget;
             _vcam.LookAt = playerMovement.CameraTarget;
+
         }
         _lastDamping = -1;
     }

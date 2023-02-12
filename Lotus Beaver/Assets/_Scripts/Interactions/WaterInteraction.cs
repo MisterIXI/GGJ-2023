@@ -1,13 +1,10 @@
-public class WaterInteraction : IInteractable
+public class WaterInteraction : Interactable
 {
-    private readonly int _index;
-    private readonly InteractionController _interactionController;
+    private new readonly int _index;
+    private new readonly InteractionController _interactionController;
 
-    public WaterInteraction(InteractionController interactionController, int index)
+    public WaterInteraction(InteractionPreset interactionPreset, InteractionController interactionController, int index) : base(interactionPreset, interactionController, index)
     {
-        InteractionController.OnInteractionChange += OnSelectionChange;
-        _index = index;
-        _interactionController = interactionController;
     }
 
     ~WaterInteraction()
@@ -15,7 +12,7 @@ public class WaterInteraction : IInteractable
         InteractionController.OnInteractionChange -= OnSelectionChange;
     }
 
-    public void OnSelectionChange(int index)
+    public override void OnSelectionChange(int index)
     {
         if (_index == index && _interactionController.BuildPreviewSpriteRenderer != null)
         {
@@ -23,11 +20,11 @@ public class WaterInteraction : IInteractable
         }
     }
 
-    public void OnInteract(Tile tile)
+    public override void OnInteract(Tile tile)
     {
     }
 
-    public void OnSelection(Tile tile)
+    public override void OnSelection(Tile tile)
     {
     }
 }

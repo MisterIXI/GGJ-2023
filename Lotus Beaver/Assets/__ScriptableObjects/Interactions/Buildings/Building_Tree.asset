@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c388026e8f6e884bb60657fce1ea5f6, type: 3}
   m_Name: Building_Tree
   m_EditorClassIdentifier: 
+  <InteractionPreset>k__BackingField:
+    InteractionIcon: {fileID: -272516443, guid: c4fab5eee0a53ff44a09190c9b926215, type: 3}
+    <DisplayName>k__BackingField: Tree
+    <Description>k__BackingField: Protects adjacent earth
+    <EarthCost>k__BackingField: 10
+    <WaterCost>k__BackingField: 100
+  InteractionIcon: {fileID: -272516443, guid: c4fab5eee0a53ff44a09190c9b926215, type: 3}
   <DisplayName>k__BackingField: Tree
   <Description>k__BackingField: Protects adjacent earth
-  InteractionIcon: {fileID: -272516443, guid: c4fab5eee0a53ff44a09190c9b926215, type: 3}
-  <BuildPreview>k__BackingField: {fileID: -521945305, guid: c4fab5eee0a53ff44a09190c9b926215, type: 3}
-  <BuildingPrefab>k__BackingField: {fileID: 6252351993334924036, guid: 6fe2eb20748e9aa4082c6cb1a2b486fe, type: 3}
   <EarthCost>k__BackingField: 10
   <WaterCost>k__BackingField: 100
+  <BuildPreview>k__BackingField: {fileID: -521945305, guid: c4fab5eee0a53ff44a09190c9b926215, type: 3}
+  <BuildingPrefab>k__BackingField: {fileID: 6252351993334924036, guid: 6fe2eb20748e9aa4082c6cb1a2b486fe, type: 3}
   <EarthProduction>k__BackingField: 0
   <WaterProduction>k__BackingField: 0
   <SelfHealAmount>k__BackingField: 10

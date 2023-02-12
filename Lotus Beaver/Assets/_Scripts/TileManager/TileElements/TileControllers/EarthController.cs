@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TileElement))]
@@ -16,7 +15,7 @@ public class EarthController : TileController
         _currentDamageStage = _damageStageLibrary.DamageStages[0];
         if (Time.time - GameManager.GameStartTime > 0.5f)
         {
-            _ = (GameManager.Instance.StartCoroutine(DelayRoutine()));
+            _ = GameManager.Instance.StartCoroutine(DelayRoutine());
         }
 
         UpdateDamageSprite();

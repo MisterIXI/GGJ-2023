@@ -1,4 +1,3 @@
-using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -44,7 +43,7 @@ public class SoundManager : MonoBehaviour
 
         for (int i = 0; i < buttons.Length; i++)
         {
-            buttons[i].AddComponent<ButtonSoundController>();
+            _ = buttons[i].AddComponent<ButtonSoundController>();
         }
     }
 
@@ -64,28 +63,23 @@ public class SoundManager : MonoBehaviour
 
     public float LogSoundVolume(float volume)
     {
-        if (volume <= 0.05f)
-        {
-            return -80f;
-        }
-
-        return Mathf.Log10(volume) * 20f;
+        return volume <= 0.05f ? -80f : Mathf.Log10(volume) * 20f;
     }
 
     [ContextMenu(nameof(StopMusic))]
     public void StopMusic()
     {
-        _audioMixer.SetFloat(_musicSettings, value: -80f);
+        _ = _audioMixer.SetFloat(_musicSettings, value: -80f);
     }
 
     public void SetMusicVolume(float volume)
     {
-        _audioMixer.SetFloat(_musicSettings, LogSoundVolume(volume));
+        _ = _audioMixer.SetFloat(_musicSettings, LogSoundVolume(volume));
     }
 
     public void SetSoundVolume(float volume)
     {
-        _audioMixer.SetFloat(_sFXSettings, LogSoundVolume(volume));
+        _ = _audioMixer.SetFloat(_sFXSettings, LogSoundVolume(volume));
     }
 
     public static void PlayWalking(Vector3? position = null)
@@ -137,7 +131,7 @@ public class SoundManager : MonoBehaviour
     {
         SoundPlayer soundPlayer = soundPool.GetPoolable();
         soundPlayer.Transform.SetParent(null);
-        soundPlayer.Transform.position = position.HasValue? position.Value : Vector3.zero;
+        soundPlayer.Transform.position = position.HasValue ? position.Value : Vector3.zero;
         soundPlayer.PlaySound();
     }
 }

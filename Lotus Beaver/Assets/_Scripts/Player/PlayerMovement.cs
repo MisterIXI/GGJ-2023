@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -29,14 +28,12 @@ public class PlayerMovement : MonoBehaviour
     {
         _transform = transform;
 
-        animator = GetComponentInChildren<Animator>();
-    }
-
-    private void Start()
-    {
         _rigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
+
         InputManager.OnMove += OnMoveInput;
         InputManager.OnReset += OnResetInput;
+
         _startPosition = _transform.position;
     }
 
@@ -72,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleMovement()
     {
-        _movement = Vector2.MoveTowards(_movement, _moveInput, _movementSettings.acceleration * 2 * 10 * Time.deltaTime);
+        _movement = Vector2.MoveTowards(_movement, _moveInput, _movementSettings.acceleration * Time.deltaTime);
         _rigidbody.velocity = _fadeState != FadeState.none ? Vector2.zero : _movement * _movementSettings.moveSpeed;
     }
 
@@ -95,25 +92,38 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleFade()
     {
-        if (_fadeState == FadeState.fadeout)
+        switch (_fadeState)
         {
-            float t = (Time.time - _fadeStartTime) / _movementSettings.fadeDuration;
-            HeadUpDisplayActiveElements.FadeImage.color = Color.Lerp(Color.clear, Color.black, t);
-            if (t >= 1)
-            {
-                _fadeState = FadeState.fadein;
-                _transform.position = _startPosition;
-                _fadeStartTime = Time.time;
-            }
-        }
-        else if (_fadeState == FadeState.fadein)
-        {
-            float t = (Time.time - _fadeStartTime) / _movementSettings.fadeDuration;
-            HeadUpDisplayActiveElements.FadeImage.color = Color.Lerp(Color.black, Color.clear, t);
-            if (t >= 1)
-            {
-                _fadeState = FadeState.none;
-            }
+            case FadeState.fadeout:
+                {
+                    float t = (Time.time - _fadeStartTime) / _movementSettings.fadeDuration;
+                    HeadUpDisplayActiveElements.FadeImage.color = Color.Lerp(Color.clear, Color.black, t);
+                    if (t >= 1)
+                    {
+                        _fadeState = FadeState.fadein;
+                        _transform.position = _startPosition;
+                        _fadeStartTime = Time.time;
+                    }
+
+                    break;
+                }
+
+            case FadeState.fadein:
+                {
+                    float t = (Time.time - _fadeStartTime) / _movementSettings.fadeDuration;
+                    HeadUpDisplayActiveElements.FadeImage.color = Color.Lerp(Color.black, Color.clear, t);
+                    if (t >= 1)
+                    {
+                        _fadeState = FadeState.none;
+                    }
+
+                    break;
+                }
+
+            default:
+                {
+                    break;
+                }
         }
     }
 

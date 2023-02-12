@@ -4,9 +4,9 @@ using UnityEngine;
 public class MovementSettings : ScriptableObject
 {
     [Header("Movement")]
-    [Range(0.01f, 10f)] public float moveSpeed = 1f;
+    [Range(0.01f, 200f)] public float moveSpeed = 1f;
 
-    [Range(0.01f, 1f)] public float acceleration = 0.7f;
+    [Range(0.01f, 100f)] public float acceleration = 0.7f;
 
     [Header("Camera")]
     [Range(0f, 10f)] public float cameraDistance = 1f;

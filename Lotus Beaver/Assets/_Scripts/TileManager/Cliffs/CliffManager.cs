@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 public class CliffManager : MonoBehaviour
@@ -18,7 +17,7 @@ public class CliffManager : MonoBehaviour
         }
 
         _instance = this;
-            DontDestroyOnLoad(transform.root.gameObject);
+        DontDestroyOnLoad(transform.root.gameObject);
 
         TickManager.OnDamageTick += OnDamageTickCliffs;
     }

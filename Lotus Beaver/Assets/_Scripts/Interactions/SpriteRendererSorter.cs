@@ -7,6 +7,6 @@ public class SpriteRendererSorter : MonoBehaviour
 
     public void SetSortOrderFromCoordinate(Tile tile)
     {
-        TileManager.GetSortOrderFromCoordinate(tile.Coordinates);
+        _ = TileManager.GetSortOrderFromCoordinate(tile.Coordinates);
     }
 }

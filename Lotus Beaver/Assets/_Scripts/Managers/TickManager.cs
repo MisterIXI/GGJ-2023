@@ -20,7 +20,7 @@ public class TickManager : MonoBehaviour
 
     private float DamageTickTimerMax => _gameSettings.DamageTickTime;
     private float BuildingTickTimerMax => _gameSettings.BuildingTickTime;
-    private float ConstructionTickTimerMax=> _gameSettings.ConstructionTickTime;
+    private float ConstructionTickTimerMax => _gameSettings.ConstructionTickTime;
 
     private int damageTick;
     private int buildingTick;

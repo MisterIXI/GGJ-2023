@@ -1,16 +1,10 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Building Preset", menuName = "ScriptableObjects/New Building Preset")]
-public class BuildingPreset : ScriptableObject
+public class BuildingPreset : InteractionPresetContainer
 {
-    [field: SerializeField] public string DisplayName { get; private set; }
-    [field: SerializeField] public string Description { get; private set; }
-
-    [field: SerializeField] public Sprite InteractionIcon;
     [field: SerializeField] public Sprite BuildPreview { get; private set; }
     [field: SerializeField] public Building BuildingPrefab { get; private set; }
-    [field: SerializeField] public float EarthCost { get; private set; }
-    [field: SerializeField] public float WaterCost { get; private set; }
 
     [field: Header("Resource Production")]
     [field: SerializeField] public float EarthProduction { get; private set; }

@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager _instance;
-    public static GameManager Instance => _instance;
+    public static GameManager Instance { get; private set; }
 
     public static event Action<GameState> OnGameStateChanged;
 
@@ -16,17 +15,20 @@ public class GameManager : MonoBehaviour
 
     public static float GameStartTime { get; private set; }
 
-    public static bool IsInGame() => GameState == GameState.Ingame;
+    public static bool IsInGame()
+    {
+        return GameState == GameState.Ingame;
+    }
 
     private void Awake()
     {
-        if (_instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
 
-        _instance = this;
+        Instance = this;
         DontDestroyOnLoad(transform.root.gameObject);
 
         SetGameState(GameState.GameOver);

@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
 using static UnityEngine.InputSystem.InputAction;
 
 public class InputManager : MonoBehaviour

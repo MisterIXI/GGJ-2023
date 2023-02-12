@@ -12,13 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c388026e8f6e884bb60657fce1ea5f6, type: 3}
   m_Name: Building_EarthPlant
   m_EditorClassIdentifier: 
+  <InteractionPreset>k__BackingField:
+    InteractionIcon: {fileID: 21300000, guid: 32481ca8410f31e46b753fc4846b2e77, type: 3}
+    <DisplayName>k__BackingField: Earth Plant
+    <Description>k__BackingField: Produces Earth
+    <EarthCost>k__BackingField: 30
+    <WaterCost>k__BackingField: 80
+  InteractionIcon: {fileID: 21300000, guid: 32481ca8410f31e46b753fc4846b2e77, type: 3}
   <DisplayName>k__BackingField: Earth Plant
   <Description>k__BackingField: Produces Earth
-  InteractionIcon: {fileID: 21300000, guid: 32481ca8410f31e46b753fc4846b2e77, type: 3}
-  <BuildPreview>k__BackingField: {fileID: 21300000, guid: 32481ca8410f31e46b753fc4846b2e77, type: 3}
-  <BuildingPrefab>k__BackingField: {fileID: 2062167917915370175, guid: 1a450d36d4a0e2243ad4d703ad53a49c, type: 3}
   <EarthCost>k__BackingField: 30
   <WaterCost>k__BackingField: 80
+  <BuildPreview>k__BackingField: {fileID: 21300000, guid: 32481ca8410f31e46b753fc4846b2e77, type: 3}
+  <BuildingPrefab>k__BackingField: {fileID: 2062167917915370175, guid: 1a450d36d4a0e2243ad4d703ad53a49c, type: 3}
   <EarthProduction>k__BackingField: 0.67
   <WaterProduction>k__BackingField: 0
   <SelfHealAmount>k__BackingField: 2

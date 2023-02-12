@@ -1,24 +1,10 @@
-public class EarthInteraction : IInteractable
+public class EarthInteraction : Interactable
 {
-    private readonly int _index;
-    private readonly InteractionController _interactionController;
-
-    public EarthInteraction(InteractionController interactionController, int index)
+    public EarthInteraction(InteractionPreset interactionPreset, InteractionController interactionController, int index) : base(interactionPreset, interactionController, index)
     {
-        InteractionController.OnInteractionChange += OnSelectionChange;
-        _index = index;
-        _interactionController = interactionController;
     }
 
-    public void OnSelectionChange(int index)
-    {
-        if (_index == index && _interactionController.BuildPreviewSpriteRenderer != null)
-        {
-            _interactionController.BuildPreviewSpriteRenderer.sprite = null;
-        }
-    }
-
-    public void OnInteract(Tile tile)
+    public override void OnInteract(Tile tile)
     {
         if (tile.TileElement?.TileElementType != TileElementType.Root && RessourceManager.Earth >= GameSettingsManager.GameSettings().EarthPlacementCost)
         {
@@ -30,9 +16,5 @@ public class EarthInteraction : IInteractable
         {
             SoundManager.PlayError();
         }
-    }
-
-    public void OnSelection(Tile tile)
-    {
     }
 }

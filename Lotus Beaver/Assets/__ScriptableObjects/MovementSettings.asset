@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MovementSettings
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  acceleration: 0.7
+  acceleration: 14
   cameraDistance: 1
   cameraDamping: 1
   cameraZDistance: 10

@@ -1,8 +1,7 @@
-using System;
 using System.Linq;
 using UnityEngine;
 
-public class Building : InteractableBase
+public class Building : MonoBehaviour, IInteractable
 {
     [SerializeField] private BuildingPreset buildingPreset;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -18,6 +17,8 @@ public class Building : InteractableBase
 
     private int ConstructionStages => buildingPreset.ConstructionStagesLength;
     public int UpgradeStages => buildingPreset.UpgradeStagesLength;
+
+    public InteractionPreset InteractionPreset { get; set; }
 
     private bool _isBuild;
 
@@ -112,7 +113,7 @@ public class Building : InteractableBase
 
     private void TickManager_OnDamageTick(object sender, TickManager.OnTickEventArgs e)
     {
-        if (!(_tile?.TileElement?.TileController is EarthController earthController))
+        if (_tile?.TileElement?.TileController is not EarthController earthController)
         {
             return;
         }
@@ -130,14 +131,14 @@ public class Building : InteractableBase
         }
     }
 
-    public override void OnInteract(Tile tile)
+    public void OnInteract(Tile tile)
     {
 #if UNITY_EDITOR
         Debug.Log("Interacted with " + tile);
 #endif
     }
 
-    public override void OnSelection(Tile tile)
+    public void OnSelection(Tile tile)
     {
 #if UNITY_EDITOR
         Debug.Log("Selected " + tile);

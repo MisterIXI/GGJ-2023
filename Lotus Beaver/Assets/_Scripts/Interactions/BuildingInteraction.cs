@@ -1,17 +1,11 @@
 using UnityEngine;
 
-public class BuildingInteraction : IInteractable
+public class BuildingInteraction : Interactable
 {
-    public BuildingPreset Settings { get; }
-    private readonly InteractionController _interactionController;
-    private readonly int _index;
+    public BuildingPreset BuildingPreset { get; set; }
 
-    public BuildingInteraction(BuildingPreset settings, InteractionController interactionController, int index)
+    public BuildingInteraction(InteractionPreset interactionPreset, InteractionController interactionController, int index) : base(interactionPreset, interactionController, index)
     {
-        Settings = settings;
-        _interactionController = interactionController;
-        _index = index;
-        InteractionController.OnInteractionChange += OnSelectionChange;
     }
 
     ~BuildingInteraction()
@@ -19,19 +13,19 @@ public class BuildingInteraction : IInteractable
         InteractionController.OnInteractionChange -= OnSelectionChange;
     }
 
-    public void OnInteract(Tile tile)
+    public override void OnInteract(Tile tile)
     {
         if (tile.TileElement.TileElementType == TileElementType.Earth)
         {
             if (tile.Building == null)
             {
-                if (Settings != RootManager.LotusBuildingPreset)
+                if (BuildingPreset != RootManager.LotusBuildingPreset)
                 {
-                    if (RessourceManager.EnoughResources(Settings.EarthCost, Settings.WaterCost))
+                    if (RessourceManager.EnoughResources(InteractionPreset.EarthCost, InteractionPreset.WaterCost))
                     {
-                        RessourceManager.UseResources(Settings.EarthCost, Settings.WaterCost);
+                        RessourceManager.UseResources(InteractionPreset.EarthCost, InteractionPreset.WaterCost);
 
-                        Building building = Object.Instantiate(Settings.BuildingPrefab, tile.Transform.position, Quaternion.identity, tile.Transform);
+                        Building building = Object.Instantiate(BuildingPreset.BuildingPrefab, tile.Transform.position, Quaternion.identity, tile.Transform);
 
                         building.SetTile(tile);
 
@@ -56,7 +50,7 @@ public class BuildingInteraction : IInteractable
                     }
                 }
             }
-            else if (tile.Building == Settings)
+            else if (tile.Building.BuildingPreset == BuildingPreset)
             {
                 TryUpgrading(tile);
             }
@@ -64,7 +58,7 @@ public class BuildingInteraction : IInteractable
             {
 #if UNITY_EDITOR
                 Debug.Log(tile.Building.BuildingName);
-                Debug.Log(Settings.DisplayName);
+                Debug.Log(InteractionPreset.DisplayName);
                 Debug.Log("There is already a building on this tile");
 #endif
                 SoundManager.PlayError();
@@ -76,7 +70,7 @@ public class BuildingInteraction : IInteractable
             if (tile.TileElement.TileElementType == TileElementType.Root)
             {
                 // check if lotus is selected and hovered
-                if (tile.Building?.BuildingPreset == Settings)
+                if (tile.Building?.BuildingPreset == BuildingPreset)
                 {
                     TryUpgrading(tile);
                 }
@@ -100,9 +94,9 @@ public class BuildingInteraction : IInteractable
         int currentUpgradeStage = tile.Building._currentUpgradeStage;
         if (currentUpgradeStage < tile.Building.UpgradeStages)
         {
-            if (RessourceManager.EnoughResources(Settings.UpgradeStages[currentUpgradeStage].UpgradeEarthCosts, Settings.UpgradeStages[currentUpgradeStage].UpgradeWaterCosts))
+            if (RessourceManager.EnoughResources(BuildingPreset.UpgradeStages[currentUpgradeStage].UpgradeEarthCosts, BuildingPreset.UpgradeStages[currentUpgradeStage].UpgradeWaterCosts))
             {
-                RessourceManager.UseResources(Settings.UpgradeStages[currentUpgradeStage].UpgradeEarthCosts, Settings.UpgradeStages[currentUpgradeStage].UpgradeWaterCosts);
+                RessourceManager.UseResources(BuildingPreset.UpgradeStages[currentUpgradeStage].UpgradeEarthCosts, BuildingPreset.UpgradeStages[currentUpgradeStage].UpgradeWaterCosts);
                 tile.Building.Upgrade();
                 SoundManager.PlayUpgrade();
             }
@@ -123,20 +117,20 @@ public class BuildingInteraction : IInteractable
         }
     }
 
-    public void OnSelection(Tile tile)
+    public override void OnSelection(Tile tile)
     {
     }
 
     public bool CanBePlaced(Tile tile)
     {
-        return tile.Building == null && RessourceManager.EnoughResources(Settings.EarthCost, Settings.WaterCost);
+        return tile.Building == null && RessourceManager.EnoughResources(InteractionPreset.EarthCost, InteractionPreset.WaterCost);
     }
 
-    public void OnSelectionChange(int selectedIndex)
+    public override void OnSelectionChange(int selectedIndex)
     {
         if (selectedIndex == _index)
         {
-            _interactionController.BuildPreviewSpriteRenderer.sprite = Settings.BuildPreview;
+            _interactionController.BuildPreviewSpriteRenderer.sprite = BuildingPreset.BuildPreview;
         }
     }
 }

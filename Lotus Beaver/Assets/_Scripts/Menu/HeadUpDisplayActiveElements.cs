@@ -117,16 +117,21 @@ public class HeadUpDisplayActiveElements : MonoBehaviour
 
     private void InitializeTools()
     {
-        GameObject tool = Instantiate(ToolPrefab, ToolsRoot);
-        tool.transform.GetChild(0).GetComponentInChildren<Image>().sprite = EarthIcon;
+        GameObject tool;
 
-        foreach (BuildingPreset buildingPreset in _interactionSettings.BuildingSettings)
+        foreach (InteractionPresetContainer interactionPresetContainer in _interactionSettings.InteractionPresetContainers)
+        {
+            tool = Instantiate(ToolPrefab, ToolsRoot);
+            tool.transform.GetChild(0).GetComponentInChildren<Image>().sprite = interactionPresetContainer.InteractionIcon;
+            // tool.GetComponentInChildren<Text>().text = buildingPreset.displayName;
+        }
+        foreach (BuildingPreset buildingPreset in _interactionSettings.BuildingPresets)
         {
             tool = Instantiate(ToolPrefab, ToolsRoot);
             tool.transform.GetChild(0).GetComponentInChildren<Image>().sprite = buildingPreset.InteractionIcon;
             // tool.GetComponentInChildren<Text>().text = buildingPreset.displayName;
         }
-        int toolCount = 1 + _interactionSettings.BuildingSettings.Length;
+        int toolCount = _interactionSettings.InteractionPresetContainers.Length + _interactionSettings.BuildingPresets.Length;
         // set toolsroot rect transform width
         ToolsRoot.GetComponent<RectTransform>().sizeDelta = new Vector2(toolCount * 100, 100);
     }
