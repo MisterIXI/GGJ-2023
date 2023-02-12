@@ -24,19 +24,19 @@ public class TileElement : Poolable
     [ContextMenu("ChangeToWater")]
     public void ChangeToWater()
     {
-        TileManager.SetTileElementType(GetComponentInParent<Tile>(), TileElementType.Water);
+        TileManager.SetTileElementType(GetComponentInParent<Tile>(), TileElementType.Water, out _);
     }
 
     [ContextMenu("ChangeToEart")]
     public void ChangeToEarth()
     {
-        TileManager.SetTileElementType(GetComponentInParent<Tile>(), TileElementType.Earth);
+        TileManager.SetTileElementType(GetComponentInParent<Tile>(), TileElementType.Earth, out _);
     }
 
     [ContextMenu("ChangeToCliff")]
     public void ChangeToCliff()
     {
-        TileManager.SetTileElementType(GetComponentInParent<Tile>(), TileElementType.Cliff);
+        TileManager.SetTileElementType(GetComponentInParent<Tile>(), TileElementType.Cliff, out _);
     }
 #endif
 }

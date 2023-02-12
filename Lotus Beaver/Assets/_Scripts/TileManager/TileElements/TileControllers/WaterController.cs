@@ -21,13 +21,13 @@ public class WaterController : TileController
     [ContextMenu(nameof(MakeEarth))]
     public void MakeEarth()
     {
-        TileManager.SetTileElementType(ParentTile, TileElementType.Earth);
+        TileManager.SetTileElementType(ParentTile, TileElementType.Earth, out _);
     }
 
     [ContextMenu(nameof(MakeCliff))]
     public void MakeCliff()
     {
-        TileManager.SetTileElementType(ParentTile, TileElementType.Cliff);
+        TileManager.SetTileElementType(ParentTile, TileElementType.Cliff, out _);
     }
 #endif
 }

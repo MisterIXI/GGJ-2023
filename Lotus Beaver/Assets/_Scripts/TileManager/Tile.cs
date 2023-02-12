@@ -27,6 +27,7 @@ public class Tile : Poolable
             TileElement.Transform.SetParent(null);
             TileElement.SetActive(false);
             TileElement = null;
+            Building = null;
         }
 
         _gameObject.SetActive(active);

@@ -61,7 +61,7 @@ public class RootManager : MonoBehaviour
         }
         for (int i = 0; i < rootTiles.Count; i++)
         {
-            TileManager.SetTileElementType(rootTiles[i], TileElementType.Root);
+            TileManager.SetTileElementType(rootTiles[i], TileElementType.Root, out _);
         }
         for (int i = 0; i < rootTiles.Count; i++)
         {
@@ -90,7 +90,7 @@ public class RootManager : MonoBehaviour
             {
                 Tile rootTile = TileManager.FilterOutOfBoundsCoordinates(_rootStart[i] + (_growthDirection[i] * j));
 
-                TileManager.SetTileElementType(rootTile, TileElementType.Root);
+                TileManager.SetTileElementType(rootTile, TileElementType.Root, out _);
 
                 if (j == 0)
                 {

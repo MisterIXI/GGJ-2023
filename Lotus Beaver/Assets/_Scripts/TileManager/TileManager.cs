@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(TilePool))]
@@ -266,12 +267,12 @@ public class TileManager : MonoBehaviour
     {
         foreach (Tile tile in GetNextTile())
         {
-            SetTileElementType(tile, TileElementType.Water);
+            SetTileElementType(tile, TileElementType.Water, out _);
         }
 
         Vector2Int center = new(GetTilesXLength() / 2, GetTilesYLength() / 2);
 
-        SetTileElementType(_tiles[center.x, center.y], TileElementType.Earth);
+        SetTileElementType(_tiles[center.x, center.y], TileElementType.Earth, out _);
     }
 
     private static IEnumerable<Tile> GetNextTile()
@@ -285,8 +286,10 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    public static void SetTileElementType(Tile tile, TileElementType tileElementType)
+    public static void SetTileElementType(Tile tile, TileElementType tileElementType, out TileController tileController)
     {
+
+        tileController = null;
         if (tile == null)
         {
             return;
@@ -294,48 +297,49 @@ public class TileManager : MonoBehaviour
 
         if (tile.Building != null && tileElementType != TileElementType.Earth)
         {
-            Destroy(tile.Building.gameObject);
-            tile.Building = null;
+            Destroy(tile.Building.GameObject());
         }
+
         tile.TileElement?.SetActive(false);
         TileElement tileElement = GetTileElement(tileElementType);
+        tile.TileElement = tileElement;
+        tileController = tileElement.TileController;
+
         tileElement.Transform.SetParent(tile.Transform);
         tileElement.Transform.localPosition = Vector3.zero;
-        tile.TileElement = tileElement;
 
-        List<Tile> surroundingTiles = GetSurroundingTilesWithDiagonal(tile);
-
-        UpdateCliffTiles(surroundingTiles, tile.TileElement.TileElementType);
+        UpdateCliffTiles(tile);
     }
 
-    private static void UpdateCliffTiles(List<Tile> tiles, TileElementType tileType)
+    private static void UpdateCliffTiles(Tile tile)
     {
-        foreach (Tile tile in tiles)
+        foreach (Tile surroundingTile in GetSurroundingTilesWithDiagonal(tile))
         {
-            bool surrByWater = IsSurroundedByWaterOrCliff(tile);
-            TileElementType type = tile.TileElement?.TileElementType ?? TileElementType.Water;
-            if (type == TileElementType.Cliff)
+            bool surrByWater = IsSurroundedByWaterOrCliff(surroundingTile);
+
+            TileController tileController = surroundingTile?.TileElement?.TileController;
+
+            if (tileController is CliffController cliffController)
             {
                 if (surrByWater)
                 {
-                    SetTileElementType(tile, TileElementType.Water);
+                    SetTileElementType(surroundingTile, TileElementType.Water, out _);
                 }
                 else
                 {
-                    tile.GetComponentInChildren<CliffController>().UpdateCliffSprite();
+                    cliffController.UpdateCliffSprite();
                 }
             }
-            else if (type == TileElementType.Water)
+            else if (tileController is WaterController)
             {
                 if (!surrByWater)
                 {
-                    SetTileElementType(tile, TileElementType.Cliff);
-                    tile.GetComponentInChildren<CliffController>().UpdateCliffSprite();
+                    SetTileElementType(surroundingTile, TileElementType.Cliff, out tileController);
+                    if (tileController is CliffController surroundingTileCliff)
+                    {
+                        surroundingTileCliff.UpdateCliffSprite();
+                    }
                 }
-            }
-            else
-            {
-                // if not cliff or water
             }
         }
     }
@@ -366,17 +370,14 @@ public class TileManager : MonoBehaviour
 
     public static bool IsSurroundedByWaterOrCliff(Tile tile)
     {
-        List<Tile> surroundingTiles = GetSurroundingTilesWithDiagonal(tile);
-
-        foreach (Tile surroundingTile in surroundingTiles)
+        foreach (Tile surroundingTile in GetSurroundingTilesWithDiagonal(tile))
         {
             if (surroundingTile == null || surroundingTile.TileElement == null)
             {
                 continue;
             }
-            // if a tile is not water or cliff, return false
-            if (surroundingTile.TileElement.TileElementType is not TileElementType.Water and
-                not TileElementType.Cliff)
+
+            if (surroundingTile.TileElement.TileElementType is not TileElementType.Water and not TileElementType.Cliff)
             {
                 return false;
             }

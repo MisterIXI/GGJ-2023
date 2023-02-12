@@ -23,7 +23,7 @@ public class EarthInteraction : IInteractable
         if (tile.TileElement?.TileElementType != TileElementType.Root && RessourceManager.Earth >= GameSettingsManager.GameSettings().EarthPlacementCost)
         {
             RessourceManager.Earth -= GameSettingsManager.GameSettings().EarthPlacementCost;
-            TileManager.SetTileElementType(tile, TileElementType.Earth);
+            TileManager.SetTileElementType(tile, TileElementType.Earth, out _);
             SoundManager.PlayPlanting();
         }
         else

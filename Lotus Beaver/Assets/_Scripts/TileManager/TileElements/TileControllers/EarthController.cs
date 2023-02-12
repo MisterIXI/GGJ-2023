@@ -70,15 +70,13 @@ public class EarthController : TileController
 
     private void TakeFatalDamage()
     {
-        Tile parentTile = GetComponentInParent<Tile>(true);
-
-        if (TileManager.IsSurroundedByWaterOrCliff(parentTile))
+        if (TileManager.IsSurroundedByWaterOrCliff(ParentTile))
         {
-            TileManager.SetTileElementType(parentTile, TileElementType.Water);
+            TileManager.SetTileElementType(ParentTile, TileElementType.Water, out _);
         }
         else
         {
-            TileManager.SetTileElementType(parentTile, TileElementType.Cliff);
+            TileManager.SetTileElementType(ParentTile, TileElementType.Cliff, out _);
         }
         SoundManager.PlayWaterSplash();
         if (Time.time - GameManager.GameStartTime > 0.5f)
