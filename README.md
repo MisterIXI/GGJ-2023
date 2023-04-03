@@ -24,7 +24,7 @@ The Water Plant produces Water
 
 Upgrade the Lotus to make it grow
 
-Cresdits:
+# Credits:
 - Juri Knauth (Programming)
 - Lerolan - Jonas Gruetzmacher (Programming)
 - MisterIXI - Yannik Braendle (Programming)
